@@ -1,4 +1,5 @@
 ## Conference Management System - Frontend V 1.0
+### This management system project is for Application Framework(AF) module.
 #### The project structure will be here soon!!!.:soon:
 This is frontend application for conference management system. Technology that we are using to implement this application is **React**. And we use **Redux** for state management in this project.
 
