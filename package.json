@@ -4,13 +4,16 @@
   "description": "Frontend React application for conference management system",
   "main": "index.js",
   "scripts": {
-    "start": "webpack serve --port 3000 --mode development --open --hot",
+    "start": "node server.js",
+    "postinstall": "webpack --mode production",
+    "dev": "webpack serve --port 3000 --mode development --open --hot",
     "build": "webpack --mode production"
   },
   "author": "2021_REG_WE_14",
   "license": "ISC",
   "dependencies": {
     "@babel/core": "^7.14.2",
+    "express": "^4.17.1",
     "react": "^17.0.2",
     "react-dom": "^17.0.2",
     "react-redux": "^7.2.4",
