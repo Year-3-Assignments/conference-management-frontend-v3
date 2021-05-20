@@ -1,9 +1,18 @@
 body {
   font-family: "SF Pro Display Bold";
+  background-color: #f8f8f8;
 }
 
 .btn--pill {
   border-radius: 80px;
+}
+
+.form-text {
+  font-size: 16px;
+}
+
+.validation-text {
+  font-size: 13px;
 }
 
 @media (min-width: 576px) {};
