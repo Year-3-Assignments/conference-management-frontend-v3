@@ -6,6 +6,7 @@ class App extends React.Component {
     return (
       <div>
         <h2>Conference App Frontend - V1</h2>
+        <button className="btn btn-primary btn--pill">Hello</button>
       </div>
     );
   }
