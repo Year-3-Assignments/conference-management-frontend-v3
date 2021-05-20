@@ -23,15 +23,14 @@ class Navbar extends React.Component {
             >
               <i className="fas fa-bars"></i>
             </button>
+            <a class="navbar-brand" href="#">
+              <img src={logo} height="35" alt="" loading="lazy" />
+              <small>REACH</small>
+            </a>
               <div className="collapse navbar-collapse" id="navbarSupportedContent">
                 {localStorage.length ===  0 ?
                   <span className="nav-content">
                     <ul className="navbar-nav me-auto mb-2 mb-lg-0">
-                      <li className="nav-item">
-                        <a className="mt-0 mt-lg-0" href="#">
-                          <img src={logo} height="40" alt="" loading="lazy" />
-                        </a>
-                      </li>
                       <li className="nav-item">
                         <a className="nav-link" href="#">Home</a>
                       </li>
@@ -59,11 +58,6 @@ class Navbar extends React.Component {
                 {localStorage.getItem('role') === 'ROLE_ADMIN' ?
                   <ul className="navbar-nav me-auto mb-2 mb-lg-0">
                     <li className="nav-item">
-                      <a className="mt-0 mt-lg-0" href="#">
-                        <img src={logo} height="40" alt="" loading="lazy" />
-                      </a>
-                    </li>
-                    <li className="nav-item">
                       <a className="nav-link" href="#">Dashboard</a>
                     </li>
                     <li className="nav-item">
@@ -86,11 +80,6 @@ class Navbar extends React.Component {
                 {localStorage.getItem('role') === 'ROLE_REVIEWER' ?
                   <ul className="navbar-nav me-auto mb-2 mb-lg-0">
                     <li className="nav-item">
-                      <a className="mt-0 mt-lg-0" href="#">
-                        <img src={logo} height="40" alt="" loading="lazy" />
-                      </a>
-                    </li>
-                    <li className="nav-item">
                       <a className="nav-link" href="#">Resources</a>
                     </li>
                     <li className="nav-item">
@@ -104,11 +93,6 @@ class Navbar extends React.Component {
                 {localStorage.getItem('role') === 'ROLE_EDITOR' ?
                   <ul className="navbar-nav me-auto mb-2 mb-lg-0">
                     <li className="nav-item">
-                      <a className="mt-0 mt-lg-0" href="#">
-                        <img src={logo} height="40" alt="" loading="lazy" />
-                      </a>
-                    </li>
-                    <li className="nav-item">
                       <a className="nav-link" href="#">My Edits</a>
                     </li>
                     <li className="nav-item">
@@ -121,11 +105,6 @@ class Navbar extends React.Component {
 
                 {localStorage.getItem('role') === 'ROLE_PRESENTER' ?
                   <ul className="navbar-nav me-auto mb-2 mb-lg-0">
-                    <li className="nav-item">
-                      <a className="mt-0 mt-lg-0" href="#">
-                        <img src={logo} height="40" alt="" loading="lazy" />
-                      </a>
-                    </li>
                     <li className="nav-item">
                       <a className="nav-link" href="#">My Profile</a>
                     </li>
