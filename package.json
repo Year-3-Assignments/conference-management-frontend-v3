@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "start": "node server.js",
-    "postinstall": "webpack -p",
+    "postinstall": "webpack --mode production",
     "dev": "webpack serve --port 3000 --mode development --open --hot",
     "build": "webpack --mode production"
   },
