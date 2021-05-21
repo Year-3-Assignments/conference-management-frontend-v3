@@ -1,9 +1,17 @@
-@font-face {
-  font-family: "SF Pro Display";
-  font-weight: 100;
-  src: url("https://applesocial.s3.amazonaws.com/assets/styles/fonts/sanfrancisco/sanfranciscodisplay-regular-webfont.woff");
+body {
+  font-family: "SF Pro Display Bold";
 }
 
 .btn--pill {
   border-radius: 80px;
 }
+
+@media (min-width: 576px) {};
+
+@media (min-width: 768px) {};
+
+@media (min-width: 992px) {};
+
+@media (min-width: 1200px) {};
+
+@media (min-width: 1400px) {};

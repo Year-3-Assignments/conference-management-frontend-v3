@@ -1,12 +1,12 @@
 import React from 'react';
 import './App.scss';
-import Footer from './components/pages/footer/Footer';
+import PageRoutes from './routes/pageRoutes';
 
 class App extends React.Component {
   render() {
     return (
       <div>
-        <Footer/>
+        <PageRoutes />
       </div>
     );
   }
