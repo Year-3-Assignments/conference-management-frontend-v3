@@ -1,8 +1,8 @@
 import React from 'react';
 import Progress from '../progress/progress';
 import firebase from '../../firebase.config';
-import { v4 as uuidv4 } from 'uuid';
 import './createTemplate.scss';
+import { NotificationContainer, NotificationManager } from 'react-notifications';
 
 let formData = {};
 let initialState = {
@@ -20,11 +20,9 @@ class CreateTemplate extends React.Component {
     super(props);
     this.onChange = this.onChange.bind(this);
     this.onFileChange = this.onFileChange.bind(this);
-    this.setImageUrl = this.setImageUrl.bind(this);
     this.setUploadPercentatge = this.setUploadPercentatge.bind(this);
     this.uploadImage = this.uploadImage.bind(this);
     this.onSubmit = this.onSubmit.bind(this);
-    this.handleReset = this.handleReset.bind(this);
     this.state = initialState;
   }
 
@@ -36,18 +34,13 @@ class CreateTemplate extends React.Component {
     this.setState({ template: e.target.files[0] });
   }
 
-  setImageUrl({url}) {
-    this.setState({ fileUrl: url});
-  }
-
   setUploadPercentatge(progress) {
     this.setState({ uploadPercentatge: progress });
   }
 
   uploadImage(e) {
     e.preventDefault();
-    if (this.state.template !== '' && this.state.templateName !== '') {
-      let templateCode = uuidv4();
+    if (this.state.template !== '') {
       let folderName = 'Templates';
       let file = this.state.template;
       let upload = firebase.storage().ref(`${folderName}/${file.name}`).put(file);
@@ -60,18 +53,13 @@ class CreateTemplate extends React.Component {
       }, () => {
         upload.snapshot.ref.getDownloadURL()
         .then(url => {
-          this.setImageUrl({ url: url }, () => {
-            return (
-              <div class="alert alert-success" role="alert">
-                This is a success alert—check it out!
-              </div>
-            )
-          });
+          this.setState({ fileUrl: url});
+          NotificationManager.success('File upload successfully')
           console.log(url)
         });
       });
     } else {
-      console.log('Please add a file')
+      NotificationManager.warning('Please select a file')
     }
   }
 
@@ -83,10 +71,6 @@ class CreateTemplate extends React.Component {
     };
     formData = Object.assign({}, data);
     return true;
-  }
-
-  handleReset() {
-    this.setState(initialState);
   }
 
   onSubmit(e) {
@@ -103,9 +87,10 @@ class CreateTemplate extends React.Component {
           templateurl: this.state.fileUrl
         };
         console.log('DATA TO SEND', template);
-        this.handleReset();
+        NotificationManager.success('New templated added');
       } else {
         this.setState({ isFormInvalid: true });
+        NotificationManager.warning('Please fill input fields');
       }
     }
   }
@@ -128,7 +113,7 @@ class CreateTemplate extends React.Component {
           <div className="form-group mb-3">
             <label className="form-text" htmlFor="template-file">Select Template File</label>
             <div className="input-group">
-              <input type="file" className="form-control" id="template-file" onChange={e => this.onFileChange(e)} />
+              <input type="file" className="form-control" id="template-file" onChange={e => this.onFileChange(e)} onF />
               <button className="btn btn-info" type="button" onClick={this.uploadImage}>UPLOAD</button>
             </div>
             {formData.templateurl===null && this.state.isFormInvalid ? <span className="text-danger validation-text p-0">Template is required</span> : null}
@@ -142,6 +127,7 @@ class CreateTemplate extends React.Component {
             </a>
           </div>
         </div>
+        <NotificationContainer />
       </div>
     );
   }

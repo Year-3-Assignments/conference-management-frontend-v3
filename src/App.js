@@ -1,14 +1,13 @@
 import React from 'react';
-import './App.scss';
-import CreateTemplate from './components/templateUploader/createTemplate';
+import "../node_modules/react-notifications/lib/notifications.css";
 import PageRoutes from './routes/pageRoutes';
+import './App.scss';
 
 class App extends React.Component {
   render() {
     return (
       <div>
         <PageRoutes />
-        <CreateTemplate/>
       </div>
     );
   }
