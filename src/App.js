@@ -1,11 +1,12 @@
 import React from 'react';
 import './App.scss';
+import Footer from './components/pages/footer/Footer';
 
 class App extends React.Component {
   render() {
     return (
       <div>
-        <h2>Conference App Frontend - V1</h2>
+        <Footer/>
       </div>
     );
   }
