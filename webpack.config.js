@@ -20,6 +20,15 @@ module.exports = {
     }, {
       test: /\.scss$/,
       use: ['style-loader', 'css-loader', 'sass-loader']
+    }, {
+      test: /\.(jpg|png|svg)$/,
+      loader: 'url-loader',
+      options: {
+        limit: 25000,
+      }
+    }, {
+      test: /\.(ttf|eot|svg|woff(2)?)(\S+)?$/,
+      use: { loader: 'file-loader?name=[name].[ext]' }
     }]
   },
   plugins: [

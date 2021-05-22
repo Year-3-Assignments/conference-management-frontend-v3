@@ -1,11 +1,13 @@
 import React from 'react';
+import "../node_modules/react-notifications/lib/notifications.css";
+import PageRoutes from './routes/pageRoutes';
 import './App.scss';
 
 class App extends React.Component {
   render() {
     return (
       <div>
-        <h2>Conference App Frontend - V1</h2>
+        <PageRoutes />
       </div>
     );
   }
