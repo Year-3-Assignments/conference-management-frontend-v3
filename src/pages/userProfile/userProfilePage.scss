@@ -1,0 +1,28 @@
+@media (min-width: 576px) {};
+
+@media (min-width: 768px) {};
+
+@media (min-width: 992px) {};
+
+@media (min-width: 1200px) {
+  .profile-card {
+    width: 350px;
+  }
+  .card-alignment {
+    margin: 0 auto;
+  }
+  .username {
+    font-size: 20px;
+  }
+};
+
+@media (min-width: 1400px) {
+  .profile-card {
+    width: 350px;
+  }
+};
+
+.col-6{
+	flex: 0 0 50%;
+	max-width: 50%;
+}

@@ -2,7 +2,7 @@ import React from 'react';
 import "../node_modules/react-notifications/lib/notifications.css";
 import PageRoutes from './routes/pageRoutes';
 import './App.scss';
-import UserProfile from './pages/userProfile/userProfile';
+import UserProfile from './pages/userProfile/userProfilePage';
 
 class App extends React.Component {
   render() {

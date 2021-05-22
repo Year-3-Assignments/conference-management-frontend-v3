@@ -19,6 +19,16 @@ body {
   border-radius: 0px;
 }
 
+.btn-color {
+  background-color: #116466;
+  color: #fff;
+  font-size: 13px;
+}
+
+.btn-color:hover {
+  color: #fff;
+}
+
 @media (min-width: 576px) {};
 
 @media (min-width: 768px) {};

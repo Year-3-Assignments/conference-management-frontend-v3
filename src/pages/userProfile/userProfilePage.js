@@ -1,9 +1,10 @@
 import React from 'react';
 import { NotificationContainer, NotificationManager } from 'react-notifications';
+import Profile from './profile';
 
 let initialState = {};
 
-class UserProfile extends React.Component {
+class UserProfilePage extends React.Component {
   constructor(props) {
     super(props);
     this.state = initialState;
@@ -11,11 +12,11 @@ class UserProfile extends React.Component {
 
   render() {
     return (
-      <div>
-        <h1>User Profile</h1>
+      <div className="container mt-2">
+        <Profile />
       </div>
     );
   }
 }
 
-export default UserProfile;
+export default UserProfilePage;
