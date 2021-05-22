@@ -4,51 +4,39 @@ import './footer.scss';
 class Footer extends React.Component{
     constructor(props) {
         super(props);
-      }
+    }
     
     render(){
         return(
-            <div className="footer-bg footer-content">
-                <footer className=" text-center text-white">
-                    <div className="container p-4 pb-0">
-                        <section className="">
-                        <form action="">
-                            <div className="row d-flex justify-content-center">
-                            <div className="col-md-5 col-12">
-                                <div className="form-outline form-white mb-4">
-                                <div className="input-group rounded">
-                                    <input type="search" className="form-control rounded" placeholder="Search" aria-label="Search"
-                                        aria-describedby="search-addon" />
-                                    <span className="input-group-text border-0" id="search-addon">
-                                        <i className="fas fa-search"></i>
-                                    </span>
-                                    </div>
-                                </div>
-                            </div>
-                            <br></br> <br></br> <br></br> <br></br> <br></br>
-                            <div className="col-md-5 col-12">
-                                <div className="form-outline form-white mb-4">
-                                <input type="email" id="form5Example2" className="form-control" />
-                                <label className="form-label" for="form5Example2">Email address</label>
-                                </div>
-                            </div>
-                            <div className="col-auto">
-                                <button type="submit" className="btn btn-outline-light mb-4">
-                                Subscribe
-                                </button>
-                            </div>
-                            </div>
-                        </form>
-                        </section>
-                    </div>
-                    <div className="text-center p-3" >
-                        © 2021 Copyright:
-                        <a class="text-white" href="">AF Project</a>
-                    </div>
-                </footer>
-            </div>
-        
-        )
+            <footer className="bg-dark text-center text-white sticky-bottom">
+                <div className="container p-4 pb-0">
+                    <section className="mb-4">
+                    <a className="btn btn-outline-light btn-floating m-1" href="#!" role="button">
+                        <i className="fab fa-facebook-f"></i>
+                    </a>
+                    <a className="btn btn-outline-light btn-floating m-1" href="#!" role="button">
+                        <i className="fab fa-twitter"></i>
+                    </a>
+                    <a className="btn btn-outline-light btn-floating m-1" href="#!" role="button">
+                        <i className="fab fa-google"></i>
+                    </a>
+                    <a className="btn btn-outline-light btn-floating m-1" href="#!" role="button">
+                        <i className="fab fa-instagram"></i>
+                    </a>
+                    <a className="btn btn-outline-light btn-floating m-1" href="#!" role="button">
+                        <i className="fab fa-linkedin-in"></i>
+                    </a>
+                    <a className="btn btn-outline-light btn-floating m-1" href="#!" role="button">
+                        <i className="fab fa-github"></i>
+                    </a>
+                    </section>
+                </div>
+                <div className="text-center p-3" style={{ backgroundColor: 'background-color: rgba(0, 0, 0, 0.2)'}}>
+                    © 2020 Copyright:
+                    <a className="text-white" href="https://mdbootstrap.com/">www.reache.com</a>
+                </div>
+            </footer>
+        );
     }
 }
 export default Footer;
