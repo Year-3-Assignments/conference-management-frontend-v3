@@ -1,7 +1,9 @@
 import React from 'react';
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
+
 // UI Componentes
 import Navbar from '../components/navBar/navbar';
+import Footer from '../components/footer/footer';
 
 class PageRoutes extends React.Component {
   render() {
@@ -11,9 +13,9 @@ class PageRoutes extends React.Component {
         <Navbar />
           <section>
             <Switch>
-              {/* Page routes go here */}
             </Switch>
           </section>
+          <Footer/>
         </Router>
       </div>
     );
