@@ -1,1 +1,10 @@
-// Application action types
+// Resource management action types
+export const CREATE_RESOURCE = "CREATE_RESOURCE";
+export const GET_ALL_RESOURCES = "GET_ALL_RESOURCES";
+export const SET_RESOURCE = "SET_RESOURCE";
+export const GET_RESOURCE = "GET_RESOURCE";
+export const GET_EDITOR_RESOURCES = "GET_EDITOR_RESOURCES";
+export const UPDATE_RESOURCE = "UPDATE_RESOURCE";
+export const DELETE_RESOURCE = "DELETE_RESOURCE";
+export const CHANGE_RESOURCE_STATUS = "CHANGE_RESOURCE_STATUS";
+export const RESOURCE_PAYMENT = "RESOURCE_PAYMENT";

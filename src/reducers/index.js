@@ -1,7 +1,8 @@
 import { combineReducers } from 'redux';
+import resourceReducer from './resourceReducer';
 
 const allReducers = combineReducers({
-  // Add alreducer files here
+  resourceReducer
 });
 
 export default allReducers;
