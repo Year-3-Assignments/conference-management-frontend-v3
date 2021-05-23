@@ -23,7 +23,7 @@ class Navbar extends React.Component {
             >
               <i className="fas fa-bars"></i>
             </button>
-            <a class="navbar-brand" href="#">
+            <a className="navbar-brand" href="#">
               <img src={logo} height="35" alt="" loading="lazy" />
               <small>REACH</small>
             </a>
