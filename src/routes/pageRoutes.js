@@ -4,6 +4,7 @@ import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 // UI Componentes
 import Navbar from '../components/navBar/navbar';
 import Footer from '../components/footer/footer';
+import CreateResource from '../components/resourceCreator/createResource';
 
 class PageRoutes extends React.Component {
   render() {
@@ -13,6 +14,7 @@ class PageRoutes extends React.Component {
         <Navbar />
           <section>
             <Switch>
+              <Route path="/" component={CreateResource}/>
             </Switch>
           </section>
           <Footer/>
