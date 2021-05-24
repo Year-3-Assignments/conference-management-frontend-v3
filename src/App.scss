@@ -19,6 +19,14 @@ body {
   border-radius: 0px;
 }
 
+.react-datepicker__input-container {
+  width: inherit;
+}
+
+.react-datepicker-wrapper {
+  width: 100%;
+}
+
 @media (min-width: 576px) {};
 
 @media (min-width: 768px) {};

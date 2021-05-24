@@ -27,7 +27,7 @@ module.exports = {
         limit: 25000,
       }
     }, {
-      test: /\.(ttf|eot|svg|woff(2)?)(\S+)?$/,
+      test: /\.(ttf|eot|gif|svg|woff(2)?)(\S+)?$/,
       use: { loader: 'file-loader?name=[name].[ext]' }
     }]
   },

@@ -5,6 +5,7 @@ import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 import SignUp from '../pages/SignUp/Signup';
 import Navbar from '../components/navBar/navbar';
 import Footer from '../components/footer/footer';
+import CreateResource from '../components/resourceCreator/createResource';
 
 class PageRoutes extends React.Component {
   render() {
@@ -15,6 +16,7 @@ class PageRoutes extends React.Component {
           <section>
             <Switch>
               <Route path="/signup" component={SignUp} exact />
+              <Route path="/" component={CreateResource}/>
             </Switch>
           </section>
           <Footer/>
