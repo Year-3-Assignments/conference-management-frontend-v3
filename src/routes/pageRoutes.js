@@ -2,7 +2,7 @@ import React from 'react';
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 
 // UI Componentes
-import SignUp from '../pages/SignUp/Signup';
+import SignUp from '../pages/signUp/Signup';
 import Navbar from '../components/navBar/navbar';
 import Footer from '../components/footer/footer';
 import CreateResource from '../components/resourceCreator/createResource';
@@ -13,7 +13,7 @@ class PageRoutes extends React.Component {
       <div>
         <Router>
         <Navbar />
-          <section>
+          <section className="content">
             <Switch>
               <Route path="/signup" component={SignUp} exact />
               <Route path="/" component={CreateResource}/>
