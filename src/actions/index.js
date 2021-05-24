@@ -8,3 +8,6 @@ export const UPDATE_RESOURCE = "UPDATE_RESOURCE";
 export const DELETE_RESOURCE = "DELETE_RESOURCE";
 export const CHANGE_RESOURCE_STATUS = "CHANGE_RESOURCE_STATUS";
 export const RESOURCE_PAYMENT = "RESOURCE_PAYMENT";
+
+// User account management types
+export const CREATE_USER_ACCOUNT = "CREATE_USER_ACCOUNT";
