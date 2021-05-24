@@ -54,12 +54,12 @@ class CreateTemplate extends React.Component {
         upload.snapshot.ref.getDownloadURL()
         .then(url => {
           this.setState({ fileUrl: url});
-          NotificationManager.success('File upload successfully')
+          NotificationManager.success('File upload successfully');
           console.log(url)
         });
       });
     } else {
-      NotificationManager.warning('Please select a file')
+      NotificationManager.warning('Please select a file');
     }
   }
 
