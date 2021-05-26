@@ -1,6 +1,9 @@
 import React from 'react';
 import './login.scss';
 import { NotificationContainer, NotificationManager } from 'react-notifications';
+import {connect} from 'react-redux';
+import {loginUserAccount} from '../../actions/userActions';
+import _ from 'lodash';
 
 let formData = {};
 let initialState = {
@@ -19,6 +22,32 @@ class Login extends React.Component{
 
   onChange(e) {
     this.setState({ [e.target.name]: e.target.value });
+  }
+
+  componentWillReceiveProps = (nextProps) =>{
+    if(this.props.loginUser !== nextProps.loginUser){
+      if (nextProps.loginUser.token !== null && nextProps.loginUser.username !== null) {
+        NotificationManager.success('Login successful');
+        localStorage.setItem('user_id', nextProps.loginUser.user_id);
+        localStorage.setItem('username', nextProps.loginUser.username);
+        localStorage.setItem('token', nextProps.loginUser.token);
+        localStorage.setItem('role', nextProps.loginUser.role);
+      } else {
+        NotificationManager.error('Error with login');
+      }
+    }
+
+    if (this.props.loginUserError !== nextProps.loginUserError) {
+      if (nextProps.loginUserError && nextProps.loginUserAccount.name) {
+        if (_.isEqual(nextProps.loginUserError.name, 'Error')) {
+          NotificationManager.warning('Credentials are not valid');
+          localStorage.removeItem('user_id');
+          localStorage.removeItem('username');
+          localStorage.removeItem('token');
+          localStorage.removeItem('role');
+        }
+      }
+    }
   }
   
   validateForm() {
@@ -42,6 +71,8 @@ class Login extends React.Component{
           username : this.state.userName,
           password : this.state.password
         }
+        console.log('DATA To SEND',login);
+        this.props.loginUserAccount(login);
       }
       else{
         this.setState({isFormInvalid: true});
@@ -76,4 +107,15 @@ class Login extends React.Component{
     )
   }
 }
-export default Login;
+
+const mapStateToProps = state =>({
+  loginUser: state.userReducer.loginUser,
+  loginUserError: state.userReducer.loginUserError
+});
+
+const mapDispatchToProps = dispatch =>({
+  loginUserAccount: user =>{
+    dispatch(loginUserAccount(user));
+  }
+})
+export default connect(mapStateToProps,mapDispatchToProps)(Login);
