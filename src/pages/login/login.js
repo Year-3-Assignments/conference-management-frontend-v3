@@ -1,6 +1,8 @@
 import React from 'react';
 import './login.scss';
 import { NotificationContainer, NotificationManager } from 'react-notifications';
+import {connect} from 'react-redux';
+import {loginUserAccount} from '../../actions/userActions';
 
 let formData = {};
 let initialState = {
@@ -19,6 +21,18 @@ class Login extends React.Component{
 
   onChange(e) {
     this.setState({ [e.target.name]: e.target.value });
+  }
+
+  componentWillReceiveProps = (nextProps) =>{
+    if(this.props.loginUser !== nextProps.loginUser){
+      this.setState({ loginResponse: nextProps.loginUserError }, () => {
+        if (this.state.loginResponse && this.state.loginResponse === 'Error') {
+          this.setState({ isLoginSuccess: false, isLoginClicked: nextProps.isLogin });
+        } else {
+          this.setState({ isLoginSuccess: '', isLoginClicked: nextProps.isLogin });
+        }
+      });
+    }
   }
   
   validateForm() {
@@ -42,6 +56,9 @@ class Login extends React.Component{
           username : this.state.userName,
           password : this.state.password
         }
+        console.log('DATA To SEND',login);
+        this.props.loginUserAccount(login);
+        NotificationManager.success('User Logged in successfully!','Success');
       }
       else{
         this.setState({isFormInvalid: true});
@@ -76,4 +93,14 @@ class Login extends React.Component{
     )
   }
 }
-export default Login;
+
+const mapStateToProps = state =>({
+  loginUser: state.userReducer.loginUser
+});
+
+const mapDispatchToProps = dispatch =>({
+  loginUserAccount: user =>{
+    dispatch(loginUserAccount(user));
+  }
+})
+export default connect(mapStateToProps,mapDispatchToProps)(Login);

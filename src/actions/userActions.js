@@ -12,7 +12,7 @@ export function createUserAccount(user) {
 export function loginUserAccount(user) {
   return {
     type: LOGIN_USER_ACCOUNT,
-    payload: axios.post(`${REACT_APP_API_STG_URL}/api/user/login`, user)
+    payload: axios.post(`https://conference-stg.herokuapp.com/api/user/login`, user)
   };
 }
 
@@ -31,7 +31,7 @@ export function getAllUsers() {
     payload: axios.get(`${REACT_APP_API_STG_URL}/api/user/users`, {
       headers: { 'Authorization': localStorage.getItem('Authorization' )}
     })
-  }
+  };
 }
 
 export function getAllAdmins() {
@@ -40,7 +40,7 @@ export function getAllAdmins() {
     payload: axios.get(`${REACT_APP_API_STG_URL}/api/user/admins`, {
       headers: { 'Authorization': localStorage.getItem('Authorization' )}
     })
-  }
+  };
 }
 
 export function getAllReviewers() {
@@ -49,7 +49,7 @@ export function getAllReviewers() {
     payload: axios.get(`${REACT_APP_API_STG_URL}/api/user/reviewers`, {
       headers: { 'Authorization': localStorage.getItem('Authorization' )}
     })
-  }
+  };
 }
 
 export function getAllEditors() {
@@ -58,7 +58,7 @@ export function getAllEditors() {
     payload: axios.get(`${REACT_APP_API_STG_URL}/api/user/editors`, {
       headers: { 'Authorization': localStorage.getItem('Authorization' )}
     })
-  }
+  };
 }
 
 export function updateUserAccount(user) {
