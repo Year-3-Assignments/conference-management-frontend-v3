@@ -1,5 +1,7 @@
 const path = require('path');
 const HTMLWebpackPlugin = require('html-webpack-plugin');
+const dotenv = require('dotenv');
+const webpack = require('webpack');
 
 module.exports = {
   entry: './src/index.js', // entry point to the react project
@@ -35,6 +37,9 @@ module.exports = {
     }]
   },
   plugins: [
-    new HTMLWebpackPlugin({ template: './public/index.html' })
+    new HTMLWebpackPlugin({ template: './public/index.html' }),
+    new webpack.DefinePlugin({
+      'process.env': JSON.stringify(dotenv.config().parsed)
+    })
   ]
 }
