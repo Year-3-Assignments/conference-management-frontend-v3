@@ -73,7 +73,7 @@ function userReducer(state = initialState, action) {
       getAllReviewers = action.payload.data;
       return { ...state, loading: false, getAllReviewers };
     case `${LOGIN_USER_ACCOUNT}_FULFILLED`:
-      loginUser = action.payload.data;
+      loginUser = action.payload.data.data;
       return { ...state, loading: false, loginUser };
     
     case `${CREATE_USER_ACCOUNT}_REJECTED`:
@@ -93,7 +93,7 @@ function userReducer(state = initialState, action) {
     case `${GET_ALL_REVIEWER_ACCOUNTS}_REJECTED`:
       return { ...state, loading: false, getAllReviewersError: action.payload.data, state: initialState };
     case `${LOGIN_USER_ACCOUNT}_REJECTED`:
-      return { ...state, loading: false, loginUserError: action.payload.data, state: initialState };
+      return { ...state, loading: false, loginUserError: action.payload, state: initialState };
 
     default: 
       return state;

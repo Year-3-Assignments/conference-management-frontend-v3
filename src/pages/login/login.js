@@ -3,6 +3,7 @@ import './login.scss';
 import { NotificationContainer, NotificationManager } from 'react-notifications';
 import {connect} from 'react-redux';
 import {loginUserAccount} from '../../actions/userActions';
+import _ from 'lodash';
 
 let formData = {};
 let initialState = {
@@ -25,13 +26,27 @@ class Login extends React.Component{
 
   componentWillReceiveProps = (nextProps) =>{
     if(this.props.loginUser !== nextProps.loginUser){
-      this.setState({ loginResponse: nextProps.loginUserError }, () => {
-        if (this.state.loginResponse && this.state.loginResponse === 'Error') {
-          this.setState({ isLoginSuccess: false, isLoginClicked: nextProps.isLogin });
-        } else {
-          this.setState({ isLoginSuccess: '', isLoginClicked: nextProps.isLogin });
+      if (nextProps.loginUser.token !== null && nextProps.loginUser.username !== null) {
+        NotificationManager.success('Login successful');
+        localStorage.setItem('user_id', nextProps.loginUser.user_id);
+        localStorage.setItem('username', nextProps.loginUser.username);
+        localStorage.setItem('token', nextProps.loginUser.token);
+        localStorage.setItem('role', nextProps.loginUser.role);
+      } else {
+        NotificationManager.error('Error with login');
+      }
+    }
+
+    if (this.props.loginUserError !== nextProps.loginUserError) {
+      if (nextProps.loginUserError && nextProps.loginUserAccount.name) {
+        if (_.isEqual(nextProps.loginUserError.name, 'Error')) {
+          NotificationManager.warning('Credentials are not valid');
+          localStorage.removeItem('user_id');
+          localStorage.removeItem('username');
+          localStorage.removeItem('token');
+          localStorage.removeItem('role');
         }
-      });
+      }
     }
   }
   
@@ -58,7 +73,6 @@ class Login extends React.Component{
         }
         console.log('DATA To SEND',login);
         this.props.loginUserAccount(login);
-        NotificationManager.success('User Logged in successfully!','Success');
       }
       else{
         this.setState({isFormInvalid: true});
@@ -95,7 +109,8 @@ class Login extends React.Component{
 }
 
 const mapStateToProps = state =>({
-  loginUser: state.userReducer.loginUser
+  loginUser: state.userReducer.loginUser,
+  loginUserError: state.userReducer.loginUserError
 });
 
 const mapDispatchToProps = dispatch =>({
