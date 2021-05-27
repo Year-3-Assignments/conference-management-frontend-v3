@@ -1,6 +1,4 @@
 import React from 'react';
-import { NotificationContainer, NotificationManager } from 'react-notifications';
-import EditProfile from './editProfle';
 import Profile from './profile';
 
 let initialState = {};
