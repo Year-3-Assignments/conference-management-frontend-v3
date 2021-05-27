@@ -28,7 +28,13 @@ class UserResources extends React.Component {
 
   componentWillReceiveProps = (nextProps) => {
     if (this.props.userResources !== nextProps.userResources) {
-      this.setState({ resources: nextProps.userResources }, () => console.log(this.state.resources));
+      this.setState({ resources: nextProps.userResources });
+    }
+
+    if (this.props.createResource !== nextProps.createResource) {
+      if (!_.isNull(localStorage.getItem('token'))) {
+        this.props.getResourcesForUser();
+      }
     }
   }
 
@@ -43,13 +49,12 @@ class UserResources extends React.Component {
   ];
 
   setStatusFormatter(cell, row) {
-    console.log('cell', cell)
     if (_.isEqual(cell, 'PENDING')) {
       return <span className="badge rounded-pill bg-warning text-dark"><strong>PENDING</strong></span>
     }
 
     if (_.isEqual(cell, 'APPROVED')) {
-
+      return <span className="badge rounded-pill bg-success text-dark"><strong>APPROVED</strong></span>
     }
   }
 
@@ -58,7 +63,6 @@ class UserResources extends React.Component {
     renderer: row => (
       <div className="row">
         <div className="col-md-6">
-          {console.log('expand row', row)}
           <h6>Resource Persons</h6>
           <div className="row">
             {row.resourcepersons.length > 0 && row.resourcepersons.map((person, index) => (
@@ -80,7 +84,7 @@ class UserResources extends React.Component {
           <h6 className="mt-1">Submitted Documents</h6>
           {row.resourceurls.length > 0 && row.resourceurls.map((item, index) => (
             <div key={index}> 
-              <i class="fas fa-file-alt"></i>&nbsp;<a href={item} target="_blank">{firebase.storage().refFromURL(item).name}</a>
+              <i className="fas fa-file-alt"></i>&nbsp;<a href={item} target="_blank">{firebase.storage().refFromURL(item).name}</a>
             </div>
           ))}
         </div>
@@ -93,17 +97,12 @@ class UserResources extends React.Component {
       <div>
         <span className="dropdown show">
           <span className="dropdown">
-            <a
-              href=""
-              className=""
-              data-mdb-toggle="dropdown"
-              aria-expanded="true"
-            >
-            <i class="fas fa-bars" style={{ color: '#000'}}></i>
+            <a href="" data-mdb-toggle="dropdown" aria-expanded="true">
+            <i className="fas fa-bars" style={{ color: '#000'}}></i>
             </a>
             <div className="dropdown-menu dropdown-menu-left">
-              <button className="dropdown-item custom-button" data-target="#update_complaint" data-toggle="modal"><i class="fas fa-edit"></i>&nbsp;&nbsp;Edit</button>
-              <button className="dropdown-item custom-button" data-target="#delete_item" data-toggle="modal"><i class="fas fa-trash"></i>&nbsp;&nbsp;Delete</button>
+              <button className="dropdown-item custom-button" data-target="#update_complaint" data-toggle="modal"><i className="fas fa-edit"></i>&nbsp;&nbsp;Edit</button>
+              <button className="dropdown-item custom-button" data-target="#delete_item" data-toggle="modal"><i className="fas fa-trash"></i>&nbsp;&nbsp;Delete</button>
             </div>
           </span>
         </span>
@@ -142,7 +141,8 @@ class UserResources extends React.Component {
 }
 
 const mapStateToProps = state =>({
-  userResources: state.resourceReducer.userResources
+  userResources: state.resourceReducer.userResources,
+  createResource: state.resourceReducer.createResource
 });
 
 const mapDispatchToProps = dispatch =>({

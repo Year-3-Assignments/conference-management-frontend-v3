@@ -30,7 +30,6 @@ let initialState = {
     buttonText: 'CREATE'
 };
 
-const $ = window.$;
 class CreateResource extends React.Component{
   constructor(props){
     super(props);
@@ -67,9 +66,7 @@ class CreateResource extends React.Component{
   }
 
   onTimeChange(time) {
-    this.setState({ modifiedTime: moment(time).format('LLLL'), time: time }, () => {
-      console.log('time', this.state.modifiedTime)
-    });
+    this.setState({ modifiedTime: moment(time).format('LLLL'), time: time });
   }
 
   onFileChange(e){
@@ -91,7 +88,7 @@ class CreateResource extends React.Component{
       let files = this.state.resources;
       
       for (let i = 0; i < files.length; i++) {
-        let upload = firebase.storage().ref(`${folderName}/${uuidv4()}-${files[i].name}`).put(files[i]);
+        let upload = firebase.storage().ref(`${folderName}/${uuidv4()}/${files[i].name}`).put(files[i]);
 
         upload.on('state_changed', (snapshot) => {
           const progress = Math.round((snapshot.bytesTransferred / snapshot.totalBytes) * 100);
@@ -126,7 +123,6 @@ class CreateResource extends React.Component{
 
   onSubmit(e){
     e.preventDefault();
-    console.log('resources', this.state.resourceUrls)
     if(this.validateResourceForm()){
       let data = Object.values(formData).map(key => {
         return key !== null;
@@ -145,14 +141,12 @@ class CreateResource extends React.Component{
           resourcepersons: this.state.resourcePersons,
           ispaid: false
         };
-
-        console.log('RESOURCE DATA TO SEND', resource);
+        
         this.props.createResource(resource);
         NotificationManager.success('New Resource is created');
-        document.getElementById('resource-form').reset();
-        this.setState(initialState, () => {
-          $('#modal').modal('toggle');
-        });
+        this.setState(initialState);
+        $('#files').val('');
+        $('[name=resourceType]').removeAttr('checked');
       }else{
         this.setState({ isFormInvalid: true});
         NotificationManager.warning('Please fill the input fields!')
@@ -247,7 +241,7 @@ class CreateResource extends React.Component{
                 <button type="button" className="btn btn-light btn--pill" data-mdb-dismiss="modal">
                   Close
                 </button>
-                <button type="button" className="btn btn-color btn--pill" onClick={this.onSubmit}>send request</button>
+                <button type="button" className="btn btn-color btn--pill" id="submit-btn" onClick={this.onSubmit}>send request</button>
               </div>
             </div>
           </div>

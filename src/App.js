@@ -4,6 +4,7 @@ import '../node_modules/react-notifications/lib/notifications.css';
 import "react-datepicker/dist/react-datepicker.css";
 import PageRoutes from './routes/pageRoutes';
 import './App.scss';
+window.$ = jQuery;
 
 class App extends React.Component {
   render() {
