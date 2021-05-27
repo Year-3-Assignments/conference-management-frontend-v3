@@ -1,4 +1,5 @@
 import React from 'react';
+import EditProfile from './editProfle';
 import Profile from './profile';
 
 let initialState = {};
@@ -12,8 +13,15 @@ class UserProfilePage extends React.Component {
   render() {
     return (
       <div className="container mt-2">
-        <Profile />
+        <div className="row">
+          <div className="col-md-3">
+            <Profile />
+          </div>
+          <div className="col-md-9">
+            <EditProfile/>
+          </div>
       </div>
+    </div>
       
     );
   }

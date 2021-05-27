@@ -37,7 +37,7 @@ class Profile extends React.Component {
         lastName: nextProps.getUser.lastname,
         description: nextProps.getUser.description,
         userName: nextProps.getUser.username,
-        profileImage: nextProps.getUser.imageUrl
+        profileImage: nextProps.getUser.imageurl
       });
     } 
   }
