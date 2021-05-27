@@ -7,6 +7,7 @@ import Navbar from '../components/navBar/navbar';
 import Footer from '../components/footer/footer';
 import Login from '../pages/login/login';
 import CreateResource from '../components/resourceCreator/createResource';
+import Reviewer from '../pages/reviewer/reviewer';
 
 class PageRoutes extends React.Component {
   render() {
@@ -18,6 +19,7 @@ class PageRoutes extends React.Component {
             <Switch>
               <Route path="/login" component={Login} exact />
               <Route path="/signup" component={SignUp} exact />
+              <Route path="/reviewer" component={Reviewer}/>
               <Route path="/" component={CreateResource}/>
             </Switch>
           </section>
