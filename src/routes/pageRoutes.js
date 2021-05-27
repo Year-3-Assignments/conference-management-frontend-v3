@@ -6,28 +6,26 @@ import SignUp from '../pages/SignUp/Signup';
 import Navbar from '../components/navBar/navbar';
 import Footer from '../components/footer/footer';
 import Login from '../pages/login/login';
-import CreateResource from '../components/resourceCreator/createResource';
-import Profile from '../pages/userProfile/Profile';
+import UserProfilePage from '../pages/userProfile/userProfilePage';
+import UserResource from '../pages/userResources/resources';
 
-class PageRoutes extends React.Component {
-  render() {
-    return (
-      <div>
-        <Router>
-        <Navbar />
-          <section className="content">
-            <Switch>
-              <Route path="/login" component={Login} exact />
-              <Route path="/signup" component={SignUp} exact />
-              <Route path="/" component={CreateResource} exact/>
-              <Route path="/me" component={Profile} exact/>
-            </Switch>
-          </section>
-          <Footer/>
-        </Router>
-      </div>
-    );
-  }
+function PageRoutes() {
+  return (
+    <div>
+      <Router>
+      <Navbar />
+        <section className="content">
+          <Switch>
+            <Route path="/signup" component={SignUp} />
+            <Route path="/login" component={Login} />
+            <Route path="/me/resource" component={UserResource} exact />
+            <Route path="/me" component={UserProfilePage} />
+          </Switch>
+        </section>
+        <Footer/>
+      </Router>
+    </div>
+  );
 }
 
 export default PageRoutes;

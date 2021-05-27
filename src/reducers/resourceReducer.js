@@ -1,9 +1,10 @@
 import { CREATE_RESOURCE, GET_ALL_RESOURCES, SET_RESOURCE, GET_RESOURCE, GET_EDITOR_RESOURCES, 
-  UPDATE_RESOURCE, DELETE_RESOURCE, CHANGE_RESOURCE_STATUS, RESOURCE_PAYMENT } from '../actions/index';
+  UPDATE_RESOURCE, DELETE_RESOURCE, CHANGE_RESOURCE_STATUS, RESOURCE_PAYMENT, GET_RESOURCES_FOR_USER } from '../actions/index';
 
 const initialState = {
   createResource: '',
   allResources: [],
+  userResources: [],
   editorResources: [],
   getResource: '',
   setResource: '',
@@ -13,6 +14,7 @@ const initialState = {
   paidResource: '',
   createResourceError: null,
   allResourcesError: null,
+  userResourcesError: null,
   editorResourcesError: null,
   getResourceError: null,
   updateResourceError: null,
@@ -23,11 +25,12 @@ const initialState = {
 
 function resourceReducer(state = initialState, action) {
   let createResource, allResources, editorResources, getResource, setResource, updateResource,
-    deleteResource, changeResourceStatus, paidResource;
+    deleteResource, changeResourceStatus, paidResource, userResources;
   
-  switch (action) {
+  switch (action.type) {
     case `${CREATE_RESOURCE}_PENDING`:
     case `${GET_ALL_RESOURCES}_PENDING`:
+    case `${GET_RESOURCES_FOR_USER}_PENDING`:
     case `${GET_RESOURCE}_PENDING`:
     case `${GET_EDITOR_RESOURCES}_PENDING`:
     case `${UPDATE_RESOURCE}_PENDING`:
@@ -37,6 +40,7 @@ function resourceReducer(state = initialState, action) {
       return { ...state, loading: true, 
         createResourceError: null,
         allResourcesError: null,
+        userResourcesError: null,
         editorResourcesError: null,
         getResourceError: null,
         updateResourceError: null,
@@ -49,8 +53,11 @@ function resourceReducer(state = initialState, action) {
       createResource = action.payload.data;
       return { ...state, loading: false, createResource };
     case `${GET_ALL_RESOURCES}_FULFILLED`:
-      allResources = action.payload.data;
+      allResources = action.payload.data.data;
       return { ...state, loading: false, allResources };
+    case `${GET_RESOURCES_FOR_USER}_FULFILLED`:
+      userResources = action.payload.data.data;
+      return { ...state, loading: false, userResources };
     case `${SET_RESOURCE}`:
       setResource = action.payload;
       return { ...state, loading: false, setResource };
@@ -77,6 +84,8 @@ function resourceReducer(state = initialState, action) {
       return { ...state, loading: false, createResourceError: action.payload.data, state: initialState };
     case `${GET_ALL_RESOURCES}_REJECTED`:
       return { ...state, loading: false, allResourcesError: action.payload.data, state: initialState };
+    case `${GET_RESOURCES_FOR_USER}_REJECTED`:
+      return { ...state, loading: false, userResourcesError: action.payload.data, state: initialState };
     case `${GET_RESOURCE}_REJECTED`:
       return { ...state, loading: false, getResourceError: action.payload.data, state: initialState };
     case `${GET_EDITOR_RESOURCES}_REJECTED`:

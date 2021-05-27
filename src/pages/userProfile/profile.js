@@ -55,7 +55,7 @@ class Profile extends React.Component {
   render() {
     return (
       <div>
-        <div className="">
+        <div className="profile">
           <div className="card">
             <div>
               <img src={this.state.profileImage} className="mb-3 profile-img" />

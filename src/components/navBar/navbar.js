@@ -106,7 +106,7 @@ class Navbar extends React.Component {
                   null
                 }
 
-                {localStorage.getItem('role') === 'ROLE_PRESENTER' ?
+                {localStorage.getItem('role') === 'ROLE_USER' ?
                   <ul className="navbar-nav me-auto mb-2 mb-lg-0">
                     <li className="nav-item">
                       <a className="nav-link" href="#">My Profile</a>
@@ -123,8 +123,7 @@ class Navbar extends React.Component {
             {localStorage.getItem('role') === 'ROLE_ADMIN' || 
               localStorage.getItem('role') === 'ROLE_REVIEWER' || 
               localStorage.getItem('role') === 'ROLE_EDITOR' ||
-              localStorage.getItem('role') === 'ROLE_PRESENTER' ||
-              localStorage.getItem('role') === 'ROLE_ATENDEE' ?
+              localStorage.getItem('role') === 'ROLE_USER' ?
               <div className="d-flex align-items-center">
                 <a
                   className="text-reset me-3 dropdown-toggle hidden-arrow"

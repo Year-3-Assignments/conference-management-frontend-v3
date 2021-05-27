@@ -2,29 +2,29 @@ import { CREATE_USER_ACCOUNT, GET_USER_ACCOUNT, UPDATE_USER_ACCOUNT, DELETE_USER
   GET_ALL_EDITOR_ACCOUNTS, GET_ALL_USER_ACCOUNTS, GET_ALL_REVIEWER_ACCOUNTS, LOGIN_USER_ACCOUNT } from '../actions/index';
 
 const initialState = {
-  createUser: '',
-  getUser: '',
-  loginUser: '',
-  updateUser: '',
-  deleteUser: '',
-  getAllUsers: [],
-  getAllEditors: [],
-  getAllReviewers: [],
-  getAllAdmins: [],
-  createUserError: null,
-  getUserError: null,
-  loginUserError: null,
-  updateUserError: null,
-  deleteUserError: null,
-  getAllUsersError: null,
-  getAllReviewersError: null,
-  getAllEditorsError: null,
-  getAllAdminsError: null
+  createuser: '',
+  getuser: '',
+  loginuser: '',
+  updateuser: '',
+  deleteuser: '',
+  getallusers: [],
+  getalleditors: [],
+  getallreviewers: [],
+  getalladmins: [],
+  createuserError: null,
+  getuserError: null,
+  loginuserError: null,
+  updateuserError: null,
+  deleteuserError: null,
+  getallusersError: null,
+  getallreviewersError: null,
+  getalleditorsError: null,
+  getalladminsError: null
 };
 
 function userReducer(state = initialState, action) {
-  let createUser, getUser, loginUser, updateUser, deleteUser, getAllAdmins, 
-      getAllEditors, getAllReviewers, getAllUsers;
+  let createuser, getuser, loginuser, updateuser, deleteuser, getalladmins, 
+      getalleditors, getallreviewers, getallusers;
 
   switch (action.type) {
     case `${CREATE_USER_ACCOUNT}_PENDING`:
@@ -37,63 +37,63 @@ function userReducer(state = initialState, action) {
     case `${GET_ALL_REVIEWER_ACCOUNTS}_PENDING`:
     case `${LOGIN_USER_ACCOUNT}_PENDING`:
       return { ...state, loading: true,
-        createUserError: null,
-        getUserError: null,
-        loginUserError: null,
-        updateUserError: null,
-        deleteUserError: null,
-        getAllUsersError: null,
-        getAllReviewersError: null,
-        getAllEditorsError: null,
-        getAllAdminsError: null
+        createuserError: null,
+        getuserError: null,
+        loginuserError: null,
+        updateuserError: null,
+        deleteuserError: null,
+        getallusersError: null,
+        getallreviewersError: null,
+        getalleditorsError: null,
+        getalladminsError: null
       };
     
     case `${CREATE_USER_ACCOUNT}_FULFILLED`:
-      createUser = action.payload.data;
-      return { ...state, loading: false, createUser };
+      createuser = action.payload.data;
+      return { ...state, loading: false, createuser };
     case `${GET_USER_ACCOUNT}_FULFILLED`:
-      getUser = action.payload.data.data;
-      return { ...state, loading: false, getUser }; 
+      getuser = action.payload.data;
+      return { ...state, loading: false, getuser }; 
     case `${UPDATE_USER_ACCOUNT}_FULFILLED`:
-      updateUser = action.payload.data;
-      return { ...state, loading: false, updateUser };
+      updateuser = action.payload.data;
+      return { ...state, loading: false, updateuser };
     case `${DELETE_USER_ACCOUNT}_FULFILLED`:
-      deleteUser = action.payload.data;
-      return { ...state, loading: false, deleteUser };
+      deleteuser = action.payload.data;
+      return { ...state, loading: false, deleteuser };
     case `${GET_ALL_ADMIN_ACCOUNTS}_FULFILLED`:
-      getAllAdmins = action.payload.data;
-      return { ...state, loading: false, getAllAdmins };
+      getalladmins = action.payload.data;
+      return { ...state, loading: false, getalladmins };
     case `${GET_ALL_EDITOR_ACCOUNTS}_FULFILLED`:
-      getAllEditors = action.payload.data;
-      return { ...state, loading: false, getAllEditors };
+      getalleditors = action.payload.data;
+      return { ...state, loading: false, getalleditors };
     case `${GET_ALL_USER_ACCOUNTS}_FULFILLED`:
-      getAllUsers = action.payload.data;
-      return { ...state, loading: false, getAllUsers };
+      getallusers = action.payload.data.data;
+      return { ...state, loading: false, getallusers };
     case `${GET_ALL_REVIEWER_ACCOUNTS}_FULFILLED`:
-      getAllReviewers = action.payload.data;
-      return { ...state, loading: false, getAllReviewers };
+      getallreviewers = action.payload.data;
+      return { ...state, loading: false, getallreviewers };
     case `${LOGIN_USER_ACCOUNT}_FULFILLED`:
-      loginUser = action.payload.data.data;
-      return { ...state, loading: false, loginUser };
+      loginuser = action.payload.data.data;
+      return { ...state, loading: false, loginuser };
     
     case `${CREATE_USER_ACCOUNT}_REJECTED`:
-      return { ...state, loading: false, createUserError: action.payload.data, state: initialState };
+      return { ...state, loading: false, createuserError: action.payload.data, state: initialState };
     case `${GET_USER_ACCOUNT}_REJECTED`:
-      return { ...state, loading: false, getUserError: action.payload.data, state: initialState };
+      return { ...state, loading: false, getuserError: action.payload.data, state: initialState };
     case `${UPDATE_USER_ACCOUNT}_REJECTED`:
-      return { ...state, loading: false, updateUserError: action.payload.data, state: initialState };
+      return { ...state, loading: false, updateuserError: action.payload.data, state: initialState };
     case `${DELETE_USER_ACCOUNT}_REJECTED`:
-      return { ...state, loading: false, deleteUserError: action.payload.data, state: initialState };
+      return { ...state, loading: false, deleteuserError: action.payload.data, state: initialState };
     case `${GET_ALL_ADMIN_ACCOUNTS}_REJECTED`:
-      return { ...state, loading: false, getAllAdminsError: action.payload.data, state: initialState };
+      return { ...state, loading: false, getalladminsError: action.payload.data, state: initialState };
     case `${GET_ALL_EDITOR_ACCOUNTS}_REJECTED`:
-      return { ...state, loading: false, getAllEditorsError: action.payload.data, state: initialState };
+      return { ...state, loading: false, getalleditorsError: action.payload.data, state: initialState };
     case `${GET_ALL_USER_ACCOUNTS}_REJECTED`:
-      return { ...state, loading: false, getAllUsersError: action.payload.data, state: initialState };
+      return { ...state, loading: false, getallusersError: action.payload.data, state: initialState };
     case `${GET_ALL_REVIEWER_ACCOUNTS}_REJECTED`:
-      return { ...state, loading: false, getAllReviewersError: action.payload.data, state: initialState };
+      return { ...state, loading: false, getallreviewersError: action.payload.data, state: initialState };
     case `${LOGIN_USER_ACCOUNT}_REJECTED`:
-      return { ...state, loading: false, loginUserError: action.payload, state: initialState };
+      return { ...state, loading: false, loginuserError: action.payload, state: initialState };
 
     default: 
       return state;
