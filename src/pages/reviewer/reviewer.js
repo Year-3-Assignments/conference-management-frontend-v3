@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import {connect} from 'react-redux';
-import { getAllResources } from '../../actions/resourceActions';
+import { getAllResources, chnageResourceState } from '../../actions/resourceActions';
 import _ from 'lodash';
 import BootstrapTable from 'react-bootstrap-table-next';
 import paginationFactory from 'react-bootstrap-table2-paginator';
@@ -36,6 +36,21 @@ class Reviewer extends Component {
   
       }
     }
+
+    setApprove(e, id) {
+      var resource = {
+        id: id,
+        status: 'APPROVED'
+      }
+      this.props.chnageResourceState(resource);
+    }
+
+    manageStatus(row){
+      return (<div>
+        <button onClick={e => this.setApprove(e, row._id)}>Approve</button>
+        <button>Reject</button>
+      </div>)
+    }
   
     tableColumnData = [
       { dataField: '_id', text: 'Request ID',  headerStyle: () => { return {width: '150px'}}},
@@ -44,6 +59,7 @@ class Reviewer extends Component {
       { dataField: 'type', text: 'Type', formatter: col => col.toUpperCase()},
       { dataField: 'status', text: 'Status', formatter: (cell, row) => this.setStatusFormatter(cell, row)},
       { dataField: 'createdby', text: 'Requested By', formatter: (col, row) => <div><img src={col.imageurl} className="created-person-img" />&nbsp;&nbsp;{col.firstname}&nbsp;{col.lastname}</div>},
+      { dataField: 'rejectorapprove', text: 'Reject/Approve', formatter: (col, row) => this.manageStatus(row)},
     ];
 
     expandRow = {
@@ -53,7 +69,6 @@ class Reviewer extends Component {
         <div className="row">
 
           <div className="col-md-6">
-            {console.log('expand row', row)}
             <h6>Resource Persons</h6>
             <div className="row">
               {row.resourcepersons.length > 0 && row.resourcepersons.map((person, index) => (
@@ -114,7 +129,10 @@ class Reviewer extends Component {
   const mapDispatchToProps = dispatch =>({
     getAllResource: () =>{
       dispatch(getAllResources());
-    }
+    },
+    chnageResourceState: (resource) =>{
+      dispatch(chnageResourceState(resource));
+    },
   })
 
 export default connect(mapStateToProps,mapDispatchToProps)(Reviewer);
