@@ -13,7 +13,6 @@ class UserProfilePage extends React.Component {
     return (
       <div className="container mt-2">
         <Profile />
-        <EditProfile/>
       </div>
       
     );
