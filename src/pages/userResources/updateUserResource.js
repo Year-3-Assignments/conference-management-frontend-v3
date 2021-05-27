@@ -1,16 +1,13 @@
 import React from 'react';
-import Progress from '../progress/progress';
-import firebase from '../../firebase.config';
-import './createResource.scss';
-import { NotificationContainer, NotificationManager } from 'react-notifications';
-import DatePicker from 'react-datepicker';
-import Select from 'react-select';
-import { createResource } from '../../actions/resourceActions';
-import { getAllUsers } from '../../actions/userActions';
 import { connect } from 'react-redux';
+import Progress from '../../components/progress/progress';
+import firebase from '../../firebase.config';
+import { NotificationContainer, NotificationManager } from 'react-notifications';
 import _ from 'lodash';
 import { v4 as uuidv4 } from 'uuid';
 import moment from 'moment';
+import DatePicker from 'react-datepicker';
+import Select from 'react-select';
 
 let formData = {};
 let initialState = {
@@ -30,83 +27,15 @@ let initialState = {
     buttonText: 'CREATE'
 };
 
-const $ = require('jquery');
-class CreateResource extends React.Component{
-  constructor(props){
+class UpdateUserResource extends React.Component {
+  constructor(props) {
     super(props);
-    this.onFileChange = this.onFileChange.bind(this);
-    this.setUploadPercentage = this.setUploadPercentage.bind(this);
     this.onChange = this.onChange.bind(this);
-    this.uploadResourceFile = this.uploadResourceFile.bind(this);
-    this.onSubmit = this.onSubmit.bind(this);
-    this.onTimeChange = this.onTimeChange.bind(this);
-    this.onResourcePersonsChange = this.onResourcePersonsChange.bind(this);
-    this.state = initialState;   
-  }
-
-  componentDidMount() {
-    this.props.getAllUsers();
-  }
-
-  componentWillReceiveProps = (nextProps) => {
-    if (this.props.getallusers !== nextProps.getallusers) {
-      let options = [];
-      nextProps.getallusers.map((item, index) => {
-        let user = {
-          value: item._id,
-          label: <div><img src={item.imageurl} className="thumb-img" />&nbsp;&nbsp;{`${item.firstname} ${item.lastname}`}</div>
-        };
-        options.push(user);
-      })
-      this.setState({ users: options });
-    }
+    this.state = initialState;
   }
 
   onChange(e){
     this.setState({ [e.target.name]: e.target.value});
-  }
-
-  onTimeChange(time) {
-    this.setState({ modifiedTime: moment(time).format('LLLL'), time: time });
-  }
-
-  onFileChange(e){
-    this.setState({ resources: e.target.files});
-  }
-
-  onResourcePersonsChange(e) {
-    this.setState({ resourcePersons: e ? e.map(user => user.value) : [] });
-  }
-
-  setUploadPercentage(progress){
-    this.setState({ uploadPercentatge: progress });
-  }
-
-  uploadResourceFile(e){
-    e.preventDefault();
-    if(this.state.resources.length > 0 ) {
-      let folderName = "Resources";
-      let files = this.state.resources;
-      
-      for (let i = 0; i < files.length; i++) {
-        let upload = firebase.storage().ref(`${folderName}/${uuidv4()}/${files[i].name}`).put(files[i]);
-
-        upload.on('state_changed', (snapshot) => {
-          const progress = Math.round((snapshot.bytesTransferred / snapshot.totalBytes) * 100);
-          this.setUploadPercentage(progress);
-        }, (error) => {
-          console.log(error);
-        }, () => {
-          upload.snapshot.ref.getDownloadURL()
-          .then(url => {
-            this.state.resourceUrls.push(url);
-            NotificationManager.success('File uploaded successfully')
-          });
-        });
-      }
-    } else {
-      NotificationManager.warning('Please select a file')
-    }
   }
 
   validateResourceForm(){
@@ -122,43 +51,10 @@ class CreateResource extends React.Component{
     return true;
   }
 
-  onSubmit(e){
-    e.preventDefault();
-    if(this.validateResourceForm()){
-      let data = Object.values(formData).map(key => {
-        return key !== null;
-      });
-
-      if(!data.includes(false)){
-        let resource = {
-          name: this.state.resourceName,
-          venue: this.state.venue,
-          time: this.state.modifiedTime,
-          description: this.state.description,
-          status: 'PENDING',
-          type: this.state.resourceType,
-          createdby: localStorage.getItem('user_id'),
-          resourceurls: this.state.resourceUrls,
-          resourcepersons: this.state.resourcePersons,
-          ispaid: false
-        };
-        
-        this.props.createResource(resource);
-        NotificationManager.success('New Resource is created');
-        this.setState(initialState);
-        $('#files').val('');
-        $('[name=resourceType]').removeAttr('checked');
-      }else{
-        this.setState({ isFormInvalid: true});
-        NotificationManager.warning('Please fill the input fields!')
-      }
-    }
-  }
-
-  render(){
+  render() {
     return (
       <div className="create-resource-form">
-        <div className="modal fade" id="create_resource" tabIndex="-1" data-mdb-backdrop="static" data-mdb-keyboard="false">
+        <div className="modal fade" id="update-user-resource" tabIndex="-1" data-mdb-backdrop="static" data-mdb-keyboard="false">
           <div className="modal-dialog modal-lg">
             <div className="modal-content">
               <div className="modal-header">
@@ -254,15 +150,11 @@ class CreateResource extends React.Component{
 }
 
 const mapStateToProps = state =>({
-  getallusers: state.userReducer.getallusers
+
 });
 
 const mapDispatchToProps = dispatch =>({
-  getAllUsers: () => {
-    dispatch(getAllUsers());
-  },
-  createResource: resource => {
-    dispatch(createResource(resource));
-  }
+
 });
-export default connect(mapStateToProps,mapDispatchToProps)(CreateResource);
+
+export default connect(mapStateToProps,mapDispatchToProps)(UpdateUserResource);

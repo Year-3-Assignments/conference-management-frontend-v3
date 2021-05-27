@@ -8,6 +8,7 @@ import paginationFactory from 'react-bootstrap-table2-paginator';
 import './userResource.scss';
 import moment from 'moment';
 import firebase from '../../firebase.config';
+import UpdateUserResource from './updateUserResource';
 
 const initialState = {
   resources: [],
@@ -89,7 +90,24 @@ class UserResources extends React.Component {
           ))}
         </div>
       </div>
-    )
+    ),
+    showExpandColumn: true,
+    expandHeaderColumnRenderer: ({ isAnyExpands }) => {
+      if (isAnyExpands) {
+        return <b style={{cursor: 'pointer'}}></b>;
+      }
+      return <b style={{cursor: 'pointer'}}></b>;
+    },
+    expandColumnRenderer: ({ expanded }) => {
+      if (expanded) {
+        return (
+          <div style={{cursor: 'pointer', marginTop: '5px'}}><i className="fas fa-chevron-circle-up"></i></div>
+        );
+      }
+      return (
+        <div style={{cursor: 'pointer', marginTop: '5px'}}><i className="fas fa-chevron-circle-down"></i></div>
+      );
+    }
   };
 
   buttonFormatter(cell, row, rowIndex) {
@@ -136,6 +154,7 @@ class UserResources extends React.Component {
           />
         </div>
         <CreateResource />
+        <UpdateUserResource />
       </div>
     );
   }

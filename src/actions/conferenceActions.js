@@ -5,7 +5,7 @@ import { CREATE_CONFERENCE, GET_ALL_CONFERENCES, GET_CONFERENCE, SET_CONFERENCE,
 export function createConference(conference) {
   return {
     type: CREATE_CONFERENCE,
-    payload: axios.post(`${process.env.REACT_APP_API_STG_URL}/api/conference/create`, conference, {
+    payload: axios.post(`${process.env.REACT_APP_API_DEV_URL}/api/conference/create`, conference, {
       headers: { 'Authorization': localStorage.getItem('Authorization') }
     })
   };
@@ -14,14 +14,14 @@ export function createConference(conference) {
 export function getAllConferences() {
   return {
     type: GET_ALL_CONFERENCES,
-    payload: axios.get(`${process.env.REACT_APP_API_STG_URL}/api/conference/`)
+    payload: axios.get(`${process.env.REACT_APP_API_DEV_URL}/api/conference/`)
   };
 }
 
 export function getConference(conference) {
   return {
     type: GET_CONFERENCE,
-    payload: axios.get(`${process.env.REACT_APP_API_STG_URL}/api/conference/${conference.id}`)
+    payload: axios.get(`${process.env.REACT_APP_API_DEV_URL}/api/conference/${conference.id}`)
   };
 }
 
@@ -35,7 +35,7 @@ export function setConference(conference) {
 export function getConferencesForAdmin() {
   return {
     type: GET_CONFERENCES_FOR_ADMIN,
-    payload: axios.get(`${process.env.REACT_APP_API_STG_URL}/api/conference`, {
+    payload: axios.get(`${process.env.REACT_APP_API_DEV_URL}/api/conference`, {
       headers: { 'Authorization': localStorage.getItem('Authorization') }
     })
   };
@@ -44,7 +44,7 @@ export function getConferencesForAdmin() {
 export function updateConference(conference) {
   return {
     type: UPDATE_CONFERENCE,
-    payload: axios.put(`${process.env.REACT_APP_API_STG_URL}/api/conference/update`, conference, {
+    payload: axios.put(`${process.env.REACT_APP_API_DEV_URL}/api/conference/update`, conference, {
       headers: { 'Authorization': localStorage.getItem('Authorization') }
     })
   };
@@ -53,7 +53,7 @@ export function updateConference(conference) {
 export function updateConferenceStatus(conference) {
   return {
     type: SET_CONFERENCE_STATUS,
-    payload: axios.put(`${process.env.REACT_APP_API_STG_URL}/api/conference/updatestatus`, conference, {
+    payload: axios.put(`${process.env.REACT_APP_API_DEV_URL}/api/conference/updatestatus`, conference, {
       headers: { 'Authorization': localStorage.getItem('Authorization') }
     })
   };
@@ -62,7 +62,7 @@ export function updateConferenceStatus(conference) {
 export function deleteConference(conference) {
   return {
     type: DELETE_CONFERENCE,
-    payload: axios.delete(`${process.env.REACT_APP_API_STG_URL}/api/conference/delete/${conference.id}`, {
+    payload: axios.delete(`${process.env.REACT_APP_API_DEV_URL}/api/conference/delete/${conference.id}`, {
       headers: { 'Authorization': localStorage.getItem('Authorization') }
     })
   };
