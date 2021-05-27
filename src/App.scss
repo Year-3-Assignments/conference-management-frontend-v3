@@ -71,6 +71,28 @@ body {
   table-layout: auto;
 }
 
+.pagination {
+  display: flex;
+  justify-content: flex-end;
+}
+
+.page-item.active .page-link {
+  background-color: #116466;
+  border-radius: 8px;
+}
+
+.btn-secondary {
+  background-color: #116466;
+}
+
+.btn-secondary:hover {
+  background-color: #167c7e;
+}
+
+.btn-secondary::after {
+  background-color: #167c7e;
+}
+
 @media (min-width: 576px) {};
 
 @media (min-width: 768px) {};

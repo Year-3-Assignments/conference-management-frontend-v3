@@ -20,7 +20,7 @@ export function getUserAccount() {
   return {
     type: GET_USER_ACCOUNT,
     payload: axios.get(`${process.env.REACT_APP_API_STG_URL}/api/user/`, {
-      headers: { 'Authorization': localStorage.getItem('Authorization' )}
+      headers: { 'Authorization': localStorage.getItem('token')}
     })
   };
 }

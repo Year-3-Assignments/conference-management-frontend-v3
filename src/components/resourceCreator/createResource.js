@@ -29,7 +29,7 @@ let initialState = {
     isFormInvalid: false,
     buttonText: 'CREATE'
 };
-
+const $ = require('jquery');
 class CreateResource extends React.Component{
   constructor(props){
     super(props);

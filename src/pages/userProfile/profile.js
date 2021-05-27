@@ -1,5 +1,8 @@
 import React from 'react';
 import './userProfilePage.scss';
+import { NotificationManager } from 'react-notifications';
+import {connect} from 'react-redux';
+import {getUserAccount} from '../../actions/userActions';
 
 let initialState = {
   firstName: '',
@@ -17,6 +20,26 @@ class Profile extends React.Component {
     this.onEditClick = this.onEditClick.bind(this);
     this.onChange = this.onChange.bind(this);
     this.state = initialState;
+  }
+
+  componentDidMount(){
+    if(localStorage.getItem('token') !== null){
+      this.props.getUserAccount();
+    }
+  }
+
+  componentWillReceiveProps = (nextProps) =>{
+    console.log(nextProps.getUser);
+    if(this.props.getUser !== nextProps.getUser){
+      console.log("User Information", nextProps.getUser);
+      this.setState({
+        firstName: nextProps.getUser.firstname,
+        lastName: nextProps.getUser.lastname,
+        description: nextProps.getUser.description,
+        userName: nextProps.getUser.username,
+        profileImage: nextProps.getUser.imageUrl
+      });
+    } 
   }
 
   onChange(e) {
@@ -56,4 +79,15 @@ class Profile extends React.Component {
   }
 }
 
-export default Profile;
+const mapStateToProps = state =>({
+  getUser: state.userReducer.getUser,
+  getUserError: state.userReducer.getUserError
+});
+
+const mapDispatchToProps = dispatch =>({
+  getUserAccount: () =>{
+    dispatch(getUserAccount());
+  }
+});
+
+export default connect(mapStateToProps,mapDispatchToProps)(Profile);
