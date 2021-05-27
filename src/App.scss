@@ -51,6 +51,48 @@ body {
   font-size: 15px;
 }
 
+.thumb-img {
+  width: 30px;
+  height: 30px;
+  margin: 0px;
+  border-radius: 25px;
+  object-fit: cover;
+}
+
+.created-person-img {
+  width: 40px;
+  height: 40px;
+  margin: 0px;
+  border-radius: 25px;
+  object-fit: cover
+}
+
+.react-bootstrap-table table {
+  table-layout: auto;
+}
+
+.pagination {
+  display: flex;
+  justify-content: flex-end;
+}
+
+.page-item.active .page-link {
+  background-color: #116466;
+  border-radius: 8px;
+}
+
+.btn-secondary {
+  background-color: #116466;
+}
+
+.btn-secondary:hover {
+  background-color: #167c7e;
+}
+
+.btn-secondary::after {
+  background-color: #167c7e;
+}
+
 @media (min-width: 576px) {};
 
 @media (min-width: 768px) {};

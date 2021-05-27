@@ -70,7 +70,7 @@ class Signup extends Component {
         if (this.state.profileImage !== null) {
           let folderName = 'Profile-Pictures';
           let file = this.state.profileImage;
-          let upload = firebase.storage().ref(`${folderName}/${this.state.userName}`).put(file);
+          let upload = firebase.storage().ref(`${folderName}/${this.state.username}`).put(file);
     
           upload.on('state_changed', (snapshot) => {
             const progress = Math.round((snapshot.bytesTransferred / snapshot.totalBytes) * 100);
@@ -100,7 +100,7 @@ class Signup extends Component {
           username: this.state.username,
           password: this.state.password,
           phonenumber: this.state.cnumber,
-          imageUrl: this.state.imageUrl,
+          imageurl: this.state.imageUrl,
           description: this.state.desctiption,
           role: this.state.role
         };

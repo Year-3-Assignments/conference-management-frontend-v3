@@ -25,21 +25,21 @@ class Login extends React.Component{
   }
 
   componentWillReceiveProps = (nextProps) =>{
-    if(this.props.loginUser !== nextProps.loginUser){
-      if (nextProps.loginUser.token !== null && nextProps.loginUser.username !== null) {
+    if(this.props.loginuser !== nextProps.loginuser){
+      if (nextProps.loginuser.token !== null && nextProps.loginuser.username !== null) {
         NotificationManager.success('Login successful');
-        localStorage.setItem('user_id', nextProps.loginUser.user_id);
-        localStorage.setItem('username', nextProps.loginUser.username);
-        localStorage.setItem('token', nextProps.loginUser.token);
-        localStorage.setItem('role', nextProps.loginUser.role);
+        localStorage.setItem('user_id', nextProps.loginuser.user_id);
+        localStorage.setItem('username', nextProps.loginuser.username);
+        localStorage.setItem('token', nextProps.loginuser.token);
+        localStorage.setItem('role', nextProps.loginuser.role);
       } else {
         NotificationManager.error('Error with login');
       }
     }
 
-    if (this.props.loginUserError !== nextProps.loginUserError) {
-      if (nextProps.loginUserError && nextProps.loginUserAccount.name) {
-        if (_.isEqual(nextProps.loginUserError.name, 'Error')) {
+    if (this.props.loginuserError !== nextProps.loginuserError) {
+      if (nextProps.loginuserError && nextProps.loginuserError.name) {
+        if (_.isEqual(nextProps.loginuserError.name, 'Error')) {
           NotificationManager.warning('Credentials are not valid');
           localStorage.removeItem('user_id');
           localStorage.removeItem('username');
@@ -109,8 +109,8 @@ class Login extends React.Component{
 }
 
 const mapStateToProps = state =>({
-  loginUser: state.userReducer.loginUser,
-  loginUserError: state.userReducer.loginUserError
+  loginuser: state.userReducer.loginuser,
+  loginuserError: state.userReducer.loginuserError
 });
 
 const mapDispatchToProps = dispatch =>({

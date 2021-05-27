@@ -28,9 +28,7 @@ export function getUserAccount() {
 export function getAllUsers() {
   return {
     type: GET_ALL_USER_ACCOUNTS,
-    payload: axios.get(`${process.env.REACT_APP_API_STG_URL}/api/user/users`, {
-      headers: { 'Authorization': localStorage.getItem('Authorization' )}
-    })
+    payload: axios.get(`${process.env.REACT_APP_API_STG_URL}/api/user/users`)
   };
 }
 
