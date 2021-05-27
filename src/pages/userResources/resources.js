@@ -39,7 +39,7 @@ class UserResources extends React.Component {
   }
 
   tableColumnData = [
-    { dataField: 'actions', text: 'Actions', formatter: this.buttonFormatter.bind(this), headerStyle: () => { return {width: '80px' }}},
+    { dataField: 'actions', text: 'Actions', formatter: this.buttonFormatter.bind(this), headerStyle: () => { return { width: '80px' }}},
     { dataField: '_id', text: 'Request ID',  headerStyle: () => { return {width: '150px'}}},
     { dataField: 'time', text: 'Date & Time'},
     { dataField: 'name', text: 'Name'},
@@ -132,6 +132,7 @@ class UserResources extends React.Component {
             hover
             headerClasses="header-class"
             expandRow={this.expandRow}
+            wrapperClasses="table-responsive"
           />
         </div>
         <CreateResource />
