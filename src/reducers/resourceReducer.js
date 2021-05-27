@@ -25,7 +25,7 @@ function resourceReducer(state = initialState, action) {
   let createResource, allResources, editorResources, getResource, setResource, updateResource,
     deleteResource, changeResourceStatus, paidResource;
   
-  switch (action) {
+  switch (action.type) {
     case `${CREATE_RESOURCE}_PENDING`:
     case `${GET_ALL_RESOURCES}_PENDING`:
     case `${GET_RESOURCE}_PENDING`:
@@ -49,7 +49,7 @@ function resourceReducer(state = initialState, action) {
       createResource = action.payload.data;
       return { ...state, loading: false, createResource };
     case `${GET_ALL_RESOURCES}_FULFILLED`:
-      allResources = action.payload.data;
+      allResources = action.payload.data.data;
       return { ...state, loading: false, allResources };
     case `${SET_RESOURCE}`:
       setResource = action.payload;
