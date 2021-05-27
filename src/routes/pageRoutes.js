@@ -8,6 +8,7 @@ import Footer from '../components/footer/footer';
 import Login from '../pages/login/login';
 import UserProfilePage from '../pages/userProfile/userProfilePage';
 import UserResource from '../pages/userResources/resources';
+import Editor from '../pages/editor/editor';
 
 function PageRoutes() {
   return (
@@ -19,7 +20,8 @@ function PageRoutes() {
             <Route path="/signup" component={SignUp} />
             <Route path="/login" component={Login} />
             <Route path="/me/resource" component={UserResource} exact />
-            <Route path="/me" component={UserProfilePage} />
+            <Route path="/me" component={UserProfilePage} exact/>
+            <Route path="/me/editor" component={Editor} exact/>
           </Switch>
         </section>
         <Footer/>
