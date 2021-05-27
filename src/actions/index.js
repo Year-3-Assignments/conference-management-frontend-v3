@@ -1,6 +1,7 @@
 // Resource management action types
 export const CREATE_RESOURCE = "CREATE_RESOURCE";
 export const GET_ALL_RESOURCES = "GET_ALL_RESOURCES";
+export const GET_RESOURCES_FOR_USER = "GET_RESOURCES_FOR_USER";
 export const SET_RESOURCE = "SET_RESOURCE";
 export const GET_RESOURCE = "GET_RESOURCE";
 export const GET_EDITOR_RESOURCES = "GET_EDITOR_RESOURCES";

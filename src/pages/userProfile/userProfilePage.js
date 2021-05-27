@@ -13,7 +13,13 @@ class UserProfilePage extends React.Component {
   render() {
     return (
       <div className="container mt-2">
-        <Profile />
+        <div className="row">
+          <div className="col-md-3">
+            <Profile />
+          </div>
+          <div className="col-md-9">
+          </div>
+        </div>
       </div>
     );
   }

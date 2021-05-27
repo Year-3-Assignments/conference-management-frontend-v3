@@ -7,7 +7,8 @@ module.exports = {
   entry: './src/index.js', // entry point to the react project
   output: {
     path: path.join(__dirname, '/dist'),
-    filename: 'index_bundle.js'
+    filename: 'index_bundle.js',
+    publicPath: '/'
   },
   devServer: {
     historyApiFallback: true
