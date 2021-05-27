@@ -20,9 +20,8 @@ class UserProfilePage extends React.Component {
           <div className="col-md-9">
             <EditProfile/>
           </div>
+        </div>
       </div>
-    </div>
-      
     );
   }
 }
