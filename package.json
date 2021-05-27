@@ -10,7 +10,7 @@
     "build": "webpack --mode production"
   },
   "author": "2021_REG_WE_14",
-  "license": "ISC",
+  "license": "ISCn",
   "dependencies": {
     "@babel/core": "^7.14.2",
     "axios": "^0.21.1",

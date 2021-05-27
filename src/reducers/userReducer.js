@@ -52,7 +52,7 @@ function userReducer(state = initialState, action) {
       createUser = action.payload.data;
       return { ...state, loading: false, createUser };
     case `${GET_USER_ACCOUNT}_FULFILLED`:
-      getUser = action.payload.data;
+      getUser = action.payload.data.data;
       return { ...state, loading: false, getUser }; 
     case `${UPDATE_USER_ACCOUNT}_FULFILLED`:
       updateUser = action.payload.data;

@@ -8,6 +8,7 @@ import Footer from '../components/footer/footer';
 import Login from '../pages/login/login';
 import CreateResource from '../components/resourceCreator/createResource';
 import Reviewer from '../pages/reviewer/reviewer';
+import Profile from '../pages/userProfile/Profile';
 
 class PageRoutes extends React.Component {
   render() {
@@ -19,8 +20,8 @@ class PageRoutes extends React.Component {
             <Switch>
               <Route path="/login" component={Login} exact />
               <Route path="/signup" component={SignUp} exact />
-              <Route path="/reviewer" component={Reviewer}/>
-              <Route path="/" component={CreateResource}/>
+              <Route path="/me" component={Profile} exact/>
+              <Route path="/" component={CreateResource} exact/>
             </Switch>
           </section>
           <Footer/>
