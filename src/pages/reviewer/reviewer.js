@@ -6,14 +6,24 @@ import BootstrapTable from 'react-bootstrap-table-next';
 import paginationFactory from 'react-bootstrap-table2-paginator';
 import firebase from '../../firebase.config';
 import moment from 'moment';
+import Modal from './Modal';
 
 class Reviewer extends Component {
 
     constructor(props) {
         super(props);
         this.state = {
-            resources: []
+            resources: [],
+            id: "",
+            name: "",
+            amount: "",
+            status: "",
+            show: false
         };
+        this.showModal = this.showModal.bind(this);
+        this.hideModal = this.hideModal.bind(this);
+        this.onChange = this.onChange.bind(this);
+        this.onSubmit = this.onSubmit.bind(this);
     }
 
     componentDidMount() {
@@ -26,6 +36,14 @@ class Reviewer extends Component {
       }
     }
 
+    showModal = () => {
+      this.setState({ show: true });
+    };
+  
+    hideModal = () => {
+      this.setState({ show: false, amount: '', status: '-' });
+    };
+
     setStatusFormatter(cell, row) {
       console.log('cell', cell)
       if (_.isEqual(cell, 'PENDING')) {
@@ -37,19 +55,57 @@ class Reviewer extends Component {
       }
     }
 
-    setApprove(e, id) {
-      var resource = {
+    onChange(e) {
+      this.setState({ [e.target.name]: e.target.value });
+    }
+
+    setApprove(e, id, name) {
+      this.setState({
         id: id,
-        status: 'APPROVED'
-      }
-      this.props.chnageResourceState(resource);
+        name: name
+      })
     }
 
     manageStatus(row){
       return (<div>
-        <button onClick={e => this.setApprove(e, row._id)}>Approve</button>
-        <button>Reject</button>
+        <button style={{margin: '1em'}} onClick={e => {this.showModal(); this.setApprove(e, row._id, row.name)}}>Approve/Reject</button>
       </div>)
+    }
+
+    onSubmit(){
+
+      console.log(this.state.status)
+      console.log(this.state.amount)
+      if(this.state.status === 'APPROVED'){
+        var resource = {
+          id: this.state.id,
+          status: this.state.status,
+          // status: "PENDING",
+          amount: this.state.amount,
+          message: "The Resource you applied is approved. Please pay " + this.state.amount
+        }
+        
+        console.log(resource)
+
+        // this.props.chnageResourceState(resource);
+
+        this.hideModal();
+
+      }else if(this.state.status === 'REJECTED'){
+        var resource = {
+          id: this.state.id,
+          status: this.state.status,
+          amount: this.state.amount,
+          message: "The Resource you applied is REJECTED"
+        }
+
+        console.log(resource);
+
+        this.hideModal();
+        
+        // this.props.chnageResourceState(resource);
+      }
+
     }
   
     tableColumnData = [
@@ -103,6 +159,26 @@ class Reviewer extends Component {
     render() {
         return (
           <div className="container">
+
+          <Modal show={this.state.show} handleClose={this.hideModal}>
+            <div style={{margin: '1em'}}>
+
+              <select name="status" id="status" value={this.state.status} onChange={this.onChange}>
+                <option defaultValue>-</option>
+                <option>APPROVED</option>
+                <option>REJECTED</option>
+              </select>
+
+              <div className="row m-0 mb-3 col">
+                <label htmlFor="amount" className="form-label p-0">Amount</label>
+                <input type="number" id="amount" className="form-control" name="amount" onChange={this.onChange} value={this.state.amount}/>
+              </div>
+
+              <button style={{padding: '0.25em'}} onClick={this.onSubmit}>Submit</button>
+
+            </div>
+          </Modal>
+        
           <h4 className="mt-3">Resources</h4>
           <div className="card p-4">
             <BootstrapTable 
@@ -117,7 +193,6 @@ class Reviewer extends Component {
             />
           </div>
         </div>
-   
         )
     }
 }
