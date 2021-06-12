@@ -21,7 +21,7 @@ setInterval(function() {
   .catch(error => {
     logger.error(error.message);
   })
-}, 3000)
+}, 900000)
 
 app.listen(PORT, () => {
   logger.info(`Server start on PORT ${PORT}`);
