@@ -1,9 +1,12 @@
 const path = require('path');
 const express = require('express');
 const app = express();
-const port = process.env.PORT || 3000;
-import https from 'https';
+const PORT = process.env.PORT || 3000;
+const axios = require('axios');
+const dotenv = require('dotenv');
+const logger = require('./assets/logger/logger');
 
+dotenv.config();
 app.use(express.static(__dirname + '/dist'));
 
 app.get('*', (req, res) => {
@@ -11,9 +14,15 @@ app.get('*', (req, res) => {
 });
 
 setInterval(function() {
-  https.get(process.env.REACT_APP_API_STG_URL);
-  console.log('Root service called');
+  axios.get(`${process.env.ROOT_URL}`)
+  .then(() => {
+    logger.info(`ROOT URL CALLED : [${process.env.ROOT_URL}]`);
+  })
+  .catch(error => {
+    logger.error(error.message);
+  })
 }, 3000)
 
-app.listen(port);
-console.log('Server started');
+app.listen(PORT, () => {
+  logger.info(`Server start on PORT ${PORT}`);
+});

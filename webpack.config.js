@@ -1,11 +1,17 @@
 const path = require('path');
 const HTMLWebpackPlugin = require('html-webpack-plugin');
+const dotenv = require('dotenv');
+const webpack = require('webpack');
 
 module.exports = {
   entry: './src/index.js', // entry point to the react project
   output: {
     path: path.join(__dirname, '/dist'),
-    filename: 'index_bundle.js'
+    filename: 'index_bundle.js',
+    publicPath: '/'
+  },
+  devServer: {
+    historyApiFallback: true
   },
   module: {
     rules: [{
@@ -25,10 +31,16 @@ module.exports = {
       loader: 'url-loader',
       options: {
         limit: 25000,
-      },
+      }
+    }, {
+      test: /\.(ttf|eot|gif|svg|woff(2)?)(\S+)?$/,
+      use: { loader: 'file-loader?name=[name].[ext]' }
     }]
   },
   plugins: [
-    new HTMLWebpackPlugin({ template: './public/index.html' })
+    new HTMLWebpackPlugin({ template: './public/index.html' }),
+    new webpack.DefinePlugin({
+      'process.env': JSON.stringify(dotenv.config().parsed)
+    })
   ]
 }

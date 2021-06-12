@@ -23,7 +23,7 @@ class Navbar extends React.Component {
             >
               <i className="fas fa-bars"></i>
             </button>
-            <a class="navbar-brand" href="#">
+            <a className="navbar-brand" href="#">
               <img src={logo} height="35" alt="" loading="lazy" />
               <small>REACH</small>
             </a>
@@ -106,7 +106,7 @@ class Navbar extends React.Component {
                   null
                 }
 
-                {localStorage.getItem('role') === 'ROLE_PRESENTER' ?
+                {localStorage.getItem('role') === 'ROLE_USER' ?
                   <ul className="navbar-nav me-auto mb-2 mb-lg-0">
                     <li className="nav-item">
                       <a className="nav-link" href="#">My Profile</a>
@@ -123,8 +123,7 @@ class Navbar extends React.Component {
             {localStorage.getItem('role') === 'ROLE_ADMIN' || 
               localStorage.getItem('role') === 'ROLE_REVIEWER' || 
               localStorage.getItem('role') === 'ROLE_EDITOR' ||
-              localStorage.getItem('role') === 'ROLE_PRESENTER' ||
-              localStorage.getItem('role') === 'ROLE_ATENDEE' ?
+              localStorage.getItem('role') === 'ROLE_USER' ?
               <div className="d-flex align-items-center">
                 <a
                   className="text-reset me-3 dropdown-toggle hidden-arrow"
@@ -159,9 +158,34 @@ class Navbar extends React.Component {
                   </li>
                 </ul>
               </div>
-          : 
-            null
-          }
+            : 
+              null
+            }
+
+            {localStorage.length === 0 ? 
+              <div>
+                <a
+                  className="dropdown-toggle d-flex align-items-center hidden-arrow"
+                  href="#"
+                  id="dropDown"
+                  role="button"
+                  data-mdb-toggle="dropdown"
+                  aria-expanded="false"
+                >
+                  <i className="fas fa-caret-down fa-lg" style={{color: '#fff'}}></i>
+                </a>
+                <ul className="dropdown-menu dropdown-menu-end" aria-labelledby="dropDown">
+                  <li>
+                    <a className="dropdown-item" href="#">Create Account</a>
+                  </li>
+                  <li>
+                    <a className="dropdown-item" href="#">Login</a>
+                  </li>
+                </ul>
+              </div>
+            :
+              null
+            }
           </div>
         </nav>
       </div>
