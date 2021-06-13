@@ -5,7 +5,7 @@ import { CREATE_RESOURCE, GET_ALL_RESOURCES, SET_RESOURCE, GET_RESOURCE, GET_EDI
 export function createResource(resource) {
   return {
     type: CREATE_RESOURCE,
-    payload: axios.post(`${process.env.REACT_APP_API_DEV_URL}/api/resource/create`, resource, {
+    payload: axios.post(`${process.env.REACT_APP_API_STG_URL}/api/resource/create`, resource, {
       headers: { 'Authorization': localStorage.getItem('token') }
     })
   };
@@ -14,14 +14,14 @@ export function createResource(resource) {
 export function getAllResources() {
   return {
     type: GET_ALL_RESOURCES,
-    payload: axios.get(`${process.env.REACT_APP_API_DEV_URL}/api/resource/`)
+    payload: axios.get(`${process.env.REACT_APP_API_STG_URL}/api/resource/`)
   };
 }
 
 export function getResourcesForUser() {
   return {
     type: GET_RESOURCES_FOR_USER,
-    payload: axios.get(`${process.env.REACT_APP_API_DEV_URL}/api/resource/resource`, {
+    payload: axios.get(`${process.env.REACT_APP_API_STG_URL}/api/resource/resource`, {
       headers: { 'Authorization': localStorage.getItem('token') }
     })
   };
@@ -30,7 +30,7 @@ export function getResourcesForUser() {
 export function getResourceById(resource) {
   return {
     type: GET_RESOURCE,
-    payload: axios.get(`${process.env.REACT_APP_API_DEV_URL}/api/resource/${resource.id}`)
+    payload: axios.get(`${process.env.REACT_APP_API_STG_URL}/api/resource/${resource.id}`)
   };
 }
 
@@ -44,7 +44,7 @@ export function setResource(resource) {
 export function getEditorResources() {
   return {
     type: GET_EDITOR_RESOURCES,
-    payload: axios.get(`${process.env.REACT_APP_API_DEV_URL}/api/resource/editor/resources`, {
+    payload: axios.get(`${process.env.REACT_APP_API_STG_URL}/api/resource/editor/resources`, {
       headers: { 'Authorization': localStorage.getItem('token') }
     })
   };
@@ -53,7 +53,7 @@ export function getEditorResources() {
 export function updateResource(resource) {
   return {
     type: UPDATE_RESOURCE,
-    payload: axios.put(`${process.env.REACT_APP_API_DEV_URL}/api/resource/update`, resource, {
+    payload: axios.put(`${process.env.REACT_APP_API_STG_URL}/api/resource/update`, resource, {
       headers: { 'Authorization': localStorage.getItem('token') }
     })
   };
@@ -62,7 +62,7 @@ export function updateResource(resource) {
 export function chnageResourceState(resource) {
   return {
     type: CHANGE_RESOURCE_STATUS,
-    payload: axios.put(`${process.env.REACT_APP_API_DEV_URL}/api/resource/status/${resource.id}`, resource, {
+    payload: axios.put(`${process.env.REACT_APP_API_STG_URL}/api/resource/status/${resource.id}`, resource, {
       headers: { 'Authorization': localStorage.getItem('token') }
     })
   }
@@ -71,7 +71,7 @@ export function chnageResourceState(resource) {
 export function resourcePayment(resource) {
   return {
     type: RESOURCE_PAYMENT,
-    payload: axios.put(`${process.env.REACT_APP_API_DEV_URL}/api/resource/paid/${resource.id}`, null, {
+    payload: axios.put(`${process.env.REACT_APP_API_STG_URL}/api/resource/paid/${resource.id}`, null, {
       headers: { 'Authorization': localStorage.getItem('token') }
     })
   }
@@ -80,7 +80,7 @@ export function resourcePayment(resource) {
 export function deleteResource(resource) {
   return {
     type: DELETE_RESOURCE,
-    payload: axios.delete(`${process.env.REACT_APP_API_DEV_URL}/api/resource/remove/${resource.id}`, null, {
+    payload: axios.delete(`${process.env.REACT_APP_API_STG_URL}/api/resource/remove/${resource.id}`, null, {
       headers: { 'Authorization': localStorage.getItem('token') }
     })
   }

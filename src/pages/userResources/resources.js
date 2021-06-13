@@ -1,6 +1,6 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { getResourcesForUser } from '../../actions/resourceActions';
+import { getResourcesForUser, setResource } from '../../actions/resourceActions';
 import _ from 'lodash';
 import CreateResource from '../../components/resourceCreator/createResource';
 import BootstrapTable from 'react-bootstrap-table-next';
@@ -119,13 +119,25 @@ class UserResources extends React.Component {
             <i className="fas fa-bars" style={{ color: '#000'}}></i>
             </a>
             <div className="dropdown-menu dropdown-menu-left">
-              <button className="dropdown-item custom-button" data-target="#update_complaint" data-toggle="modal"><i className="fas fa-edit"></i>&nbsp;&nbsp;Edit</button>
-              <button className="dropdown-item custom-button" data-target="#delete_item" data-toggle="modal"><i className="fas fa-trash"></i>&nbsp;&nbsp;Delete</button>
+              <button className="dropdown-item custom-button" 
+                data-mdb-target="#update-user-resource" 
+                data-mdb-toggle="modal"
+                onClick={e => this.setUpdateResource(e, row)}
+              >
+                <i className="fas fa-edit"></i>&nbsp;&nbsp;Edit
+              </button>
+              <button className="dropdown-item custom-button" data-target="#delete_item" data-toggle="modal">
+                <i className="fas fa-trash"></i>&nbsp;&nbsp;Delete
+              </button>
             </div>
           </span>
         </span>
       </div>
     );
+  }
+
+  setUpdateResource(e, row) {
+    this.props.setResource(row);
   }
 
   render() {
@@ -168,6 +180,9 @@ const mapStateToProps = state =>({
 const mapDispatchToProps = dispatch =>({
   getResourcesForUser: () => {
     dispatch(getResourcesForUser());
+  },
+  setResource: resource => {
+    dispatch(setResource(resource));
   }
 });
 

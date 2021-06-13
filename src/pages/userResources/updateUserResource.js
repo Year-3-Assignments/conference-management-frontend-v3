@@ -8,6 +8,7 @@ import { v4 as uuidv4 } from 'uuid';
 import moment from 'moment';
 import DatePicker from 'react-datepicker';
 import Select from 'react-select';
+import { getAllUsers } from '../../actions/userActions';
 
 let formData = {};
 let initialState = {
@@ -32,6 +33,31 @@ class UpdateUserResource extends React.Component {
     super(props);
     this.onChange = this.onChange.bind(this);
     this.state = initialState;
+  }
+
+  componentDidMount() {
+    this.props.getAllUsers();
+  }
+
+  componentWillReceiveProps = (nextProps) => {
+    if (this.state.setResource !== nextProps.setResource) {
+      console.log(nextProps.setResource)
+      this.setState({
+        resourceUrls: nextProps.setResource.resourceurls
+      })
+    }
+
+    if (this.props.getallusers !== nextProps.getallusers) {
+      let options = [];
+      nextProps.getallusers.map((item, index) => {
+        let user = {
+          value: item._id,
+          label: <div><img src={item.imageurl} className="thumb-img" />&nbsp;&nbsp;{`${item.firstname} ${item.lastname}`}</div>
+        };
+        options.push(user);
+      })
+      this.setState({ users: options });
+    }
   }
 
   onChange(e){
@@ -123,7 +149,18 @@ class UpdateUserResource extends React.Component {
                   {formData.resourcetype===null && this.state.isFormInvalid ? <span className="text-danger validation-text p-0">Resource type is required</span> : null}
                 </div>
                 <div className="form-group mb-3">
-                  <label className="form-text" htmlFor="files">Select Resource File</label>
+                  <label className="form-text" htmlFor="files">Resources</label>
+                  <div>
+                    {this.state.resourceUrls && this.state.resourceUrls.length > 0 ? 
+                      <div>
+                        {this.state.resourceUrls.map((resource, index) => (
+                          <div key={index}> 
+                            <i className="fas fa-file-alt"></i>&nbsp;<a href={resource} target="_blank">{firebase.storage().refFromURL(resource).name}</a>
+                          </div>
+                        ))}
+                      </div>
+                    : null}
+                  </div>
                   <div className="input-group">
                     <input type="file" className="form-control" multiple id="files" onChange={e => this.onFileChange(e)} />
                     <button className="btn btn-color" type="button" onClick={this.uploadResourceFile}>UPLOAD</button>
@@ -150,11 +187,14 @@ class UpdateUserResource extends React.Component {
 }
 
 const mapStateToProps = state =>({
-
+  setResource: state.resourceReducer.setResource,
+  getallusers: state.userReducer.getallusers
 });
 
 const mapDispatchToProps = dispatch =>({
-
+  getAllUsers: () => {
+    dispatch(getAllUsers());
+  }
 });
 
 export default connect(mapStateToProps,mapDispatchToProps)(UpdateUserResource);
