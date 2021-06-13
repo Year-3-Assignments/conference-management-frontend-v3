@@ -33,6 +33,9 @@
   .profile {
     padding-top: 30px
   }
+  .profile-img {
+    height: 260px
+  }
 };
 
 @media (min-width: 1400px) {
@@ -41,6 +44,9 @@
   }
   .profile {
     padding-top: 30px
+  }
+  .profile-img {
+    height: 300px
   }
 };
 
