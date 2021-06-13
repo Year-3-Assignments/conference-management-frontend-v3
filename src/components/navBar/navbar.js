@@ -5,6 +5,17 @@ import './navbar.scss';
 class Navbar extends React.Component {
   constructor(props) {
     super(props);
+    this.logoutUser = this.logoutUser.bind(this);
+  }
+
+  logoutUser(e) {
+    if (localStorage.getItem('role') !== null) {
+      localStorage.removeItem('role');
+      localStorage.removeItem('user_id');
+      localStorage.removeItem('username');
+      localStorage.removeItem('token');
+      window.location = '/';
+    }
   }
 
   render() {
@@ -109,10 +120,10 @@ class Navbar extends React.Component {
                 {localStorage.getItem('role') === 'ROLE_USER' ?
                   <ul className="navbar-nav me-auto mb-2 mb-lg-0">
                     <li className="nav-item">
-                      <a className="nav-link" href="#">My Profile</a>
+                      <a className="nav-link" href="/me">My Profile</a>
                     </li>
                     <li className="nav-item">
-                      <a className="nav-link" href="#">Resources</a>
+                      <a className="nav-link" href="/me/resource">Resources</a>
                     </li>
                   </ul>
                 :
@@ -151,10 +162,10 @@ class Navbar extends React.Component {
                 </a>
                 <ul className="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdownMenuLink">
                   <li>
-                    <a className="dropdown-item" href="#">My profile</a>
+                    <a className="dropdown-item" href="/me">My profile</a>
                   </li>
                   <li>
-                    <a className="dropdown-item" href="#">Logout</a>
+                    <a className="dropdown-item" href="#" onClick={this.logoutUser}>Logout</a>
                   </li>
                 </ul>
               </div>
@@ -176,10 +187,10 @@ class Navbar extends React.Component {
                 </a>
                 <ul className="dropdown-menu dropdown-menu-end" aria-labelledby="dropDown">
                   <li>
-                    <a className="dropdown-item" href="#">Create Account</a>
+                    <a className="dropdown-item" href="/signup">Create Account</a>
                   </li>
                   <li>
-                    <a className="dropdown-item" href="#">Login</a>
+                    <a className="dropdown-item" href="/login">Login</a>
                   </li>
                 </ul>
               </div>
