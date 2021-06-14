@@ -43,7 +43,8 @@ class UpdateUserResource extends React.Component {
     if (this.state.setResource !== nextProps.setResource) {
       console.log(nextProps.setResource)
       this.setState({
-        resourceUrls: nextProps.setResource.resourceurls
+        resourceUrls: nextProps.setResource.resourceurls,
+        description: nextProps.setResource.description
       })
     }
 
@@ -152,7 +153,7 @@ class UpdateUserResource extends React.Component {
                   <label className="form-text" htmlFor="files">Resources</label>
                   <div>
                     {this.state.resourceUrls && this.state.resourceUrls.length > 0 ? 
-                      <div>
+                      <div className="mb-2">
                         {this.state.resourceUrls.map((resource, index) => (
                           <div key={index}> 
                             <i className="fas fa-file-alt"></i>&nbsp;<a href={resource} target="_blank">{firebase.storage().refFromURL(resource).name}</a>
