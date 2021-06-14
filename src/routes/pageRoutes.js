@@ -16,8 +16,8 @@ function PageRoutes() {
       <Navbar />
         <section className="content">
           <Switch>
-            <Route path="/signup" component={SignUp} />
-            <Route path="/login" component={Login} />
+            <Route path="/signup" component={SignUp} exact />
+            <Route path="/login" component={Login} exact />
             <Route path="/me/resource" component={UserResource} exact />
             <Route path="/me" component={UserProfilePage} />
           </Switch>
