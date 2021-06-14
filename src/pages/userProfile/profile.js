@@ -30,14 +30,14 @@ class Profile extends React.Component {
 
   componentWillReceiveProps = (nextProps) =>{
     console.log(nextProps.getUser);
-    if(this.props.getUser !== nextProps.getUser){
-      console.log("User Information", nextProps.getUser);
+    if(this.props.getuser !== nextProps.getuser){
+      console.log("User Information", nextProps.getuser);
       this.setState({
-        firstName: nextProps.getUser.firstname,
-        lastName: nextProps.getUser.lastname,
-        description: nextProps.getUser.description,
-        userName: nextProps.getUser.username,
-        profileImage: nextProps.getUser.imageUrl
+        firstName: nextProps.getuser.firstname,
+        lastName: nextProps.getuser.lastname,
+        description: nextProps.getuser.description,
+        userName: nextProps.getuser.username,
+        profileImage: nextProps.getuser.imageurl
       });
     } 
   }
@@ -80,7 +80,7 @@ class Profile extends React.Component {
 }
 
 const mapStateToProps = state =>({
-  getUser: state.userReducer.getUser,
+  getuser: state.userReducer.getuser,
   getUserError: state.userReducer.getUserError
 });
 
