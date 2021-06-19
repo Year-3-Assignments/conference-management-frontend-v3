@@ -3,6 +3,7 @@ import { NotificationContainer, NotificationManager } from 'react-notifications'
 import { connect } from 'react-redux';
 import './dashboard.scss';
 import Overview from './overview';
+import Summary from './summary';
 
 class DashBoard extends Component {
   constructor(props) {
@@ -17,7 +18,7 @@ class DashBoard extends Component {
             <Overview />
           </div>
           <div className="col-md-7 col-sm-12 col-lg-8">
-
+            <Summary />
           </div>
         </div>
       </div>
