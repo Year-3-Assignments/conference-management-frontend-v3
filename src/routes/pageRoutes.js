@@ -8,6 +8,7 @@ import Footer from '../components/footer/footer';
 import Login from '../pages/login/login';
 import UserProfilePage from '../pages/userProfile/userProfilePage';
 import UserResource from '../pages/userResources/resources';
+import Dashboard from '../pages/admin/dashboard/dashboard';
 
 function PageRoutes() {
   return (
@@ -20,6 +21,7 @@ function PageRoutes() {
             <Route path="/login" component={Login} exact />
             <Route path="/me/resource" component={UserResource} exact />
             <Route path="/me" component={UserProfilePage} />
+            <Route path="/admin/dashboard" component={Dashboard} exact />
           </Switch>
         </section>
         <Footer/>

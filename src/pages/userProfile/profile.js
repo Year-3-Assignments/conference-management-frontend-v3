@@ -1,6 +1,5 @@
 import React from 'react';
 import './userProfilePage.scss';
-import { NotificationManager } from 'react-notifications';
 import {connect} from 'react-redux';
 import {getUserAccount} from '../../actions/userActions';
 

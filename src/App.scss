@@ -1,6 +1,6 @@
 body {
   background-color: #f8f8f8;
-  font-family: 'Poppins',-apple-system,BlinkMacSystemFont,Roboto,'Segoe UI',Helvetica,Arial,sans-serif,'Apple Color Emoji','Segoe UI Emoji','Segoe UI Symbol';
+  font-family: 'Segoe UI','SF Pro Text','Poppins',-apple-system,BlinkMacSystemFont,Roboto,'Segoe UI',Helvetica,Arial,sans-serif,'Apple Color Emoji','Segoe UI Emoji','Segoe UI Symbol';
 }
 .content {
   display: flex;
@@ -11,7 +11,7 @@ body {
 *, *::before, *::after{
   margin: 0;
   padding: 0;
-  box-sizing: border-box; 
+  box-sizing: border-box;
 }
 .btn--pill {
   border-radius: 80px;
