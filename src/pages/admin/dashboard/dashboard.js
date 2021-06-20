@@ -4,6 +4,7 @@ import { connect } from 'react-redux';
 import './dashboard.scss';
 import Overview from './overview';
 import Summary from './summary';
+import ConferenceSummary from './conferenceSummary';
 
 class DashBoard extends Component {
   constructor(props) {
@@ -20,6 +21,13 @@ class DashBoard extends Component {
           <div className="col-md-7 col-sm-12 col-lg-8">
             <Summary />
           </div>
+        </div>
+
+        <div className="row mt-4">
+          <div className="col-md-7">
+            <ConferenceSummary />
+          </div>
+          <div className="col-md-5"></div>
         </div>
       </div>
     );
