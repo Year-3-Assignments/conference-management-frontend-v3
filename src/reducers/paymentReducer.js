@@ -29,7 +29,7 @@ function paymentReducer(state = initialState, action) {
       chargeresouceamount = action.payload.data;
       return { ...state, loading: false, chargeresouceamount };
     case `${GET_PAYMENTS}_FULFILLED`:
-      getallpayments = action.payload.data;
+      getallpayments = action.payload.data.data;
       return { ...state, loading: false, getallpayments };
 
     case `${CHARGE_AMOUNT}_REJECTED`:

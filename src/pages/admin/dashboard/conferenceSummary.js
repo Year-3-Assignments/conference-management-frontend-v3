@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { getConferencesForAdmin } from '../../../actions/conferenceActions';
+import { getAllWorkshops } from '../../../actions/workshopActions';
 import './dashboard.scss';
 import LineChart from '../../../components/charts/lineChart';
 
@@ -8,7 +9,8 @@ class ConferenceSummary extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      conferences: []
+      conferences: [],
+      workshops: []
     }
   }
 
@@ -18,11 +20,19 @@ class ConferenceSummary extends Component {
       this.props.conference === null) {
       this.props.getConferencesForAdmin();
     }
+
+    if (this.props.workshops === null) {
+      this.props.getAllWorkshops();
+    }
   }
 
   componentWillReceiveProps = nextProps => {
     if (this.props.conference !== nextProps.conference) {
       this.setState({ conferences: nextProps.conference });
+    }
+
+    if (this.props.workshops !== nextProps.workshops) {
+      this.setState({ workshops: nextProps.workshops });
     }
   }
 
@@ -31,7 +41,7 @@ class ConferenceSummary extends Component {
     return date.getMonth();
   }
 
-  makeDateArray() {
+  makeConferenceDateArray() {
     let monthCounts = new Array(12).fill(0);
 
     if (this.state.conferences.length > 0) {
@@ -43,10 +53,25 @@ class ConferenceSummary extends Component {
     return monthCounts;
   }
 
+  makeWorkshopDateArray() {
+    let monthCounts = new Array(12).fill(0);
+
+    if (this.state.workshops && this.state.workshops.length > 0) {
+      for (let workshop of this.state.workshops) {
+        const MONTH = parseInt(this.findMonth(workshop.createddate));
+        monthCounts[MONTH] += 1;
+      }
+    }
+    return monthCounts;
+  }
+
   render() {
     return (
       <div className="card p-3">
-        <LineChart months={this.makeDateArray()} />
+        <LineChart 
+          months={this.makeConferenceDateArray()} 
+          workshopMonths={this.makeWorkshopDateArray()} 
+        />
       </div>
     );
   }
@@ -54,12 +79,16 @@ class ConferenceSummary extends Component {
 
 const mapStateToProps = state =>({
   conference: state.conferenceReducer.getadminconferences,
+  workshops: state.workshopReducer.allWorkshops,
 });
 
 const mapDispatchToProps = dispatch =>({
   getConferencesForAdmin: () => {
     dispatch(getConferencesForAdmin());
-  }
+  },
+  getAllWorkshops: () => {
+    dispatch(getAllWorkshops());
+  },
 });
 
 export default connect(mapStateToProps,mapDispatchToProps)(ConferenceSummary);

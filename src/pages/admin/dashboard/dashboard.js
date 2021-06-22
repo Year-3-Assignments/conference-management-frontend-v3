@@ -5,6 +5,7 @@ import './dashboard.scss';
 import Overview from './overview';
 import Summary from './summary';
 import ConferenceSummary from './conferenceSummary';
+import UserPayments from './payments';
 
 class DashBoard extends Component {
   constructor(props) {
@@ -27,7 +28,9 @@ class DashBoard extends Component {
           <div className="col-md-7">
             <ConferenceSummary />
           </div>
-          <div className="col-md-5"></div>
+          <div className="col-md-5">
+            <UserPayments />
+          </div>
         </div>
       </div>
     );

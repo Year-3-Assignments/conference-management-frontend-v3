@@ -49,7 +49,7 @@ class Overview extends Component {
 								<img src={this.state.profilePicture} className="admin-profile-img" alt="admin-profile-page" />
 							</div>
 							<div className="admin-info admin-name">
-								<h3 className="m-0">{this.state.firstName}&nbsp;{this.state.lastName}</h3>
+								<h3 className="m-0 name">{this.state.firstName}&nbsp;{this.state.lastName}</h3>
 								<p className="admin-username m-0">{this.state.userName}</p>
 							</div>
 						</div>
