@@ -13,7 +13,7 @@ function Payment({ image, firstName, lastName, date, amount }) {
           <p>{firstName}&nbsp;{lastName}</p>
         </div>
         <div className="payment-info payment-user-name">
-          <p className="badge rounded-pill bg-info text-dark">{moment(date).format('MMMM Do YYYY, h:mm:ss a')}</p>
+          <p className="badge rounded-pill bg-info text-dark">{moment(date).format('lll')}</p>
         </div>
         <div className="payment-info payment-user-name">
           <p className="badge rounded-pill bg-success text-dark">LKR.{amount}.00</p>
