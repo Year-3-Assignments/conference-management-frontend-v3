@@ -17,7 +17,7 @@ const initialState = {
 function workshopReducer(state = initialState,action){
   let createWorkshop, allWorkshops, getWorkshop, setWorkshop, updateWorkshop, deleteWorkshop;
 
-  switch(action){
+  switch(action.type){
     case `${CREATE_WORKSHOP}_PENDING`:
     case `${GET_ALL_WORKSHOPS}_PENDING`:
     case `${GET_WORKSHOP}_PENDING`:
@@ -35,7 +35,7 @@ function workshopReducer(state = initialState,action){
       createWorkshop = action.payload.data;
       return{...state, loading: false, createWorkshop};
     case  `${GET_ALL_WORKSHOPS}_FULFILLED`:
-      allWorkshops = action.payload.data;
+      allWorkshops = action.payload.data.data;
       return{...state, loading:false, allWorkshops};
     case  `${SET_WORKSHOP}`:
       setWorkshop = action.payload;

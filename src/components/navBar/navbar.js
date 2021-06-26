@@ -36,7 +36,7 @@ class Navbar extends React.Component {
             </button>
             <a className="navbar-brand" href="#">
               <img src={logo} height="35" alt="" loading="lazy" />
-              <small>REACH</small>
+              <small className="navbar-title">REACH</small>
             </a>
               <div className="collapse navbar-collapse" id="navbarSupportedContent">
                 {localStorage.length ===  0 ?
