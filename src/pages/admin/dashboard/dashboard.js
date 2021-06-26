@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import { NotificationContainer, NotificationManager } from 'react-notifications';
 import { connect } from 'react-redux';
 import './dashboard.scss';
 import Overview from './overview';
@@ -16,24 +15,30 @@ class DashBoard extends Component {
   render() {
     return (
       <div className="container p-4">
-        <div className="row">
-          <div className="col-md-4 col-sm-12 col-lg-4">
-            <Overview />
-          </div>
-          <div className="col-md-7 col-sm-12 col-lg-8">
-            <Summary />
-          </div>
-        </div>
+        {localStorage.getItem('role') === 'ROLE_ADMIN' ?
+          <div>
+            <div className="row">
+              <div className="col-md-4 col-sm-12 col-lg-4">
+                <Overview />
+              </div>
+              <div className="col-md-7 col-sm-12 col-lg-8">
+                <Summary />
+              </div>
+            </div>
 
-        <div className="row mt-4">
-          <div className="col-md-7">
-            <ConferenceSummary />
-            <AdminNotifications />
+            <div className="row mt-4">
+              <div className="col-md-7">
+                <ConferenceSummary />
+                <AdminNotifications />
+              </div>
+              <div className="col-md-5">
+                <UserPayments />
+              </div>
+            </div>
           </div>
-          <div className="col-md-5">
-            <UserPayments />
-          </div>
-        </div>
+        :
+          window.location = '/login'
+        }
       </div>
     );
   }

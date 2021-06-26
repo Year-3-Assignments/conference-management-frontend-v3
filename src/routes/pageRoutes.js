@@ -9,6 +9,7 @@ import Login from '../pages/login/login';
 import UserProfilePage from '../pages/userProfile/userProfilePage';
 import UserResource from '../pages/userResources/resources';
 import Dashboard from '../pages/admin/dashboard/dashboard';
+import Users from '../pages/admin/users/users';
 
 function PageRoutes() {
   return (
@@ -22,6 +23,7 @@ function PageRoutes() {
             <Route path="/me/resource" component={UserResource} exact />
             <Route path="/me" component={UserProfilePage} />
             <Route path="/admin/dashboard" component={Dashboard} exact />
+            <Route path="/admin/users" component={Users} exact />
           </Switch>
         </section>
         <Footer/>

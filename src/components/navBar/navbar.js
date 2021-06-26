@@ -1,11 +1,16 @@
 import React from 'react';
 import logo from '../../../assets/conference_logo.png';
 import './navbar.scss';
+import { connect } from 'react-redux';
+import { Link } from 'react-router-dom';
 
 class Navbar extends React.Component {
   constructor(props) {
     super(props);
     this.logoutUser = this.logoutUser.bind(this);
+    this.state = {
+      profileImage: ''
+    }
   }
 
   logoutUser(e) {
@@ -15,6 +20,12 @@ class Navbar extends React.Component {
       localStorage.removeItem('username');
       localStorage.removeItem('token');
       window.location = '/';
+    }
+  }
+
+  componentDidMount() {
+    if (this.props.getuser !== null) {
+      this.setState({ profileImage: this.props.getuser.imageurl })
     }
   }
 
@@ -72,13 +83,10 @@ class Navbar extends React.Component {
                 {localStorage.getItem('role') === 'ROLE_ADMIN' ?
                   <ul className="navbar-nav me-auto mb-2 mb-lg-0">
                     <li className="nav-item">
-                      <a className="nav-link" href="#">Dashboard</a>
+                      <Link to="/admin/dashboard" className="nav-link">Dashboard</Link>
                     </li>
                     <li className="nav-item">
-                      <a className="nav-link" href="#">Designs</a>
-                    </li>
-                    <li className="nav-item">
-                      <a className="nav-link" href="#">Users</a>
+                      <Link to="/admin/users" className="nav-link">Users</Link>
                     </li>
                     <li className="nav-item">
                       <a className="nav-link" href="#">Reviwers</a>
@@ -158,7 +166,11 @@ class Navbar extends React.Component {
                   data-mdb-toggle="dropdown"
                   aria-expanded="false"
                 >
-                  <img src="https://mdbootstrap.com/img/new/avatars/2.jpg" className="rounded-circle" height="35" alt="" loading="lazy" />
+                  {this.props.getuser && this.props.getuser.imageurl ?
+                    <img src={this.props.getuser.imageurl} className="rounded-circle" height="35" alt="" loading="lazy" />
+                  :
+                    <img src="https://mdbootstrap.com/img/new/avatars/2.jpg" className="rounded-circle" height="35" alt="" loading="lazy" />
+                  }
                 </a>
                 <ul className="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdownMenuLink">
                   <li>
@@ -204,4 +216,12 @@ class Navbar extends React.Component {
   }
 }
 
-export default Navbar;
+const mapStateToProps = state =>({
+  getuser: state.userReducer.getuser,
+});
+
+const mapDispatchToProps = dispatch =>({
+
+});
+
+export default connect(mapStateToProps,mapDispatchToProps)(Navbar);
