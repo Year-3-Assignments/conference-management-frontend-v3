@@ -55,8 +55,8 @@ class Overview extends Component {
 						</div>
 						<hr/>
 						<div className="admin-data">
-							<p><i className="fas fa-envelope"></i>&nbsp;&nbsp;{this.state.email}</p>
-							<p><i className="fas fa-phone"></i>&nbsp;&nbsp;{this.state.phoneNumber}</p>
+							<p className="admin-contact"><i className="fas fa-envelope"></i>&nbsp;&nbsp;{this.state.email}</p>
+							<p className="admin-contact"><i className="fas fa-phone"></i>&nbsp;&nbsp;{this.state.phoneNumber}</p>
 						</div>
 					</div>
 				:

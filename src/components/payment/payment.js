@@ -4,13 +4,13 @@ import './payment.scss';
 
 function Payment({ image, firstName, lastName, date, amount }) {
   return (
-    <div className="border m-2">
+    <div className="border m-2 p-2">
       <div className="p-2 payment-info-container">
         <div className="payment-info">
           <img src={image} alt="profile-image" className="payment-profile" />
         </div>
         <div className="payment-info payment-user-name">
-          <p>{firstName}&nbsp;{lastName}</p>
+          <p className="badge rounded-pill bg-light text-dark">{firstName}&nbsp;{lastName}</p>
         </div>
         <div className="payment-info payment-user-name">
           <p className="badge rounded-pill bg-info text-dark">{moment(date).format('lll')}</p>

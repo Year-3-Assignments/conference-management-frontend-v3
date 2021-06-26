@@ -6,6 +6,7 @@ import Overview from './overview';
 import Summary from './summary';
 import ConferenceSummary from './conferenceSummary';
 import UserPayments from './payments';
+import AdminNotifications from './notifications';
 
 class DashBoard extends Component {
   constructor(props) {
@@ -27,6 +28,7 @@ class DashBoard extends Component {
         <div className="row mt-4">
           <div className="col-md-7">
             <ConferenceSummary />
+            <AdminNotifications />
           </div>
           <div className="col-md-5">
             <UserPayments />

@@ -27,7 +27,7 @@ class UserPayments extends Component {
   render() {
     return (
       <div className="card p-3">
-        <h4 className="payment-title">Recent Payments</h4>
+        <h3 className="payment-title">Recent Payments</h3>
         {this.state.paymentDetails && this.state.paymentDetails.length > 0 ?
           <div>
             {this.state.paymentDetails.slice(0, 7).map((payment, index) => (
