@@ -10,7 +10,7 @@ import firebase from '../../firebase.config';
 
 const initialState = {
   resources:[],
-  uers:[]
+  users:[]
 };
 
 class Editor extends React.Component{
