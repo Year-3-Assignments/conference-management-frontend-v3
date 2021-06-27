@@ -3,13 +3,15 @@ import logo from '../../../assets/conference_logo.png';
 import './navbar.scss';
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
+import { getUserNotifications, getUserAccount } from '../../actions/userActions';
 
 class Navbar extends React.Component {
   constructor(props) {
     super(props);
     this.logoutUser = this.logoutUser.bind(this);
     this.state = {
-      profileImage: ''
+      profileImage: '',
+      notifications: []
     }
   }
 
@@ -25,14 +27,22 @@ class Navbar extends React.Component {
 
   componentDidMount() {
     if (this.props.getuser !== null) {
-      this.setState({ profileImage: this.props.getuser.imageurl })
+      this.props.getUserAccount();
+      this.props.getUserNotifications();
+      this.setState({ profileImage: this.props.getuser.imageurl });
+    }
+  }
+
+  componentWillReceiveProps = nextProps => {
+    if (this.props.usernotifications !== nextProps.usernotifications) {
+      this.setState({ notifications: nextProps.usernotifications })
     }
   }
 
   render() {
     return (
       <div>
-        <nav className="navbar navbar-expand-lg navbar-dark navbar-bg">
+        <nav className="navbar fixed-top navbar-expand-lg navbar-dark navbar-bg">
           <div className="container-fluid">
             <button
               className="navbar-toggler"
@@ -89,10 +99,10 @@ class Navbar extends React.Component {
                       <Link to="/admin/users" className="nav-link">Users</Link>
                     </li>
                     <li className="nav-item">
-                      <a className="nav-link" href="#">Reviwers</a>
+                      <Link to="/admin/reviewers" className="nav-link">Reviewers</Link>
                     </li>
                     <li className="nav-item">
-                      <a className="nav-link" href="#">Editors</a>
+                      <Link to="/admin/editors" className="nav-link">Editors</Link>
                     </li>
                   </ul>
                 :
@@ -130,9 +140,6 @@ class Navbar extends React.Component {
                     <li className="nav-item">
                       <a className="nav-link" href="/me">My Profile</a>
                     </li>
-                    <li className="nav-item">
-                      <a className="nav-link" href="/me/resource">Resources</a>
-                    </li>
                   </ul>
                 :
                   null
@@ -153,7 +160,9 @@ class Navbar extends React.Component {
                   aria-expanded="false"
                 >
                   <i className="fas fa-bell notification-icon"></i>
-                  <span className="badge rounded-pill badge-notification bg-danger">10</span>
+                  <span className="badge rounded-pill badge-notification bg-danger">
+                    {this.state.notifications ? this.state.notifications.length : 0}
+                  </span>
                 </a>
                 <ul className="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdownMenuLink">
                   <li><a className="dropdown-item" href="#">See my notifications</a></li>
@@ -167,7 +176,7 @@ class Navbar extends React.Component {
                   aria-expanded="false"
                 >
                   {this.props.getuser && this.props.getuser.imageurl ?
-                    <img src={this.props.getuser.imageurl} className="rounded-circle" height="35" alt="" loading="lazy" />
+                    <img src={this.props.getuser.imageurl} className="rounded-circle" width="35" height="35" alt="" loading="lazy" />
                   :
                     <img src="https://mdbootstrap.com/img/new/avatars/2.jpg" className="rounded-circle" height="35" alt="" loading="lazy" />
                   }
@@ -218,10 +227,16 @@ class Navbar extends React.Component {
 
 const mapStateToProps = state =>({
   getuser: state.userReducer.getuser,
+  usernotifications: state.userReducer.usernotifications
 });
 
 const mapDispatchToProps = dispatch =>({
-
+  getUserNotifications: () => {
+    dispatch(getUserNotifications());
+  },
+  getUserAccount: () => {
+    dispatch(getUserAccount());
+  }
 });
 
 export default connect(mapStateToProps,mapDispatchToProps)(Navbar);

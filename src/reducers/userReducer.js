@@ -1,5 +1,6 @@
 import { CREATE_USER_ACCOUNT, GET_USER_ACCOUNT, UPDATE_USER_ACCOUNT, DELETE_USER_ACCOUNT, GET_ALL_ADMIN_ACCOUNTS, 
-  GET_ALL_EDITOR_ACCOUNTS, GET_ALL_USER_ACCOUNTS, GET_ALL_REVIEWER_ACCOUNTS, LOGIN_USER_ACCOUNT, GET_USER_NOTIFICATIONS } from '../actions/index';
+  GET_ALL_EDITOR_ACCOUNTS, GET_ALL_USER_ACCOUNTS, GET_ALL_REVIEWER_ACCOUNTS, LOGIN_USER_ACCOUNT, 
+  GET_USER_NOTIFICATIONS, CHANGE_USER_ROLE, REQUEST_CHANGE_USER_ROLE, GET_REQUEST_USER_ROLES } from '../actions/index';
 
 const initialState = {
   createuser: '',
@@ -12,6 +13,9 @@ const initialState = {
   getallreviewers: [],
   getalladmins: [],
   usernotifications: [],
+  changeuserrole: '',
+  requestchangeuserrole: '',
+  getrequestuserroles: [],
   createuserError: null,
   getuserError: null,
   loginuserError: null,
@@ -21,12 +25,16 @@ const initialState = {
   getallreviewersError: null,
   getalleditorsError: null,
   getalladminsError: null,
-  usernotificationsError: null
+  usernotificationsError: null,
+  changeuserroleError: null,
+  requestchangeuserroleError: null,
+  getrequestuserrolesError: null
 };
 
 function userReducer(state = initialState, action) {
   let createuser, getuser, loginuser, updateuser, deleteuser, getalladmins, 
-      getalleditors, getallreviewers, getallusers, usernotifications;
+      getalleditors, getallreviewers, getallusers, usernotifications, changeuserrole,
+      requestchangeuserrole, getrequestuserroles;
 
   switch (action.type) {
     case `${CREATE_USER_ACCOUNT}_PENDING`:
@@ -39,6 +47,9 @@ function userReducer(state = initialState, action) {
     case `${GET_ALL_REVIEWER_ACCOUNTS}_PENDING`:
     case `${LOGIN_USER_ACCOUNT}_PENDING`:
     case `${GET_USER_NOTIFICATIONS}_PENDING`:
+    case `${CHANGE_USER_ROLE}_PENDING`:
+    case `${REQUEST_CHANGE_USER_ROLE}_PENDING`:
+    case `${GET_REQUEST_USER_ROLES}_PENDING`:
       return { ...state, loading: true,
         createuserError: null,
         getuserError: null,
@@ -49,7 +60,10 @@ function userReducer(state = initialState, action) {
         getallreviewersError: null,
         getalleditorsError: null,
         getalladminsError: null,
-        usernotificationsError: null
+        usernotificationsError: null,
+        changeuserroleError: null,
+        requestchangeuserroleError: null,
+        getrequestuserrolesError: null
       };
     
     case `${CREATE_USER_ACCOUNT}_FULFILLED`:
@@ -68,13 +82,13 @@ function userReducer(state = initialState, action) {
       getalladmins = action.payload.data;
       return { ...state, loading: false, getalladmins };
     case `${GET_ALL_EDITOR_ACCOUNTS}_FULFILLED`:
-      getalleditors = action.payload.data;
+      getalleditors = action.payload.data.data;
       return { ...state, loading: false, getalleditors };
     case `${GET_ALL_USER_ACCOUNTS}_FULFILLED`:
       getallusers = action.payload.data.data;
       return { ...state, loading: false, getallusers };
     case `${GET_ALL_REVIEWER_ACCOUNTS}_FULFILLED`:
-      getallreviewers = action.payload.data;
+      getallreviewers = action.payload.data.data;
       return { ...state, loading: false, getallreviewers };
     case `${LOGIN_USER_ACCOUNT}_FULFILLED`:
       loginuser = action.payload.data.data;
@@ -82,6 +96,15 @@ function userReducer(state = initialState, action) {
     case `${GET_USER_NOTIFICATIONS}_FULFILLED`:
       usernotifications = action.payload.data.data;
       return { ...state, loading: false, usernotifications };
+    case `${CHANGE_USER_ROLE}_FULFILLED`:
+      changeuserrole = action.payload.data.data;
+      return { ...state, loading: false, changeuserrole };
+    case `${REQUEST_CHANGE_USER_ROLE}_FULFILLED`:
+      requestchangeuserrole = action.payload.data.data;
+      return { ...state, loading: false, requestchangeuserrole };
+    case `${GET_REQUEST_USER_ROLES}_FULFILLED`:
+      getrequestuserroles = action.payload.data.data;
+      return { ...state, loading: false, getrequestuserroles };
     
     case `${CREATE_USER_ACCOUNT}_REJECTED`:
       return { ...state, loading: false, createuserError: action.payload.data, state: initialState };
@@ -103,6 +126,12 @@ function userReducer(state = initialState, action) {
       return { ...state, loading: false, loginuserError: action.payload, state: initialState };
     case `${GET_USER_NOTIFICATIONS}_REJECTED`:
       return { ...state, loading: false, usernotificationsError: action.payload, state: initialState };
+    case `${CHANGE_USER_ROLE}_REJECTED`:
+      return { ...state, loading: false, changeuserroleError: action.payload, state: initialState };
+    case `${REQUEST_CHANGE_USER_ROLE}_REJECTED`:
+      return { ...state, loading: false, requestchangeuserroleError: action.payload, state: initialState };
+    case `${GET_REQUEST_USER_ROLES}_REJECTED`:
+      return { ...state, loading: false, getrequestuserrolesError: action.payload, state: initialState };
 
     default: 
       return state;

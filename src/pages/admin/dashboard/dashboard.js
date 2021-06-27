@@ -6,6 +6,7 @@ import Summary from './summary';
 import ConferenceSummary from './conferenceSummary';
 import UserPayments from './payments';
 import AdminNotifications from './notifications';
+import RoleChangeRequests from './roleChangeRequests';
 
 class DashBoard extends Component {
   constructor(props) {
@@ -33,6 +34,7 @@ class DashBoard extends Component {
               </div>
               <div className="col-md-5">
                 <UserPayments />
+                <RoleChangeRequests />
               </div>
             </div>
           </div>
