@@ -90,7 +90,14 @@ class Editor extends React.Component{
             </div>
           ))}
         </div>
-
+            <div className="col-md-6">
+              <button 
+                className="btn btn-primary"  
+                data-mdb-toggle="modal"
+                data-mdb-target="#modal">
+                Post
+              </button>
+        </div>
       </div>
     )
   };
