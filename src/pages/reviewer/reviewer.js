@@ -18,6 +18,7 @@ class Reviewer extends Component {
             name: "",
             amount: "",
             status: "",
+            message: "",
             show: false
         };
         this.showModal = this.showModal.bind(this);
@@ -34,6 +35,11 @@ class Reviewer extends Component {
       if (this.props.allResources !== nextProps.allResources) {
         this.setState({ resources: nextProps.allResources }, () => console.log(this.state.resources));
       }
+
+      if(this.props.changeResourceStatus !== nextProps.changeResourceStatus) {
+        this.props.getAllResource();
+      }
+
     }
 
     showModal = () => {
@@ -51,8 +57,13 @@ class Reviewer extends Component {
       }
   
       if (_.isEqual(cell, 'APPROVED')) {
-  
+        return <span className="badge rounded-pill bg-success text-dark"><strong>APPROVED</strong></span>
       }
+
+      if (_.isEqual(cell, 'REJECTED')) {
+        return <span className="badge rounded-pill bg-danger text-dark"><strong>REJECTED</strong></span>
+      }
+
     }
 
     onChange(e) {
@@ -80,30 +91,32 @@ class Reviewer extends Component {
         var resource = {
           id: this.state.id,
           status: this.state.status,
-          // status: "PENDING",
           amount: this.state.amount,
-          message: "The Resource you applied is approved. Please pay " + this.state.amount
+          message: this.state.message
         }
         
         console.log(resource)
 
-        // this.props.chnageResourceState(resource);
+        this.props.chnageResourceState(resource);
 
         this.hideModal();
 
-      }else if(this.state.status === 'REJECTED'){
+      }
+      
+      if(this.state.status === 'REJECTED'){
         var resource = {
           id: this.state.id,
           status: this.state.status,
           amount: this.state.amount,
-          message: "The Resource you applied is REJECTED"
+          message: this.state.message
         }
 
         console.log(resource);
 
+        this.props.chnageResourceState(resource);
+
         this.hideModal();
         
-        // this.props.chnageResourceState(resource);
       }
 
     }
@@ -169,9 +182,18 @@ class Reviewer extends Component {
                 <option>REJECTED</option>
               </select>
 
-              <div className="row m-0 mb-3 col">
+              {this.state.status === "APPROVED" ? 
+
+              (<div className="row m-0 mb-3 col">
                 <label htmlFor="amount" className="form-label p-0">Amount</label>
                 <input type="number" id="amount" className="form-control" name="amount" onChange={this.onChange} value={this.state.amount}/>
+              </div>)
+
+              : null }
+
+              <div className="row m-0 mb-3 col">
+                <label htmlFor="message" className="form-label p-0">Message</label>
+                <input type="text" id="message" className="form-control" name="message" onChange={this.onChange} value={this.state.message}/>
               </div>
 
               <button style={{padding: '0.25em'}} onClick={this.onSubmit}>Submit</button>
@@ -199,6 +221,7 @@ class Reviewer extends Component {
 
   const mapStateToProps = state =>({
     allResources: state.resourceReducer.allResources,
+    changeResourceStatus: state.resourceReducer.changeResourceStatus
   });
   
   const mapDispatchToProps = dispatch =>({
