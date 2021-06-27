@@ -8,7 +8,8 @@ import Footer from '../components/footer/footer';
 import Login from '../pages/login/login';
 import UserProfilePage from '../pages/userProfile/userProfilePage';
 import UserResource from '../pages/userResources/resources';
-import Editor from '../pages/editor/editor';
+import Dashboard from '../pages/admin/dashboard/dashboard';
+import Editor from '../pages/editor/Editor';
 
 function PageRoutes() {
   return (
@@ -17,10 +18,11 @@ function PageRoutes() {
       <Navbar />
         <section className="content">
           <Switch>
-            <Route path="/signup" component={SignUp} />
-            <Route path="/login" component={Login} />
+            <Route path="/signup" component={SignUp} exact />
+            <Route path="/login" component={Login} exact />
             <Route path="/me/resource" component={UserResource} exact />
             <Route path="/me" component={UserProfilePage} exact/>
+            <Route path="/admin/dashboard" component={Dashboard} exact />
             <Route path="/me/editor" component={Editor} exact/>
           </Switch>
         </section>

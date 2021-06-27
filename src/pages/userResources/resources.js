@@ -132,6 +132,7 @@ class UserResources extends React.Component {
             hover
             headerClasses="header-class"
             expandRow={this.expandRow}
+            wrapperClasses="table-responsive"
           />
         </div>
         <CreateResource />

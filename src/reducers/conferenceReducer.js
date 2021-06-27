@@ -23,7 +23,7 @@ import { CREATE_CONFERENCE, GET_ALL_CONFERENCES, GET_CONFERENCE, SET_CONFERENCE,
     let createconference, getconferences, getconference, setconference, updateconference, deleteconference,
       getadminconferences, setconferencestatus;
     
-    switch (action) {
+    switch (action.type) {
       case `${CREATE_CONFERENCE}_PENDING`:
       case `${GET_ALL_CONFERENCES}_PENDING`:
       case `${GET_CONFERENCE}_PENDING`:
@@ -60,7 +60,7 @@ import { CREATE_CONFERENCE, GET_ALL_CONFERENCES, GET_CONFERENCE, SET_CONFERENCE,
         deleteconference = action.payload.data;
         return { ...state, loading: false, deleteconference };
       case `${GET_CONFERENCES_FOR_ADMIN}_FULFILLED`:
-        getadminconferences = action.payload.data;
+        getadminconferences = action.payload.data.data;
         return { ...state, loading: false, getadminconferences };
       case `${SET_CONFERENCE_STATUS}_FULFILLED`:
         setconferencestatus = action.payload.data;

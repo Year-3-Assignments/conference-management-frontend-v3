@@ -21,6 +21,7 @@ export const GET_ALL_REVIEWER_ACCOUNTS = "GET_ALL_REVIEWER_ACCOUNTS";
 export const GET_ALL_EDITOR_ACCOUNTS = "GET_ALL_EDITOR_ACCOUNTS";
 export const GET_ALL_ADMIN_ACCOUNTS = "GET_ALL_ADMIN_ACCOUNTS";
 export const LOGIN_USER_ACCOUNT = "LOGIN_USER_ACCOUNT";
+export const GET_USER_NOTIFICATIONS = "GET_USER_NOTIFICATIONS";
 
 // Conference management types
 export const CREATE_CONFERENCE = "CREATE_CONFERENCE";
@@ -32,10 +33,15 @@ export const DELETE_CONFERENCE = "DELETE_CONFERENCE";
 export const GET_CONFERENCES_FOR_ADMIN = "GET_CONFERENCES_FOR_ADMIN";
 export const SET_CONFERENCE_STATUS = "SET_CONFERENCE_STATUS";
 
-//Workshop management action types
+// Workshop management action types
 export const CREATE_WORKSHOP = "CREATE_WORKSHOP";
 export const GET_WORKSHOP = "GET_WORKSHOP";
 export const SET_WORKSHOP = "SET_WORKSHOP";
 export const UPDATE_WORKSHOP = "UPDATE_WORKSHOP";
 export const DELETE_WORKSHOP = "DELETE_WORKSHOP";
 export const GET_ALL_WORKSHOPS = "GET_ALL_WORKSHOPS";
+
+// Payment management action typs
+export const CHARGE_AMOUNT = "CHARGE_AMOUNT";
+export const CHARGE_RESOURCE_AMOUNT = "CHARGE_RESOURCE_AMOUNT";
+export const GET_PAYMENTS = "GET_PAYMENTS";

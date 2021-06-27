@@ -63,7 +63,7 @@ class Editor extends React.Component{
 
       <div className="row">
 
-        <div className="col-md-6">
+        <div className="col-md-7">
           <h6>Resource Persons</h6>
           <div className="row">
             {row.resourcepersons.length > 0 && row.resourcepersons.map((person, index) => (
@@ -109,6 +109,7 @@ class Editor extends React.Component{
             hover
             headerClasses="header-class"
             expandRow={this.expandRow}
+            wrapperClasses="table-responsive"
           />
         </div>
       </div>
