@@ -3,12 +3,14 @@ import userReducer from './userReducer';
 import resourceReducer from './resourceReducer';
 import conferenceReducer from './conferenceReducer';
 import workshopReducer from './workshopReducer';
+import paymentReducer from './paymentReducer';
 
 const allReducers = combineReducers({
   userReducer,
   resourceReducer,
   conferenceReducer,
-  workshopReducer
+  workshopReducer,
+  paymentReducer
 });
 
 export default allReducers;
