@@ -11,12 +11,14 @@ import CreatePost from '../../components/createPost/createPost';
 
 const initialState = {
   resources:[],
-  users:[]
+  users:[],
+  postdata: ''
 };
 
 class Editor extends React.Component{
   constructor(props){
     super(props);
+    this.setPostInformation = this.setPostInformation.bind(this);
     this.state = initialState;
   }
 
@@ -30,19 +32,6 @@ class Editor extends React.Component{
     if (this.props.editorResources !== nextProps.editorResources) {
       this.setState({ resources: nextProps.editorResources });
     }
-  }
-
-  manageStatus(row){
-    return (
-    <div>
-      <button 
-        className="btn btn-info btn-sm btn--pill" 
-        data-mdb-toggle="modal"
-        data-mdb-target="#modal">
-        Create Post
-        </button>
-        <CreatePost data = {row}/>
-    </div>)
   }
 
   tableColumnData = [
@@ -69,6 +58,24 @@ class Editor extends React.Component{
     if (_.isEqual(cell, 'APPROVED')) {
       return <span className="badge rounded-pill bg-success text-dark"><strong>APPROVED</strong></span>
     }
+  }
+
+  manageStatus(row){
+    return (
+    <div>
+      <button 
+        className="btn btn-info btn-sm btn--pill" 
+        data-mdb-toggle="modal"
+        data-mdb-target="#modal" 
+        onClick={e => this.setPostInformation(e, row)} 
+        >
+          Create Post
+        </button>
+    </div>)
+  }
+
+  setPostInformation(e, row) {
+    this.setState({ postdata: row });
   }
 
   expandRow = {
@@ -108,19 +115,20 @@ class Editor extends React.Component{
   render() {
       return (
         <div className="container">
-        <h4 className="mt-3">Resources</h4>
-        <div className="card p-4">
-          <BootstrapTable 
-            keyField='_id' 
-            data={ this.state.resources } 
-            columns={ this.tableColumnData } 
-            pagination={ paginationFactory() } 
-            hover
-            headerClasses="header-class"
-            expandRow={this.expandRow}
-            wrapperClasses="table-responsive"
-          />
-        </div>
+          <h4 className="mt-3">Resources</h4>
+          <div className="card p-4">
+            <BootstrapTable 
+              keyField='_id' 
+              data={ this.state.resources } 
+              columns={ this.tableColumnData } 
+              pagination={ paginationFactory() } 
+              hover
+              headerClasses="header-class"
+              expandRow={this.expandRow}
+              wrapperClasses="table-responsive"
+            />
+          </div>
+          <CreatePost data={this.state.postdata} />
       </div>
       );
   }

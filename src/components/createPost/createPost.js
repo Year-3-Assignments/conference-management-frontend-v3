@@ -6,20 +6,17 @@ class CreatePost extends Component{
     super(props);
   }
 
-  componentDidMount() {
-    console.log(this.props.data);
-  }
   render() {
     return(
       <div>
         <div
-        className="modal fade"
-        id="modal"
-        tabIndex="-1"
-        aria-labelledby="ModalLabel"
-        aria-hidden="true"
+          className="modal fade"
+          id="modal"
+          tabIndex="-1"
+          aria-labelledby="ModalLabel"
+          aria-hidden="true"
         >
-        <div className="modal-dialog">
+        <div className="modal-dialog modal-lg">
           <div className="modal-content">
             <div className="modal-header">
             <h5 className="modal-title" id="ModalLabel">Upload Conference</h5>
@@ -30,7 +27,9 @@ class CreatePost extends Component{
               aria-label="Close"
             ></button>
           </div>
-          <div className="modal-body">...</div>
+          <div className="modal-body">
+            {this.props.data.status}
+          </div>
             <div className="modal-footer">
               <button type="button" className="btn btn-secondary" data-mdb-dismiss="modal">Cancel</button>
               <button type="button" className="btn btn-primary">Upload</button>
