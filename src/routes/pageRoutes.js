@@ -10,6 +10,9 @@ import UserProfilePage from '../pages/userProfile/userProfilePage';
 import UserResource from '../pages/userResources/resources';
 import Reviewer from '../pages/reviewer/reviewer'
 import Dashboard from '../pages/admin/dashboard/dashboard';
+import Users from '../pages/admin/users/users';
+import Reviewers from '../pages/admin/reviewers/reviewers';
+import Editors from '../pages/admin/editors/editors';
 
 function PageRoutes() {
   return (
@@ -18,12 +21,15 @@ function PageRoutes() {
       <Navbar />
         <section className="content">
           <Switch>
-            <Route path="/signup" component={SignUp} />
-            <Route path="/login" component={Login} />
             <Route path="/reviewer" component={Reviewer} exact/>
             <Route path="/me/resource" component={UserResource} exact />
+            <Route path="/signup" component={SignUp} exact />
+            <Route path="/login" component={Login} exact />
             <Route path="/me" component={UserProfilePage} />
             <Route path="/admin/dashboard" component={Dashboard} exact />
+            <Route path="/admin/users" component={Users} exact />
+            <Route path="/admin/reviewers" component={Reviewers} exact />
+            <Route path="/admin/editors" component={Editors} exact />
           </Switch>
         </section>
         <Footer/>

@@ -32,7 +32,12 @@ class Login extends React.Component{
         localStorage.setItem('username', nextProps.loginuser.username);
         localStorage.setItem('token', nextProps.loginuser.token);
         localStorage.setItem('role', nextProps.loginuser.role);
-        window.location  = '/me'
+        
+        if (localStorage.getItem('role') === 'ROLE_ADMIN') {
+          window.location = '/admin/dashboard';
+        } else if (localStorage.getItem('role') === 'ROLE_USER') {
+          window.location = '/me'
+        }
       } else {
         NotificationManager.error('Error with login');
       }
