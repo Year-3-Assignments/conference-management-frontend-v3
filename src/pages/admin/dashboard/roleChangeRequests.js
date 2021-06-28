@@ -20,9 +20,7 @@ class RoleChangeRequests extends Component {
 
   componentWillReceiveProps = nextProps => {
     if (this.props.userroles !== nextProps.userroles) {
-      this.setState({ requests: nextProps.userroles }, () => {
-        console.log('roles', this.state.requests)
-      })
+      this.setState({ requests: nextProps.userroles });
     }
 
     if (this.props.changeuserrole !== nextProps.changeuserrole) {
