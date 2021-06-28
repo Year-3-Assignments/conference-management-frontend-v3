@@ -11,6 +11,7 @@ import Dashboard from '../pages/admin/dashboard/dashboard';
 import Users from '../pages/admin/users/users';
 import Reviewers from '../pages/admin/reviewers/reviewers';
 import Editors from '../pages/admin/editors/editors';
+import Editor from '../pages/editor/editor';
 
 function PageRoutes() {
   return (
@@ -21,11 +22,12 @@ function PageRoutes() {
           <Switch>
             <Route path="/signup" component={SignUp} exact />
             <Route path="/login" component={Login} exact />
-            <Route path="/me" component={UserProfilePage} />
+            <Route path="/me" component={UserProfilePage} exact/>
             <Route path="/admin/dashboard" component={Dashboard} exact />
             <Route path="/admin/users" component={Users} exact />
             <Route path="/admin/reviewers" component={Reviewers} exact />
             <Route path="/admin/editors" component={Editors} exact />
+            <Route path="/me/editor" component={Editor} exact />
           </Switch>
         </section>
         <Footer/>

@@ -7,6 +7,7 @@ import paginationFactory from 'react-bootstrap-table2-paginator';
 import './editor.scss';
 import moment from 'moment';
 import firebase from '../../firebase.config';
+import CreatePost from '../../components/createPost/createPost';
 
 const initialState = {
   resources:[],
@@ -33,79 +34,14 @@ class Editor extends React.Component{
 
   manageStatus(row){
     return (
-      <div>
-        <button className="btn btn-info btn-sm btn--pill">Create Post</button>
-      </div>
-    );
-  }
-
-  manageStatusActions(col){
-    return (
     <div>
       <button 
-        className="btn btn-primary" 
+        className="btn btn-info btn-sm btn--pill" 
         data-mdb-toggle="modal"
         data-mdb-target="#modal">
-        Create Conference
-      </button>
-      <div
-        className="modal fade"
-        id="modal"
-        tabindex="-1"
-        aria-labelledby="ModalLabel"
-        aria-hidden="true"
-      >
-      <div className="modal-dialog">
-        <div className="modal-content">
-          <div className="modal-header">
-            <h5 className="modal-title" id="ModalLabel">Upload Conference</h5>
-            <button
-              type="button"
-              className="btn-close"
-              data-mdb-dismiss="modal"
-              aria-label="Close"
-            ></button>
-          </div>
-        <div className="modal-body">...</div>
-        <div className="modal-footer">
-          <button type="button" className="btn btn-secondary" data-mdb-dismiss="modal">Cancel</button>
-          <button type="button" className="btn btn-primary">Upload</button>
-        </div>
-      </div>
-    </div>
-  </div>
-  <button 
-    className="btn btn-primary" 
-    data-mdb-toggle="modal"
-    data-mdb-target="#modal">
-    Create Workshop
-  </button>
-  <div
-    class="modal fade"
-    id="modal"
-    tabindex="-1"
-    aria-labelledby="ModalLabel1"
-    aria-hidden="true"
-  >
-  <div class="modal-dialog">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h5 class="modal-title" id="ModalLabel1">Upload Workshop</h5>
-        <button
-          type="button"
-          class="btn-close"
-          data-mdb-dismiss="modal"
-          aria-label="Close"
-        ></button>
-      </div>
-    <div class="modal-body">...</div>
-    <div class="modal-footer">
-      <button type="button" class="btn btn-secondary" data-mdb-dismiss="modal">Cancel</button>
-      <button type="button" class="btn btn-primary">Upload</button>
-    </div>
-  </div>
-  </div>
-  </div>
+        Create Post
+        </button>
+        <CreatePost data = {row}/>
     </div>)
   }
 
@@ -116,8 +52,7 @@ class Editor extends React.Component{
     { dataField: 'type', text: 'Type', formatter: col => col.toUpperCase()},
     { dataField: 'status', text: 'Status', formatter: (cell, row) => this.setStatusFormatter(cell, row)},
     { dataField: 'createdby', text: 'Requested By', formatter: (col, row) => <div><img src={col.imageurl} className="created-person-img" />&nbsp;&nbsp;{col.firstname}&nbsp;{col.lastname}</div>},
-    { dataField: 'createpost', text: 'Create Post', formatter: (col, row) => this.manageStatus(row)},
-    { dataField: 'actions', text: 'Actions', formatter: (col, row) => this.manageStatusActions(row)},
+    { dataField: 'actions', text: 'Actions', formatter: (col, row) => this.manageStatus(row)},
   ];
 
   setIdFromatter(cell) {
@@ -162,7 +97,7 @@ class Editor extends React.Component{
           <h6 className="mt-1">Submitted Documents</h6>
           {row.resourceurls.length > 0 && row.resourceurls.map((item, index) => (
             <div key={index}> 
-              <i class="fas fa-file-alt"></i>&nbsp;<a href={item} target="_blank">{firebase.storage().refFromURL(item).name}</a>
+              <i className="fas fa-file-alt"></i>&nbsp;<a href={item} target="_blank">{firebase.storage().refFromURL(item).name}</a>
             </div>
           ))}
         </div>
