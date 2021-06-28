@@ -21,8 +21,6 @@ function PageRoutes() {
             <Route path="/signup" component={SignUp} />
             <Route path="/login" component={Login} />
             <Route path="/reviewer" component={Reviewer} exact/>
-            <Route path="/signup" component={SignUp} exact />
-            <Route path="/login" component={Login} exact />
             <Route path="/me/resource" component={UserResource} exact />
             <Route path="/me" component={UserProfilePage} />
             <Route path="/admin/dashboard" component={Dashboard} exact />
