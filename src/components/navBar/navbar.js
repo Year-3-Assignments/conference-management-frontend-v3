@@ -165,7 +165,9 @@ class Navbar extends React.Component {
                   </span>
                 </a>
                 <ul className="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdownMenuLink">
-                  <li><a className="dropdown-item" href="#">See my notifications</a></li>
+                  <li>
+                    <Link to="/notifications" className="dropdown-item">See my notifications</Link>
+                  </li>
                 </ul>
                 <a
                   className="dropdown-toggle d-flex align-items-center hidden-arrow"
