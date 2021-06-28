@@ -27,15 +27,16 @@ class Editor extends React.Component{
 
   componentWillReceiveProps = (nextProps) => {
     if (this.props.editorResources !== nextProps.editorResources) {
-      this.setState({ resources: nextProps.editorResources }, () => console.log(this.state.resources));
+      this.setState({ resources: nextProps.editorResources });
     }
   }
 
   manageStatus(row){
     return (
-    <div>
-      <button>Create Post</button>
-    </div>)
+      <div>
+        <button className="btn btn-info btn-sm btn--pill">Create Post</button>
+      </div>
+    );
   }
 
   manageStatusActions(col){
@@ -109,7 +110,7 @@ class Editor extends React.Component{
   }
 
   tableColumnData = [
-    { dataField: '_id', text: 'Request ID',  headerStyle: () => { return {width: '150px'}}},
+    { dataField: '_id', text: 'Request ID', formatter: (cell) => this.setIdFromatter(cell),  headerStyle: () => { return {width: '150px'}}},
     { dataField: 'time', text: 'Date & Time'},
     { dataField: 'name', text: 'Name'},
     { dataField: 'type', text: 'Type', formatter: col => col.toUpperCase()},
@@ -118,6 +119,12 @@ class Editor extends React.Component{
     { dataField: 'createpost', text: 'Create Post', formatter: (col, row) => this.manageStatus(row)},
     { dataField: 'actions', text: 'Actions', formatter: (col, row) => this.manageStatusActions(row)},
   ];
+
+  setIdFromatter(cell) {
+    return (
+      <p className="badge resource-badge rounded-pill bg-warning text-dark">{cell}</p>
+    );
+  }
 
   setStatusFormatter(cell, row) {
     if (_.isEqual(cell, 'PENDING')) {
@@ -132,10 +139,8 @@ class Editor extends React.Component{
   expandRow = {
     showExpandColumn: true,
     renderer: row => (
-
       <div className="row">
-
-        <div className="col-md-7">
+        <div className="col-md-6">
           <h6>Resource Persons</h6>
           <div className="row">
             {row.resourcepersons.length > 0 && row.resourcepersons.map((person, index) => (
@@ -149,7 +154,6 @@ class Editor extends React.Component{
             ))}
           </div>
         </div>
-
         <div className="col-md-6">
           <h6>Request Information</h6>
           <p><i className="fas fa-align-left"></i>&nbsp;{row.description}</p>
@@ -176,7 +180,6 @@ class Editor extends React.Component{
             data={ this.state.resources } 
             columns={ this.tableColumnData } 
             pagination={ paginationFactory() } 
-            striped
             hover
             headerClasses="header-class"
             expandRow={this.expandRow}
@@ -184,8 +187,7 @@ class Editor extends React.Component{
           />
         </div>
       </div>
- 
-      )
+      );
   }
 }
 
