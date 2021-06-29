@@ -1,5 +1,5 @@
 import { CREATE_CONFERENCE, GET_ALL_CONFERENCES, GET_CONFERENCE, SET_CONFERENCE, UPDATE_CONFERENCE, 
-  DELETE_CONFERENCE, GET_CONFERENCES_FOR_ADMIN, SET_CONFERENCE_STATUS } from '../actions/index';
+  DELETE_CONFERENCE, GET_CONFERENCES_FOR_ADMIN, SET_CONFERENCE_STATUS, GET_ALL_APPROVED_CONFERENCES } from '../actions/index';
 
   const initialState = {
     createconference: '',
@@ -9,6 +9,7 @@ import { CREATE_CONFERENCE, GET_ALL_CONFERENCES, GET_CONFERENCE, SET_CONFERENCE,
     updateconference: '',
     deleteconference: '',
     getadminconferences: [],
+    getallApprovedConferences: [],
     setconferencestatus: '',
     createconferenceError: null,
     getconferencesError: null,
@@ -16,12 +17,13 @@ import { CREATE_CONFERENCE, GET_ALL_CONFERENCES, GET_CONFERENCE, SET_CONFERENCE,
     updateconferenceError: null,
     deleteconferenceError: null,
     getadminconferencesError: null,
-    setconferencestatusError: null
+    setconferencestatusError: null,
+    getallApprovedConferencesError: null
   };
 
   function conferenceReducer(state = initialState, action) {
     let createconference, getconferences, getconference, setconference, updateconference, deleteconference,
-      getadminconferences, setconferencestatus;
+      getadminconferences, setconferencestatus, getallApprovedConferences;
     
     switch (action.type) {
       case `${CREATE_CONFERENCE}_PENDING`:
@@ -31,6 +33,7 @@ import { CREATE_CONFERENCE, GET_ALL_CONFERENCES, GET_CONFERENCE, SET_CONFERENCE,
       case `${DELETE_CONFERENCE}_PENDING`:
       case `${GET_CONFERENCES_FOR_ADMIN}_PENDING`:
       case `${SET_CONFERENCE_STATUS}_PENDING`:
+      case `${GET_ALL_APPROVED_CONFERENCES}_PENDING`:
         return { ...state, loading: true, 
           createconferenceError: null,
           getconferencesError: null,
@@ -38,7 +41,8 @@ import { CREATE_CONFERENCE, GET_ALL_CONFERENCES, GET_CONFERENCE, SET_CONFERENCE,
           updateconferenceError: null,
           deleteconferenceError: null,
           getadminconferencesError: null,
-          setconferencestatusError: null
+          setconferencestatusError: null,
+          getallApprovedConferencesError: null
         };
     
       case `${CREATE_CONFERENCE}_FULFILLED`:
@@ -65,6 +69,9 @@ import { CREATE_CONFERENCE, GET_ALL_CONFERENCES, GET_CONFERENCE, SET_CONFERENCE,
       case `${SET_CONFERENCE_STATUS}_FULFILLED`:
         setconferencestatus = action.payload.data;
         return { ...state, loading: false, setconferencestatus };
+      case `${GET_ALL_APPROVED_CONFERENCES}_PENDING`:
+        getallApprovedConferences = action.payload.data.data;
+        return { ...state, loading: false, getallApprovedConferences };
 
       case `${CREATE_CONFERENCE}_REJECTED`:
         return { ...state, loading: false, createconferenceError: action.payload.data, state: initialState };
@@ -80,7 +87,8 @@ import { CREATE_CONFERENCE, GET_ALL_CONFERENCES, GET_CONFERENCE, SET_CONFERENCE,
         return { ...state, loading: false, getadminconferencesError: action.payload.data, state: initialState };
       case `${SET_CONFERENCE_STATUS}_REJECTED`:
         return { ...state, loading: false, setconferencestatusError: action.payload.data, state: initialState };
-      
+      case `${GET_ALL_APPROVED_CONFERENCES}_REJECTED`:
+        return { ...state, loading: false, getallApprovedConferences: action.payload.data, state: initialState };
       default:
         return state;
     }
