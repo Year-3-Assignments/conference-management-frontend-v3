@@ -78,7 +78,7 @@ class CreateWorkshop extends Component{
         let publishData = {
           name: this.state.publishTitle,
           description: this.state.publishDescription,
-          image_url: this.state.iamge
+          image_url: this.state.imageUrl
         };
 
         console.log("DATA TO SEND", publishData);
@@ -86,7 +86,7 @@ class CreateWorkshop extends Component{
         NotificationManager.success('Publish data Successfully sent to Admin', 'Success');
       } else {
         this.setState({ formNotValid: true}, () => {
-          NotificationManager.warning('Please Check the inpu Fields');
+          NotificationManager.warning('Please Check the input Fields');
         });
       }
     }

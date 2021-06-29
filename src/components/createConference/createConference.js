@@ -73,13 +73,14 @@ class CreateConference extends Component{
     e.preventDefault();
     if(this.validateForm()) {
       let data = Object.values(formData).map(key => {
+        console.log(key);
         return key != null;
       });
       if(!data.includes(false)) {
         let publishData = {
           name: this.state.publishTitle,
           description: this.state.publishDescription,
-          image_url: this.state.image
+          image_url: this.state.imageUrl
         };
 
         console.log("DATA TO SEND", publishData);
@@ -183,8 +184,7 @@ class CreateConference extends Component{
                 <input type="file" className="form-control" id="image" name="image" onChange={e => this.setImagePreview(e)} />
                 <button className="btn btn-color btn-sm" type="button" onClick={this.uploadImage}>UPLOAD</button>
               </div>
-              {formData.image_url===null && this.state.formNotValid ? <span className="text-danger validation-text p-0">Publish image is required</span> : null}
-            </div>
+             </div>
             <div className="mb-3">
               <Progress percentage={this.state.uploadPercentage} />
             </div>
