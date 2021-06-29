@@ -12,6 +12,7 @@ import Users from '../pages/admin/users/users';
 import Reviewers from '../pages/admin/reviewers/reviewers';
 import Editors from '../pages/admin/editors/editors';
 import UserNotifications from '../pages/notifications/userNotifications';
+import Workshops from '../pages/admin/workshops/workshops';
 
 function PageRoutes() {
   return (
@@ -28,6 +29,7 @@ function PageRoutes() {
             <Route path="/admin/reviewers" component={Reviewers} exact />
             <Route path="/admin/editors" component={Editors} exact />
             <Route path="/notifications" component={UserNotifications} exact />
+            <Route path="/admin/workshops" component={Workshops} exact />
           </Switch>
         </section>
         <Footer/>

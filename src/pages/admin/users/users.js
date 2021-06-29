@@ -32,7 +32,7 @@ class Users extends Component {
     { dataField: '_id', text: 'User ID', formatter: (cell) => this.setIdFormatter(cell), headerStyle: () => { return {width: '150px'}}},
     { dataField: 'firstname', text: 'Name', formatter: (cell, row) => this.setNameFormatter(cell, row)},
     { dataField: 'email', text: 'Email', formatter: (cell) => this.setFieldFormatter(cell)},
-    {dataField: 'phonenumber', text: 'Phone number', formatter: (cell) => this.setFieldFormatter(cell)},
+    { dataField: 'phonenumber', text: 'Phone number', formatter: (cell) => this.setFieldFormatter(cell)},
     { dataField: 'username', text: 'Username', formatter: (cell) => this.setFieldFormatter(cell)},
     { dataField: 'createdAt', text: 'Register Date', formatter: (cell) => this.setDateFormatter(cell)}
   ]
@@ -40,6 +40,7 @@ class Users extends Component {
   setIdFormatter(cell) {
     return ( <p className="badge user-badge rounded-pill bg-warning text-dark">{cell}</p> );
   }
+  
   setNameFormatter(cell, row) {
     return (
       <div>

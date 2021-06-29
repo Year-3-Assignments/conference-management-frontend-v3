@@ -104,6 +104,9 @@ class Navbar extends React.Component {
                     <li className="nav-item">
                       <Link to="/admin/editors" className="nav-link">Editors</Link>
                     </li>
+                    <li className="nav-item">
+                      <Link to="/admin/workshops" className="nav-link">Workshops</Link>
+                    </li>
                   </ul>
                 :
                   null
