@@ -1,5 +1,5 @@
 import { CREATE_RESOURCE, GET_ALL_RESOURCES, SET_RESOURCE, GET_RESOURCE, GET_EDITOR_RESOURCES, 
-  UPDATE_RESOURCE, DELETE_RESOURCE, CHANGE_RESOURCE_STATUS, RESOURCE_PAYMENT, GET_RESOURCES_FOR_USER,EDITOR_PUBLISH_RESOURCES } from '../actions/index';
+  UPDATE_RESOURCE, DELETE_RESOURCE, CHANGE_RESOURCE_STATUS, RESOURCE_PAYMENT, GET_RESOURCES_FOR_USER } from '../actions/index';
 
 const initialState = {
   createResource: '',
@@ -12,7 +12,6 @@ const initialState = {
   deleteResource: '',
   changeResourceStatus: '',
   paidResource: '',
-  editorPublishResource: '',
   createResourceError: null,
   allResourcesError: null,
   userResourcesError: null,
@@ -22,12 +21,11 @@ const initialState = {
   deleteResourceError: null,
   changeResourceStatusError: null,
   paidResourceError: null,
-  editorPublishResourceError: null,
 };
 
 function resourceReducer(state = initialState, action) {
   let createResource, allResources, editorResources, getResource, setResource, updateResource,
-    deleteResource, changeResourceStatus, paidResource, userResources,editorPublishResource;
+    deleteResource, changeResourceStatus, paidResource, userResources;
   
   switch (action.type) {
     case `${CREATE_RESOURCE}_PENDING`:
@@ -39,7 +37,6 @@ function resourceReducer(state = initialState, action) {
     case `${DELETE_RESOURCE}_PENDING`:
     case `${CHANGE_RESOURCE_STATUS}_PENDING`:
     case `${RESOURCE_PAYMENT}_PENDING`:
-    case `${EDITOR_PUBLISH_RESOURCES}_PENDING`:
       return { ...state, loading: true, 
         createResourceError: null,
         allResourcesError: null,
@@ -50,7 +47,6 @@ function resourceReducer(state = initialState, action) {
         deleteResourceError: null,
         changeResourceStatusError: null,
         paidResourceError: null,
-        editorPublishResourceError: null
       };
     
     case `${CREATE_RESOURCE}_FULFILLED`:
@@ -83,9 +79,7 @@ function resourceReducer(state = initialState, action) {
     case `${RESOURCE_PAYMENT}_FULFILLED`:
       paidResource = action.payload.data;
       return { ...state, loading: false, paidResource };
-    case `${EDITOR_PUBLISH_RESOURCES}_FULFILLED`:
-      editorPublishResource = action.payload.data;
-      return { ...state, loading: false, editorPublishResource };
+  
 
     case `${CREATE_RESOURCE}_REJECTED`:
       return { ...state, loading: false, createResourceError: action.payload.data, state: initialState };
@@ -105,8 +99,6 @@ function resourceReducer(state = initialState, action) {
       return { ...state, loading: false, changeResourceStatusError: action.payload.data, state: initialState };
     case `${RESOURCE_PAYMENT}_REJECTED`:
       return { ...state, loading: false, paidResourceError: action.payload.data, state: initialState };
-    case `${EDITOR_PUBLISH_RESOURCES}_REJECTED`:
-      return { ...state, loading: false, editorPublishResourceError: action.payload.data, state: initialState };
     default:
       return state;
   }

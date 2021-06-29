@@ -1,6 +1,6 @@
 import axios from 'axios';
 import { CREATE_RESOURCE, GET_ALL_RESOURCES, SET_RESOURCE, GET_RESOURCE, GET_EDITOR_RESOURCES, 
-  UPDATE_RESOURCE, DELETE_RESOURCE, CHANGE_RESOURCE_STATUS, RESOURCE_PAYMENT, GET_RESOURCES_FOR_USER, EDITOR_PUBLISH_RESOURCES } from './index';
+  UPDATE_RESOURCE, DELETE_RESOURCE, CHANGE_RESOURCE_STATUS, RESOURCE_PAYMENT, GET_RESOURCES_FOR_USER } from './index';
 
 export function createResource(resource) {
   return {
@@ -81,15 +81,6 @@ export function deleteResource(resource) {
   return {
     type: DELETE_RESOURCE,
     payload: axios.delete(`${process.env.REACT_APP_API_STG_URL}/api/resource/remove/${resource.id}`, null, {
-      headers: { 'Authorization': localStorage.getItem('token') }
-    })
-  }
-}
-
-export function editorPublishResource(resource) {
-  return {
-    type: EDITOR_PUBLISH_RESOURCES,
-    payload: axios.put(`${process.env.REACT_APP_API_STG_URL}/api/editpublish/${resource.id}`, null, {
       headers: { 'Authorization': localStorage.getItem('token') }
     })
   }

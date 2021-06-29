@@ -69,7 +69,7 @@ class Editor extends React.Component{
         <div> <button 
         className="btn btn-info btn-sm btn--pill" 
         data-mdb-toggle="modal"
-        data-mdb-target="#modal" 
+        data-mdb-target="#create-conference" 
         onClick={e => this.setPostInformation(e, row)} 
         >
           Create Conference
@@ -81,7 +81,7 @@ class Editor extends React.Component{
         <div> <button 
         className="btn btn-info btn-sm btn--pill" 
         data-mdb-toggle="modal"
-        data-mdb-target="#modal" 
+        data-mdb-target="#create-workshop" 
         onClick={e => this.setPostInformation(e, row)} 
         >
           Create Workshop

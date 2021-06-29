@@ -1,7 +1,7 @@
 import React, {Component} from 'react';
 import './createWorkshop.scss';
-import { editorPublishResource } from '../../actions/resourceActions';
 import Progress from '../progress/progress';
+import { updateWorkshop } from '../../actions/workshopActions';
 import {connect} from 'react-redux';
 import _ from 'lodash';
 import moment from 'moment';
@@ -31,9 +31,9 @@ class CreateWorkshop extends Component{
     this.setState({ [e.target.name]: e.target.value });
   }
 
-  setImageUrl = ({imageUrl}) => {
-    this.setState({ imageUrl: imageUrl}, () => {
-      console.log('image url', this.state.imageUrl);
+  setImageUrl = ({image}) => {
+    this.setState({ image: image}, () => {
+      console.log('image url', this.state.image);
     });
   }
   setUploadPercentage = (progress) => {
@@ -74,13 +74,13 @@ class CreateWorkshop extends Component{
       });
       if(!data.includes(false)) {
         let publishData = {
-          publish_title: this.state.publishTitle,
-          publish_description: this.state.publishDescription,
-          publish_img_url: this.state.imageUrl
+          name: this.state.publishTitle,
+          description: this.state.publishDescription,
+          image_url: this.state.iamge
         };
 
         console.log("DATA TO SEND", publishData);
-        this.props.editorPublishResource(publishData);
+        this.props.updateWorkshop(publishData);
         NotificationManager.success('Publish data Successfully sent to Admin', 'Success');
       } else {
         this.setState({ formNotValid: true}, () => {
@@ -92,9 +92,9 @@ class CreateWorkshop extends Component{
 
   validateForm() {
     const data = {
-      publish_title: this.state.publishTitle && this.state.publishTitle.trim().length > 0 ? this.state.publishTitle : null,
-      publish_description: this.state.publishNote && this.state.publishNote.trim().length > 0 ? this.state.publishNote : null,
-      publish_img_url: this.state.imageUrl && this.state.imageUrl.trim().length > 0 ? this.state.imageUrl : null
+      name: this.state.publishTitle && this.state.publishTitle.trim().length > 0 ? this.state.publishTitle : null,
+      description: this.state.publishDescription && this.state.publishDescription.trim().length > 0 ? this.state.publishDescription : null,
+      image_url: this.state.imageUrl && this.state.imageUrl.trim().length > 0 ? this.state.imageUrl : null
     };
     formData = Object.assign({}, data);
     return true;
@@ -105,7 +105,7 @@ class CreateWorkshop extends Component{
       <div>
         <div
           className="modal fade"
-          id="modal"
+          id="create-workshop"
           tabIndex="-1"
           aria-labelledby="ModalLabel"
           aria-hidden="true"
@@ -167,23 +167,20 @@ class CreateWorkshop extends Component{
             <div className="row m-0 mb-2">
               <label htmlFor="publishTitle" className="form-label p-0">Publish Title</label>
               <input type="text" id="publishTitle" className="form-control" name="publishTitle" value={this.state.publishTitle} onChange={this.onChange} />
-              {formData.publish_title===null && this.state.formNotValid ? <span className="text-danger validation-text p-0"> Publish Title is required</span> : null}
+              {formData.name===null && this.state.formNotValid ? <span className="text-danger validation-text p-0"> Publish Title is required</span> : null}
             </div>
             <div className="row m-0 mb-3">
-              <label htmlFor="publishNote" className="form-label p-0">Publish Note</label>
-              <textarea type="publishNote" id="publishNote" rows="4" className="form-control" name="publishNote" value={this.state.publishNote} onChange={this.onChange}/>
-              {formData.publish_description===null && this.state.formNotValid ? <span className="text-danger validation-text p-0">Publish description is required</span> : null}
+              <label htmlFor="publishDescription" className="form-label p-0">Publish Note</label>
+              <textarea type="text" id="publishDescription" rows="4" className="form-control" name="publishDescription" value={this.state.publishDescription} onChange={this.onChange}/>
+              {formData.description===null && this.state.formNotValid ? <span className="text-danger validation-text p-0">Publish description is required</span> : null}
             </div>
             <div className="mb-3">
-              <label htmlFor="profile-image" className="form-label">Publish Image</label>
+              <label htmlFor="image" className="form-label">Publish Image</label>
               <div className="input-group">
-                <input type="file" className="form-control" id="profile-image" name="imageUrl" value={this.state.publish_img_url} onChange={e => this.setImagePreview(e)} />
+                <input type="file" className="form-control" id="image" name="image" value={this.state.image} onChange={e => this.setImagePreview(e)} />
                 <button className="btn btn-color btn-sm" type="button" onClick={this.uploadImage}>UPLOAD</button>
               </div>
-              {formData.publish_img_url===null && this.state.formNotValid ? <span className="text-danger validation-text p-0">Publish image is required</span> : null}
-              <div className="mb-3">
-                <Progress percentage={this.state.uploadPercentage} />
-              </div>
+              {formData.image_url===null && this.state.formNotValid ? <span className="text-danger validation-text p-0">Publish image is required</span> : null}
             </div>
             {this.state.image && this.state.image !== '' ?
               <div>
@@ -192,6 +189,9 @@ class CreateWorkshop extends Component{
             :
               null
             }
+            <div className="mb-3">
+              <Progress percentage={this.state.uploadPercentage} />
+            </div>
           </div>  
             <div className="modal-footer">
               <button type="button" className="btn btn-secondary" data-mdb-dismiss="modal">Cancel</button>
@@ -206,13 +206,13 @@ class CreateWorkshop extends Component{
 }
 
 const mapStateToProps = state => ({
-  editorPublishResource: state.resourceReducer.editorPublishResource
+  updateWorkshop: state.workshopReducer.updateWorkshop
 });
 
 const mapDispatchToProps = dispatch => ({
-  editorPublishResource: resource => {
-    dispatch(editorPublishResource(resource));
+  updateWorkshop: workshop => {
+    dispatch(updateWorkshop(workshop));
   }
 });
 
-export default connect(mapStateToProps,mapDispatchToProps)(CreateWorkshop);
+export default connect( mapStateToProps,mapDispatchToProps )(CreateWorkshop);
