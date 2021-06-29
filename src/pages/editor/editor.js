@@ -7,7 +7,8 @@ import paginationFactory from 'react-bootstrap-table2-paginator';
 import './editor.scss';
 import moment from 'moment';
 import firebase from '../../firebase.config';
-import CreatePost from '../../components/createPost/createPost';
+import CreateConference from '../../components/createConference/createConference';
+import CreateWorkshop from '../../components/createWorkshop/createWorkshop';
 
 const initialState = {
   resources:[],
@@ -63,14 +64,30 @@ class Editor extends React.Component{
   manageStatus(row){
     return (
     <div>
-      <button 
+      <div>
+     {_.isEqual(row.type.toUpperCase(), 'CONFERENCE') ? 
+        <div> <button 
         className="btn btn-info btn-sm btn--pill" 
         data-mdb-toggle="modal"
         data-mdb-target="#modal" 
         onClick={e => this.setPostInformation(e, row)} 
         >
-          Create Post
-        </button>
+          Create Conference
+        </button></div> 
+    : null }
+    </div>
+    <div>
+    {_.isEqual(row.type.toUpperCase(), 'WORKSHOP') ? 
+        <div> <button 
+        className="btn btn-info btn-sm btn--pill" 
+        data-mdb-toggle="modal"
+        data-mdb-target="#modal" 
+        onClick={e => this.setPostInformation(e, row)} 
+        >
+          Create Workshop
+        </button></div> 
+    : null } 
+    </div>
     </div>)
   }
 
@@ -128,7 +145,8 @@ class Editor extends React.Component{
               wrapperClasses="table-responsive"
             />
           </div>
-          <CreatePost data={this.state.postdata} />
+          <div><CreateConference data={this.state.postdata} /></div>
+          <div><CreateWorkshop data={this.state.postdata} /></div>
       </div>
       );
   }
