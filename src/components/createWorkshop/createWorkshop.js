@@ -17,7 +17,8 @@ class CreateWorkshop extends Component{
       publishTitle: '',
       publishDescription: '',
       image: '',
-      publishImage: '',
+      rowImage: '',
+      imageUrl: '',
       formNotValid: false,
       uploadPercentage: 0,
     };
@@ -32,9 +33,7 @@ class CreateWorkshop extends Component{
   }
 
   setImageUrl = ({image}) => {
-    this.setState({ image: image}, () => {
-      console.log('image url', this.state.image);
-    });
+    this.setState({ image: image });
   }
   setUploadPercentage = (progress) => {
     this.setState({ uploadPercentage: progress });
@@ -42,15 +41,18 @@ class CreateWorkshop extends Component{
 
   setImagePreview(e) {
     const image = e.target.files[0];
-    this.setState({ image: URL.createObjectURL(image) });
+    this.setState({ 
+      image: URL.createObjectURL(image),
+      rowImage: image 
+    });
   }
 
   uploadImage = (e) => {
     e.preventDefault();
-    if(this.state.image !== null) {
+    if(this.state.rowImage !== null) {
       let folderName = 'Profile-Pictures';
-      let file = this.state.image;
-      let upload = firebase.storage().ref(`${folderName}/${this.state.username}`).put(file);
+      let file = this.state.rowImage;
+      let upload = firebase.storage().ref(`${folderName}/${this.state.publishTitle}`).put(file);
 
       upload.on('state_changed', (snapshot) => {
         const progress = Math.round((snapshot.bytesTransferred / snapshot.totalBytes) * 100);
@@ -59,8 +61,8 @@ class CreateWorkshop extends Component{
         console.log(error);
       }, () => {
         upload.snapshot.ref.getDownloadURL().then((url) => {
-          console.log(url);
           this.setImageUrl({ imageUrl: url });
+          NotificationManager.success('Image uploaded successfully');
         });
       });
     }
@@ -177,10 +179,13 @@ class CreateWorkshop extends Component{
             <div className="mb-3">
               <label htmlFor="image" className="form-label">Publish Image</label>
               <div className="input-group">
-                <input type="file" className="form-control" id="image" name="image" value={this.state.image} onChange={e => this.setImagePreview(e)} />
+                <input type="file" className="form-control" id="image" name="image" onChange={e => this.setImagePreview(e)} />
                 <button className="btn btn-color btn-sm" type="button" onClick={this.uploadImage}>UPLOAD</button>
               </div>
               {formData.image_url===null && this.state.formNotValid ? <span className="text-danger validation-text p-0">Publish image is required</span> : null}
+            </div>
+            <div className="mb-3">
+              <Progress percentage={this.state.uploadPercentage} />
             </div>
             {this.state.image && this.state.image !== '' ?
               <div>
@@ -189,9 +194,6 @@ class CreateWorkshop extends Component{
             :
               null
             }
-            <div className="mb-3">
-              <Progress percentage={this.state.uploadPercentage} />
-            </div>
           </div>  
             <div className="modal-footer">
               <button type="button" className="btn btn-secondary" data-mdb-dismiss="modal">Cancel</button>
@@ -200,6 +202,7 @@ class CreateWorkshop extends Component{
           </div>
         </div>
       </div>
+      <NotificationContainer />
     </div>
     )
   }

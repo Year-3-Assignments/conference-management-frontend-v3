@@ -34,9 +34,7 @@ class CreateConference extends Component{
   }
 
   setImageUrl = ({image}) => {
-    this.setState({ image: image}, () => {
-      console.log('image url', this.state.image);
-    });
+    this.setState({ image: image});
   }
   setUploadPercentage = (progress) => {
     this.setState({ uploadPercentage: progress });
@@ -64,8 +62,8 @@ class CreateConference extends Component{
         console.log(error);
       }, () => {
         upload.snapshot.ref.getDownloadURL().then((url) => {
-          console.log(url);
           this.setImageUrl({ imageUrl: url });
+          NotificationManager.success('Image uploaded successfully');
         });
       });
     }
@@ -182,10 +180,13 @@ class CreateConference extends Component{
             <div className="mb-3">
               <label htmlFor="image" className="form-label">Publish Image</label>
               <div className="input-group">
-                <input type="file" className="form-control" id="image" name="image" value={this.state.rowImage} onChange={e => this.setImagePreview(e)} />
+                <input type="file" className="form-control" id="image" name="image" onChange={e => this.setImagePreview(e)} />
                 <button className="btn btn-color btn-sm" type="button" onClick={this.uploadImage}>UPLOAD</button>
               </div>
               {formData.image_url===null && this.state.formNotValid ? <span className="text-danger validation-text p-0">Publish image is required</span> : null}
+            </div>
+            <div className="mb-3">
+              <Progress percentage={this.state.uploadPercentage} />
             </div>
             {this.state.image && this.state.image !== '' ?
               <div>
@@ -194,9 +195,6 @@ class CreateConference extends Component{
             :
               null
             }
-           <div className="mb-3">
-              <Progress percentage={this.state.uploadPercentage} />
-            </div>
           </div>  
             <div className="modal-footer">
               <button type="button" className="btn btn-secondary" data-mdb-dismiss="modal">Cancel</button>
@@ -205,6 +203,7 @@ class CreateConference extends Component{
           </div>
         </div>
       </div>
+      <NotificationContainer />
     </div>
     )
   }
