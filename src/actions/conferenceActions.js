@@ -1,6 +1,6 @@
 import axios from 'axios';
 import { CREATE_CONFERENCE, GET_ALL_CONFERENCES, GET_CONFERENCE, SET_CONFERENCE, UPDATE_CONFERENCE, 
-  DELETE_CONFERENCE, GET_CONFERENCES_FOR_ADMIN, SET_CONFERENCE_STATUS } from './index';
+  DELETE_CONFERENCE, GET_CONFERENCES_FOR_ADMIN, SET_CONFERENCE_STATUS, GET_CONFERENCE_FOR_HOME_PAGE } from './index';
 
 export function createConference(conference) {
   return {
@@ -66,4 +66,11 @@ export function deleteConference(conference) {
       headers: { 'Authorization': localStorage.getItem('Authorization') }
     })
   };
+}
+
+export function getConferenceForHomePage() {
+  return {
+    type: GET_CONFERENCE_FOR_HOME_PAGE,
+    payload: axios.get(`${process.env.REACT_APP_API_STG_URL}/api/conference/conference/home`)
+  }
 }

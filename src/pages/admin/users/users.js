@@ -24,7 +24,9 @@ class Users extends Component {
 
   componentWillReceiveProps = nextProps => {
     if (this.props.users !== nextProps.users) {
-      this.setState({ users: nextProps.users });
+      this.setState({ users: nextProps.users }, () => {
+        console.log('adfasdfadsf')
+      });
     }
   }
 

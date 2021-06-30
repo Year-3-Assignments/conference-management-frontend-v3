@@ -1,5 +1,5 @@
 import axios from 'axios';
-import {CREATE_WORKSHOP, GET_ALL_WORKSHOPS, SET_WORKSHOP, GET_WORKSHOP, UPDATE_WORKSHOP, DELETE_WORKSHOP } from './index';
+import {CREATE_WORKSHOP, GET_ALL_WORKSHOPS, SET_WORKSHOP, GET_WORKSHOP, UPDATE_WORKSHOP, DELETE_WORKSHOP, CHANGE_WORKSHOP_STATUS } from './index';
 
 export function createWorkshop(workshop){
   return{
@@ -46,6 +46,15 @@ export function deleteWorkshop(workshop){
   return{
     type:DELETE_WORKSHOP,
     payload:axios.delete(`${process.env.REACT_APP_API_STG_URL}/api/workshop/delete/${workshop.id}`, null, {
+      headers: { 'Authorization': localStorage.getItem('token') }
+    })
+  };
+}
+
+export function changeWorkshopStatus(workshop) {
+  return {
+    type: CHANGE_WORKSHOP_STATUS,
+    payload: axios.put(`${process.env.REACT_APP_API_STG_URL}/api/workshop/admin/status/${workshop.id}`, null, {
       headers: { 'Authorization': localStorage.getItem('token') }
     })
   };

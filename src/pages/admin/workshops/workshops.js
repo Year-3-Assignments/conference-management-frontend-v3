@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { getAllWorkshops } from '../../../actions/workshopActions';
+import { getAllWorkshops, changeWorkshopStatus } from '../../../actions/workshopActions';
 import BootstrapTable from 'react-bootstrap-table-next';
 import ToolkitProvider, { Search } from 'react-bootstrap-table2-toolkit/dist/react-bootstrap-table2-toolkit';
 import paginationFactory from 'react-bootstrap-table2-paginator';
@@ -22,10 +22,14 @@ class Workshops extends Component {
   }
 
   componentWillReceiveProps = nextProps => {
-    if (this.props.workshops !== nextProps.workshops) {
-      this.setState({ workshops: nextProps.workshops }, () => {
-        console.log('wo', this.state.workshops)
+    if (this.props.allWorkshops !== nextProps.allWorkshops) {
+      this.setState({ workshops: nextProps.allWorkshops }, () => {
+        console.log(this.state.workshops)
       });
+    }
+
+    if (this.props.changeworkshopstatus !== nextProps.changeworkshopstatus) {
+      this.props.getAllWorkshops();
     }
   }
 
@@ -63,9 +67,16 @@ class Workshops extends Component {
   buttonFormatter(cell, row, rowIndex) {
     return (
       <div>
-        <button className="btn btn-sm btn-success btn--pill">APPROVE</button>
+        <button className="btn btn-sm btn-success btn--pill" onClick={e => this.onApproveButtonClick(e, row)}>APPROVE</button>
       </div>
     );
+  }
+
+  onApproveButtonClick(e, row) {
+    const workshop = {
+      id: row._id
+    }
+    this.props.changeWorkshopStatus(workshop);
   }
 
   expandRow = {
@@ -100,23 +111,25 @@ class Workshops extends Component {
             ))}
           </div>
         </div>
-
+        <hr/>
         <div className="row">
           <h6 className="workshop-resource-title m-0">Publish Information</h6>
           <small className="text-muted m-0 mb-2"><i>Note for the Admin : Below information is the data data mainly visible to the user along with above details</i></small>
-          <div className="col-md-4">
+          <div className="col-md-3">
             <p className="thumbnail-title"><i className="fas fa-image"></i>&nbsp;&nbsp;Thumbnail Image</p>
-            <img src={row.imageurl} className="workshop-resource-img" />
+            <img src={row.image_url} className="workshop-resource-img" />
           </div>
-          <div className="col-md-6">
+          <div className="col-md-7">
             <p className="thumbnail-title"><i className="fas fa-align-left"></i>&nbsp;&nbsp;Description</p>
             <p>{row.description}</p>
           </div>
-          <div className="col-md-2">
-            <p className="thumbnail-title"><i className="fas fa-user-edit"></i>&nbsp;&nbsp;Editor Information</p>
-            <img src={row.createdby.imageurl} className="created-person-img" />&nbsp;&nbsp;&nbsp;
-            <h6 className="person-info m-0">{row.createdby.firstname}&nbsp;{row.createdby.lastname}</h6>
-            <p><i className="fas fa-envelope"></i>&nbsp;&nbsp;{row.createdby.email}</p>
+        </div>
+
+        <div className="row">
+          <div className="editor-content">
+            <p>Editor : </p>&nbsp;&nbsp;
+            <p><i className="fas fa-user-alt"></i>&nbsp;&nbsp;{row.createdby.firstname}&nbsp;{row.createdby.lastname}</p>&nbsp;&nbsp;
+            <p><i className="fas fa-envelope"></i>&nbsp;&nbsp;{row.createdby.email}</p>&nbsp;&nbsp;
             <p><i className="fas fa-phone"></i>&nbsp;&nbsp;{row.createdby.phonenumber}</p>
           </div>
         </div>
@@ -135,26 +148,23 @@ class Workshops extends Component {
             data={this.state.workshops}
             columns={this.tableColumnData}
             search
-            >
-              {props => (
-                <div>
-                  <SearchBar { ...props.searchProps } placeholder="Search users by name" className="mb-3" />
-                  <BootstrapTable 
-                    { ...props.baseProps } 
-                    pagination={ paginationFactory() }
-                    bordered={false}
-                    striped={true}
-                    hover={true}
-                    expandRow={this.expandRow}
-                    headerClasses="header-class"
-                    wrapperClasses="table-responsive"
-                  />
-                </div>
-              )}
-            </ToolkitProvider>
-          : 
-            null
-          }
+          >
+            {props => (
+              <div>
+                <SearchBar { ...props.searchProps } placeholder="Search users by name" className="mb-3" />
+                <BootstrapTable 
+                  { ...props.baseProps } 
+                  pagination={ paginationFactory() }
+                  bordered={false}
+                  striped={true}
+                  hover={true}
+                  headerClasses="header-class"
+                  wrapperClasses="table-responsive"
+                />
+              </div>
+            )}
+          </ToolkitProvider>
+          : null}
         </div>
       </div>
     );
@@ -162,12 +172,16 @@ class Workshops extends Component {
 }
 
 const mapStateToProps = state =>({
-  workshops: state.workshopReducer.allWorkshops
+  allWorkshops: state.workshopReducer.allWorkshops,
+  changeworkshopstatus: state.workshopReducer.changeworkshopstatus
 });
 
 const mapDispatchToProps = dispatch =>({
   getAllWorkshops: () => {
     dispatch(getAllWorkshops());
+  },
+  changeWorkshopStatus: workshop => {
+    dispatch(changeWorkshopStatus(workshop));
   }
 })
 export default connect(mapStateToProps,mapDispatchToProps)(Workshops);
