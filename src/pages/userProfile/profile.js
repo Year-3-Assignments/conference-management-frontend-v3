@@ -59,13 +59,13 @@ class Profile extends React.Component {
             <div>
               <img src={this.state.profileImage} className="mb-3 profile-img" />
               <div className="p-2">
-                <h4 className="m-0">{this.state.firstName}&nbsp;{this.state.lastName}</h4>
+                <h5 className="m-0 name">{this.state.firstName}&nbsp;{this.state.lastName}</h5>
                 {!this.state.isEditClicked ?
                   <p className="username mb-1">@{this.state.userName}</p> : 
                   <input type="text" className="form-control mb-2 mt-2" id="name" name="userName" onChange={this.onChange} value={this.state.userName} />
                 }
                 {!this.state.isEditClicked ?
-                  <p>{this.state.description}</p> :
+                  <p className="user-description">{this.state.description}</p> :
                   <textarea className="form-control mb-3" id="description" rows="2" name="description" onChange={this.onChange} value={this.state.description}></textarea>
                 }
                 <button className="btn btn-color btn-block" onClick={this.onEditClick}>{this.state.buttonText}</button>

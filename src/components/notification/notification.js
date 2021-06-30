@@ -9,7 +9,7 @@ function Notification({ id, from, message }) {
           <p className="badge rounded-pill bg-warning text-dark">{id}</p>
         </div>
         <div className="col-md-4">
-          <img src={from.imageurl} alt="profile-image" className="notification-profile-img" />&nbsp;&nbsp;
+          <img src={from.imageurl} className="notification-profile-img" />&nbsp;&nbsp;
           <p className="badge rounded-pill bg-custom-light text-dark">{from.email}</p>
         </div>
         <div className="col-md-4">
