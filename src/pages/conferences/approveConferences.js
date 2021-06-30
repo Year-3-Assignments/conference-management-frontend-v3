@@ -6,7 +6,7 @@ import BootstrapTable from 'react-bootstrap-table-next';
 import paginationFactory from 'react-bootstrap-table2-paginator';
 import moment from 'moment';
 
-class ConferenceSummary extends Component {
+class ApproveConferences extends Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -15,12 +15,12 @@ class ConferenceSummary extends Component {
   }
 
   componentDidMount() {
-      this.props.getAllApprovedConferences();
+      this.props.getConferencesForAdmin();
   }
 
   componentWillReceiveProps = nextProps => {
-    if (this.props.getallApprovedConferences !== nextProps.getallApprovedConferences) {
-        this.setState({ conferences: nextProps.getallApprovedConferences }, () => console.log(this.state.conferences));
+    if (this.props.getadminconferences !== nextProps.getadminconferences) {
+        this.setState({ conferences: nextProps.getadminconferences }, () => console.log(this.state.conferences));
       }
   }
 
@@ -29,6 +29,7 @@ class ConferenceSummary extends Component {
     { dataField: 'time', text: 'Date & Time'},
     { dataField: 'name', text: 'Name'},
     { dataField: 'type', text: 'Type', formatter: col => col.toUpperCase()},
+    { dataField: 'status', text: 'Status', formatter: (cell, row) => this.setStatusFormatter(cell, row)},
     { dataField: 'createdby', text: 'Requested By', formatter: (col, row) => <div><img src={col.imageurl} className="created-person-img" />&nbsp;&nbsp;{col.firstname}&nbsp;{col.lastname}</div>},
   ];
 
@@ -94,12 +95,12 @@ class ConferenceSummary extends Component {
 }
 
 const mapStateToProps = state =>({
-    getAllApprovedConferences: state.conferenceReducer.getallApprovedConferences,
+    getadminconferences: state.conferenceReducer.getadminconferences,
 });
 
 const mapDispatchToProps = dispatch =>({
-    getAllApprovedConferences: () =>{
-        dispatch(getAllApprovedConferences());
+    getConferencesForAdmin: () =>{
+        dispatch(getConferencesForAdmin());
       },
 });
 

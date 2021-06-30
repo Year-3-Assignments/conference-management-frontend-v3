@@ -35,7 +35,7 @@ export function setConference(conference) {
 export function getConferencesForAdmin() {
   return {
     type: GET_CONFERENCES_FOR_ADMIN,
-    payload: axios.get(`${process.env.REACT_APP_API_STG_URL}/api/conference`, {
+    payload: axios.get(`${process.env.REACT_APP_API_DEV_URL}/api/conference/admin`, {
       headers: { 'Authorization': localStorage.getItem('Authorization') }
     })
   };

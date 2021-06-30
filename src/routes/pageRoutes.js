@@ -11,6 +11,7 @@ import UserResource from '../pages/userResources/resources';
 import Reviewer from '../pages/reviewer/reviewer'
 import Dashboard from '../pages/admin/dashboard/dashboard';
 import ConferenceList from '../pages/conferences/conference';
+import AdminConferences from '../pages/conferences/approveConferences';
 
 function PageRoutes() {
   return (
@@ -27,6 +28,7 @@ function PageRoutes() {
             <Route path="/me/resource" component={UserResource} exact />
             <Route path="/me" component={UserProfilePage} />
             <Route path="/conferencelist" component={ConferenceList} />
+            {/* <Route path="/admin/conference" component={AdminConferences} /> */}
             <Route path="/admin/dashboard" component={Dashboard} exact />
           </Switch>
         </section>
