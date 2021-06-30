@@ -19,6 +19,7 @@ class CreateWorkshop extends Component{
       image: '',
       rowImage: '',
       imageUrl: '',
+      amount: '',
       formNotValid: false,
       uploadPercentage: 0,
     };
@@ -102,6 +103,7 @@ class CreateWorkshop extends Component{
     const data = {
       name: this.state.publishTitle && this.state.publishTitle.trim().length > 0 ? this.state.publishTitle : null,
       description: this.state.publishDescription && this.state.publishDescription.trim().length > 0 ? this.state.publishDescription : null,
+      amount: this.state.amount && this.state.amount.trim().length > 0 ? this.state.amount : null,
       image_url: this.state.imageUrl && this.state.imageUrl.trim().length > 0 ? this.state.imageUrl : null
     };
     formData = Object.assign({}, data);
@@ -181,6 +183,11 @@ class CreateWorkshop extends Component{
               <label htmlFor="publishDescription" className="form-label p-0">Publish Note</label>
               <textarea type="text" id="publishDescription" rows="4" className="form-control" name="publishDescription" value={this.state.publishDescription} onChange={this.onChange}/>
               {formData.description===null && this.state.formNotValid ? <span className="text-danger validation-text p-0">Publish description is required</span> : null}
+            </div>
+            <div className="row m-0 mb-2">
+              <label htmlFor="amount" className="form-label p-0">Publish Amount</label>
+              <input type="text" id="amount" className="form-control" name="amount" value={this.state.amount} onChange={this.onChange} />
+              {formData.amount===null && this.state.formNotValid ? <span className="text-danger validation-text p-0"> Publish Amount is required</span> : null}
             </div>
             <div className="mb-3">
               <label htmlFor="image" className="form-label">Publish Image</label>
