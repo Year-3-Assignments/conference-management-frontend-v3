@@ -1,4 +1,4 @@
-import { CREATE_WORKSHOP, GET_WORKSHOP, SET_WORKSHOP, UPDATE_WORKSHOP, DELETE_WORKSHOP, GET_ALL_WORKSHOPS } from '../actions/index';
+import { CREATE_WORKSHOP, GET_WORKSHOP, SET_WORKSHOP, UPDATE_WORKSHOP, DELETE_WORKSHOP, GET_ALL_WORKSHOPS , GET_WORKSHOPS_FOR_HOMEPAGE} from '../actions/index';
 
 const initialState = {
   createWorkshop: '',
@@ -7,11 +7,13 @@ const initialState = {
   setWorkshop: '',
   updateWorkshop:'',
   deleteWorkshop:'',
+  getWorkshopsForHomepage: '',
   createWorkshopError: null,
   allWorkshopsError: null,
   getWorkshopError: null,
   updateWorkshopError: null,
   deleteWorkshopError: null,
+  getWorkshopsForHomepageError: null, 
 };
 
 function workshopReducer(state = initialState,action){

@@ -1,5 +1,5 @@
 import axios from 'axios';
-import {CREATE_WORKSHOP, GET_ALL_WORKSHOPS, SET_WORKSHOP, GET_WORKSHOP, UPDATE_WORKSHOP, DELETE_WORKSHOP } from './index';
+import {CREATE_WORKSHOP, GET_ALL_WORKSHOPS, SET_WORKSHOP, GET_WORKSHOP, UPDATE_WORKSHOP, DELETE_WORKSHOP, GET_WORKSHOPS_FOR_HOMEPAGE } from './index';
 
 export function createWorkshop(workshop){
   return{

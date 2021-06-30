@@ -9,6 +9,7 @@ import Login from '../pages/login/login';
 import UserProfilePage from '../pages/userProfile/userProfilePage';
 import UserResource from '../pages/userResources/resources';
 import Dashboard from '../pages/admin/dashboard/dashboard';
+import Workshops from '../pages/homepageWorkshop/workshopsDisplay';
 
 function PageRoutes() {
   return (
@@ -20,8 +21,9 @@ function PageRoutes() {
             <Route path="/signup" component={SignUp} exact />
             <Route path="/login" component={Login} exact />
             <Route path="/me/resource" component={UserResource} exact />
-            <Route path="/me" component={UserProfilePage} />
+            <Route path="/me" component={UserProfilePage} exact/>
             <Route path="/admin/dashboard" component={Dashboard} exact />
+            <Route path="/home/workshop" component={Workshops} exact/>
           </Switch>
         </section>
         <Footer/>

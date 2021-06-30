@@ -40,6 +40,7 @@ export const SET_WORKSHOP = "SET_WORKSHOP";
 export const UPDATE_WORKSHOP = "UPDATE_WORKSHOP";
 export const DELETE_WORKSHOP = "DELETE_WORKSHOP";
 export const GET_ALL_WORKSHOPS = "GET_ALL_WORKSHOPS";
+export const GET_WORKSHOPS_FOR_HOMEPAGE = "GET_WORKSHOPS_FOR_HOMEPAGE";
 
 // Payment management action typs
 export const CHARGE_AMOUNT = "CHARGE_AMOUNT";
