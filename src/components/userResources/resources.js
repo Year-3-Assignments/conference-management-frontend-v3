@@ -115,10 +115,9 @@ class UserResources extends React.Component {
 
   render() {
     return (
-      <div className="container">
-        <h3 className="mt-5 payment-title">My Resources</h3>
+      <div className="container mt-5">
         <div className="d-flex justify-content-end">
-          <button className="btn btn-info btn--pill float-end mb-4 resource-btn" data-mdb-toggle="modal" data-mdb-target="#create_resource">
+          <button className="btn btn-info btn--pill mb-4" data-mdb-toggle="modal" data-mdb-target="#create_resource">
             <span>
               <i className="fas fa-plus"></i>&nbsp;&nbsp;
               <span>New Resource</span>
@@ -126,6 +125,7 @@ class UserResources extends React.Component {
           </button>
         </div>
         <div className="card p-4">
+          <h3 className="payment-title">My Resources</h3>
           <BootstrapTable 
             keyField='_id' 
             data={ this.state.resources } 
