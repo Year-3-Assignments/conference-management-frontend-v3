@@ -46,10 +46,16 @@
     padding-top: 30px
   }
   .profile-img {
-    height: 300px
+    height: 200px
   }
 };
 
 .username {
   font-size: 18px;
+}
+
+.user-description {
+  font-weight: 600;
+  font-size: 14px;
+  margin-bottom: 10px;
 }

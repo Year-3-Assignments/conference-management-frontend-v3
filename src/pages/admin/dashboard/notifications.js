@@ -12,9 +12,12 @@ class AdminNotifications extends Component {
   }
 
   componentDidMount() {
-    if (localStorage.getItem('token') !== null) {
-      this.props.getUserNotifications();
-    }
+    this.props.getUserNotifications();
+    setInterval(() => {
+      if (localStorage.getItem('token') !== null) {
+        this.props.getUserNotifications();
+      }
+    }, 120000)
   }
 
   componentWillReceiveProps = nextProps => {
@@ -25,18 +28,20 @@ class AdminNotifications extends Component {
 
   render() {
     return (
-      <div className="card p-3 mt-4">
+      <div className="card p-3 mt-4"> 
         <h4 className="payment-title">Recent Notifications</h4>
         {this.state.notifications && this.state.notifications.length > 0 ?
           <div>
-            {this.state.notifications.slice(0, 10).map((notification, index) => (
+            {this.state.notifications.slice(0, 5).map((notification, index) => (
               <div key={index}>
                 <Notification id={notification._id} from={notification.from} message={notification.message} />
               </div>
             ))}
           </div>
         :
-          null
+          <div>
+            <p className="badge rounded-pill bg-custom-light text-dark">CURRENTLY THERE ARN'T ANY</p>
+          </div>
         }
       </div>
     );

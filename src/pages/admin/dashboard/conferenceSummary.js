@@ -46,10 +46,10 @@ class ConferenceSummary extends Component {
 
     if (this.state.conferences.length > 0) {
       for (let conference of this.state.conferences) {
-        const MONTH = parseInt(this.findMonth(conference.startdate));
+        const MONTH = parseInt(this.findMonth(conference.createdAt));
         monthCounts[MONTH] += 1;
       }
-    }
+    } 
     return monthCounts;
   }
 
@@ -58,7 +58,7 @@ class ConferenceSummary extends Component {
 
     if (this.state.workshops && this.state.workshops.length > 0) {
       for (let workshop of this.state.workshops) {
-        const MONTH = parseInt(this.findMonth(workshop.createddate));
+        const MONTH = parseInt(this.findMonth(workshop.createdAt));
         monthCounts[MONTH] += 1;
       }
     }

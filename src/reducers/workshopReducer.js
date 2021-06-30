@@ -1,4 +1,4 @@
-import { CREATE_WORKSHOP, GET_WORKSHOP, SET_WORKSHOP, UPDATE_WORKSHOP, DELETE_WORKSHOP, GET_ALL_WORKSHOPS , GET_WORKSHOPS_FOR_HOMEPAGE} from '../actions/index';
+import { CREATE_WORKSHOP, GET_WORKSHOP, SET_WORKSHOP, UPDATE_WORKSHOP, DELETE_WORKSHOP, GET_ALL_WORKSHOPS, CHANGE_WORKSHOP_STATUS } from '../actions/index';
 
 const initialState = {
   createWorkshop: '',
@@ -6,18 +6,18 @@ const initialState = {
   getWorkshop: '',
   setWorkshop: '',
   updateWorkshop:'',
+  changeworkshopstatus: '',
   deleteWorkshop:'',
-  getWorkshopsForHomepage: '',
   createWorkshopError: null,
   allWorkshopsError: null,
   getWorkshopError: null,
   updateWorkshopError: null,
   deleteWorkshopError: null,
-  getWorkshopsForHomepageError: null, 
+  changeworkshopstatusError: null
 };
 
 function workshopReducer(state = initialState,action){
-  let createWorkshop, allWorkshops, getWorkshop, setWorkshop, updateWorkshop, deleteWorkshop;
+  let createWorkshop, allWorkshops, getWorkshop, setWorkshop, updateWorkshop, deleteWorkshop, changeworkshopstatus;
 
   switch(action.type){
     case `${CREATE_WORKSHOP}_PENDING`:
@@ -25,12 +25,14 @@ function workshopReducer(state = initialState,action){
     case `${GET_WORKSHOP}_PENDING`:
     case `${UPDATE_WORKSHOP}_PENDING`:
     case `${DELETE_WORKSHOP}_PENDING`:
+    case `${CHANGE_WORKSHOP_STATUS}_PENDING`:
       return{ ...state, loading:true,
         createWorkshop: null,
         allWorkshops: null,
         getWorkshop: null,
         updateWorkshop:null,
-        deleteWorkshop: null
+        deleteWorkshop: null,
+        changeworkshopstatusError: null
       };
 
     case  `${CREATE_WORKSHOP}_FULFILLED`:
@@ -51,6 +53,9 @@ function workshopReducer(state = initialState,action){
     case  `${DELETE_WORKSHOP}_FULFILLED`:
       deleteWorkshop = action.payload.data;
       return{...state, loading:false , deleteWorkshop};
+    case  `${CHANGE_WORKSHOP_STATUS}_FULFILLED`:
+      changeworkshopstatus = action.payload.data;
+      return{...state, loading:false , changeworkshopstatus};
 
     case `${CREATE_WORKSHOP}_REJECTED`:
       return { ...state, loading: false, createWorkshopError: action.payload.data, state: initialState };
@@ -62,6 +67,8 @@ function workshopReducer(state = initialState,action){
       return { ...state, loading: false, updateWorkshopError: action.payload.data, state: initialState };
     case `${DELETE_WORKSHOP}_REJECTED`:
       return { ...state, loading: false, deleteWorkshopError: action.payload.data, state: initialState };
+    case `${CHANGE_WORKSHOP_STATUS}_REJECTED`:
+      return { ...state, loading: false, changeworkshopstatusError: action.payload.data, state: initialState };
     default:
       return state;
   } 

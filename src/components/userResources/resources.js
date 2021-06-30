@@ -2,7 +2,7 @@ import React from 'react';
 import { connect } from 'react-redux';
 import { getResourcesForUser } from '../../actions/resourceActions';
 import _ from 'lodash';
-import CreateResource from '../../components/resourceCreator/createResource';
+import CreateResource from '../resourceCreator/createResource';
 import BootstrapTable from 'react-bootstrap-table-next';
 import paginationFactory from 'react-bootstrap-table2-paginator';
 import './userResource.scss';
@@ -39,14 +39,17 @@ class UserResources extends React.Component {
   }
 
   tableColumnData = [
-    { dataField: 'actions', text: 'Actions', formatter: this.buttonFormatter.bind(this), headerStyle: () => { return {width: '80px' }}},
-    { dataField: '_id', text: 'Request ID',  headerStyle: () => { return {width: '150px'}}},
-    { dataField: 'time', text: 'Date & Time'},
+    { dataField: 'actions', text: 'Actions', formatter: this.buttonFormatter.bind(this), headerStyle: () => { return {width: '50px' }}},
+    { dataField: '_id', text: 'Request ID', formatter: (cell) => this.setIdFormatter(cell)},
     { dataField: 'name', text: 'Name'},
     { dataField: 'type', text: 'Type', formatter: col => col.toUpperCase()},
     { dataField: 'status', text: 'Status', formatter: (cell, row) => this.setStatusFormatter(cell, row)},
     { dataField: 'createdby', text: 'Requested By', formatter: (col, row) => <div><img src={col.imageurl} className="created-person-img" />&nbsp;&nbsp;{col.firstname}&nbsp;{col.lastname}</div>}
   ];
+
+  setIdFormatter(cell) {
+    return (<p className="badge rounded-pill bg-custom-light text-dark">{cell}</p>)
+  }
 
   setStatusFormatter(cell, row) {
     if (_.isEqual(cell, 'PENDING')) {
@@ -66,7 +69,7 @@ class UserResources extends React.Component {
           <h6>Resource Persons</h6>
           <div className="row">
             {row.resourcepersons.length > 0 && row.resourcepersons.map((person, index) => (
-              <div className="mb-1 col-md-4" key={index}>
+              <div className="mb-3 col-md-6" key={index}>
                 <img src={person.imageurl} className="created-person-img" />&nbsp;&nbsp;&nbsp;
                 <h6 className="person-info m-0">{person.firstname}&nbsp;{person.lastname}</h6>
                 <p><i className="fas fa-at"></i>&nbsp;&nbsp;{person.username}</p>
@@ -113,7 +116,7 @@ class UserResources extends React.Component {
   render() {
     return (
       <div className="container">
-        <h4 className="mt-3">Resources</h4>
+        <h3 className="mt-5 payment-title">My Resources</h3>
         <div className="d-flex justify-content-end">
           <button className="btn btn-info btn--pill float-end mb-4 resource-btn" data-mdb-toggle="modal" data-mdb-target="#create_resource">
             <span>
