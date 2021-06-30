@@ -30,7 +30,7 @@ class UserPayments extends Component {
         <h3 className="payment-title">Recent Payments</h3>
         {this.state.paymentDetails && this.state.paymentDetails.length > 0 ?
           <div>
-            {this.state.paymentDetails.slice(0, 7).map((payment, index) => (
+            {this.state.paymentDetails.slice(0, 5).map((payment, index) => (
               <div key={index}>
                 <Payment 
                   image={payment.attendee.imageurl} 

@@ -29,7 +29,7 @@ class AdminNotifications extends Component {
         <h4 className="payment-title">Recent Notifications</h4>
         {this.state.notifications && this.state.notifications.length > 0 ?
           <div>
-            {this.state.notifications.slice(0, 10).map((notification, index) => (
+            {this.state.notifications.slice(0, 5).map((notification, index) => (
               <div key={index}>
                 <Notification id={notification._id} from={notification.from} message={notification.message} />
               </div>
