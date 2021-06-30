@@ -5,7 +5,7 @@ export function createWorkshop(workshop){
   return{
     type:CREATE_WORKSHOP,
     payload:axios.post(`${process.env.REACT_APP_API_STG_URL}/api/workshop/create`,workshop, {
-      headers: { 'Authorization': localStorage.getItem('Authorization') }
+      headers: { 'Authorization': localStorage.getItem('token') }
     })
   };
 }

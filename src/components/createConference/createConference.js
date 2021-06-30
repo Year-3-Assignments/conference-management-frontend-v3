@@ -1,6 +1,6 @@
 import React, {Component} from 'react';
 import './createConference.scss';
-import {updateConference} from '../../actions/conferenceActions';
+import { createConference } from '../../actions/conferenceActions';
 import Progress from '../progress/progress';
 import {connect} from 'react-redux';
 import _ from 'lodash';
@@ -62,7 +62,8 @@ class CreateConference extends Component{
         console.log(error);
       }, () => {
         upload.snapshot.ref.getDownloadURL().then((url) => {
-          this.setImageUrl({ imageUrl: url });
+          console.log(url)
+          this.setState({ imageUrl: url });
           NotificationManager.success('Image uploaded successfully');
         });
       });
@@ -80,11 +81,12 @@ class CreateConference extends Component{
         let publishData = {
           name: this.state.publishTitle,
           description: this.state.publishDescription,
-          image_url: this.state.imageUrl
+          image_url: this.state.imageUrl,
+          resource_id: this.props.data._id
         };
 
         console.log("DATA TO SEND", publishData);
-        this.props.updateConference(publishData);
+        this.props.createConference(publishData);
         NotificationManager.success('Publish data Successfully sent to Admin', 'Success');
       } else {
         this.setState({ formNotValid: true}, () => {
@@ -144,10 +146,11 @@ class CreateConference extends Component{
             }
             <div className="row">
               <div className="col-md-6">
-                <h6 className="editor-title mt-3">Request Information</h6>
+                <h6 className="editor-title mt-3">Approved Information</h6>
+                <p><i className="fas fa-file-alt"></i>&nbsp;{this.props.data.name}</p>
                 <p><i className="fas fa-align-left"></i>&nbsp;{this.props.data.description}</p>
                 <p><i className="fas fa-map-pin"></i>&nbsp;{this.props.data.venue}</p>
-                <p><i className="fas fa-clock"></i>&nbsp;{moment(this.props.data.createdAt).format('LLLL')}</p>
+                <p><i className="fas fa-clock"></i>&nbsp;{this.props.data.time}</p>
               </div>
               <div className="col-md-6">
               <h6 className="mt-3 editor-title">Submitted Documents</h6>
@@ -184,7 +187,8 @@ class CreateConference extends Component{
                 <input type="file" className="form-control" id="image" name="image" onChange={e => this.setImagePreview(e)} />
                 <button className="btn btn-color btn-sm" type="button" onClick={this.uploadImage}>UPLOAD</button>
               </div>
-             </div>
+              {formData.image_url===null && this.state.formNotValid ? <span className="text-danger validation-text p-0">Publish image is required</span> : null}
+            </div>
             <div className="mb-3">
               <Progress percentage={this.state.uploadPercentage} />
             </div>
@@ -197,8 +201,8 @@ class CreateConference extends Component{
             }
           </div>  
             <div className="modal-footer">
-              <button type="button" className="btn btn-secondary" data-mdb-dismiss="modal">Cancel</button>
-              <button type="button" className="btn btn-primary" onClick={this.onSubmit}>Upload</button>
+              <button type="button" className="btn btn-light btn--pill" data-mdb-dismiss="modal">Cancel</button>
+              <button type="button" className="btn btn-secondary btn--pill" onClick={this.onSubmit}>Create</button>
             </div>
           </div>
         </div>
@@ -210,12 +214,12 @@ class CreateConference extends Component{
 }
 
 const mapStateToProps = state => ({
-  updateConference: state.conferenceReducer.updateconference
+  createconference: state.conferenceReducer.createconference
 });
 
 const mapDispatchToProps = dispatch => ({
-  updateConference: conference => {
-    dispatch(updateConference(conference));
+  createConference: conference => {
+    dispatch(createConference(conference));
   }
 });
 

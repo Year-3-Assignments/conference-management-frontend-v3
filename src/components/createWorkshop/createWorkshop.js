@@ -1,7 +1,7 @@
 import React, {Component} from 'react';
 import './createWorkshop.scss';
 import Progress from '../progress/progress';
-import { updateWorkshop } from '../../actions/workshopActions';
+import { createWorkshop } from '../../actions/workshopActions';
 import {connect} from 'react-redux';
 import _ from 'lodash';
 import moment from 'moment';
@@ -26,6 +26,12 @@ class CreateWorkshop extends Component{
     this.setImagePreview = this.setImagePreview.bind(this);
     this.setUploadPercentage = this.setUploadPercentage.bind(this);
     this.setImageUrl = this.setImageUrl.bind(this);
+  }
+
+  componentWillReceiveProps = nextProps => {
+    if (this.props.newworkshop !== nextProps.newworkshop) {
+      NotificationManager.success('Publish data Successfully sent to Admin', 'Success');
+    }
   }
 
   onChange(e) {
@@ -61,7 +67,7 @@ class CreateWorkshop extends Component{
         console.log(error);
       }, () => {
         upload.snapshot.ref.getDownloadURL().then((url) => {
-          this.setImageUrl({ imageUrl: url });
+          this.setState({ imageUrl: url });
           NotificationManager.success('Image uploaded successfully');
         });
       });
@@ -78,12 +84,12 @@ class CreateWorkshop extends Component{
         let publishData = {
           name: this.state.publishTitle,
           description: this.state.publishDescription,
-          image_url: this.state.imageUrl
+          imageurl: this.state.imageUrl,
+          resource: this.props.data._id,
+          amount: 250
         };
 
-        console.log("DATA TO SEND", publishData);
-        this.props.updateWorkshop(publishData);
-        NotificationManager.success('Publish data Successfully sent to Admin', 'Success');
+        this.props.createWorkshop(publishData);
       } else {
         this.setState({ formNotValid: true}, () => {
           NotificationManager.warning('Please Check the input Fields');
@@ -196,8 +202,8 @@ class CreateWorkshop extends Component{
             }
           </div>  
             <div className="modal-footer">
-              <button type="button" className="btn btn-secondary" data-mdb-dismiss="modal">Cancel</button>
-              <button type="button" className="btn btn-primary" onClick={this.onSubmit}>Upload</button>
+              <button type="button" className="btn btn-light btn--pill" data-mdb-dismiss="modal">Cancel</button>
+              <button type="button" className="btn btn-secondary btn--pill" onClick={this.onSubmit}>Create</button>
             </div>
           </div>
         </div>
@@ -209,12 +215,12 @@ class CreateWorkshop extends Component{
 }
 
 const mapStateToProps = state => ({
-  updateWorkshop: state.workshopReducer.updateWorkshop
+  newworkshop: state.workshopReducer.createWorkshop
 });
 
 const mapDispatchToProps = dispatch => ({
-  updateWorkshop: workshop => {
-    dispatch(updateWorkshop(workshop));
+  createWorkshop: workshop => {
+    dispatch(createWorkshop(workshop));
   }
 });
 

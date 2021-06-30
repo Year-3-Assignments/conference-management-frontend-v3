@@ -65,9 +65,9 @@ class Editor extends React.Component{
     return (
     <div>
       <div>
-     {_.isEqual(row.type.toUpperCase(), 'CONFERENCE') ? 
+    {_.isEqual(row.type.toUpperCase(), 'CONFERENCE') ? 
         <div> <button 
-        className="btn btn-info btn-sm btn--pill" 
+        className="btn btn-info btn-sm btn--pill table-btn" 
         data-mdb-toggle="modal"
         data-mdb-target="#create-conference" 
         onClick={e => this.setPostInformation(e, row)} 
@@ -79,7 +79,7 @@ class Editor extends React.Component{
     <div>
     {_.isEqual(row.type.toUpperCase(), 'WORKSHOP') ? 
         <div> <button 
-        className="btn btn-info btn-sm btn--pill" 
+        className="btn btn-info btn-sm btn--pill table-btn" 
         data-mdb-toggle="modal"
         data-mdb-target="#create-workshop" 
         onClick={e => this.setPostInformation(e, row)} 
@@ -131,9 +131,9 @@ class Editor extends React.Component{
 
   render() {
       return (
-        <div className="container">
-          <h4 className="mt-3">Resources</h4>
+        <div className="container p-4">
           <div className="card p-4">
+            <h4 className="resource-title">Resources</h4>
             <BootstrapTable 
               keyField='_id' 
               data={ this.state.resources } 
