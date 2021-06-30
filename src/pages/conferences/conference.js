@@ -6,7 +6,7 @@ import BootstrapTable from 'react-bootstrap-table-next';
 import paginationFactory from 'react-bootstrap-table2-paginator';
 import moment from 'moment';
 
-class ConferenceSummary extends Component {
+class ConferenceList extends Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -103,4 +103,4 @@ const mapDispatchToProps = dispatch =>({
       },
 });
 
-export default connect(mapStateToProps,mapDispatchToProps)(ConferenceSummary);
+export default connect(mapStateToProps,mapDispatchToProps)(ConferenceList);

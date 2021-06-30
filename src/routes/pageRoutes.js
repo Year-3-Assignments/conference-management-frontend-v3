@@ -27,7 +27,7 @@ function PageRoutes() {
             <Route path="/login" component={Login} exact />
             <Route path="/me" component={UserProfilePage} />
             <Route path="/conferencelist" component={ConferenceList} />
-            {/* <Route path="/admin/conference" component={AdminConferences} /> */}
+            <Route path="/admin/conference" component={AdminConferences} />
             <Route path="/admin/dashboard" component={Dashboard} exact />
             <Route path="/admin/users" component={Users} exact />
             <Route path="/admin/reviewers" component={Reviewers} exact />

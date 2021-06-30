@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { getAllApprovedConferences } from '../../actions/conferenceActions';
+import { getConferencesForAdmin } from '../../actions/conferenceActions';
 import _ from 'lodash';
 import BootstrapTable from 'react-bootstrap-table-next';
 import paginationFactory from 'react-bootstrap-table2-paginator';
@@ -29,7 +29,6 @@ class ApproveConferences extends Component {
     { dataField: 'time', text: 'Date & Time'},
     { dataField: 'name', text: 'Name'},
     { dataField: 'type', text: 'Type', formatter: col => col.toUpperCase()},
-    { dataField: 'status', text: 'Status', formatter: (cell, row) => this.setStatusFormatter(cell, row)},
     { dataField: 'createdby', text: 'Requested By', formatter: (col, row) => <div><img src={col.imageurl} className="created-person-img" />&nbsp;&nbsp;{col.firstname}&nbsp;{col.lastname}</div>},
   ];
 
@@ -104,4 +103,4 @@ const mapDispatchToProps = dispatch =>({
       },
 });
 
-export default connect(mapStateToProps,mapDispatchToProps)(ConferenceSummary);
+export default connect(mapStateToProps,mapDispatchToProps)(ApproveConferences);
